@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, flash
+from flask import Flask, render_template, request, url_for, redirect, flash, safe_join
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
@@ -11,7 +11,9 @@ import os
 
 # Flask App
 app = Flask(__name__)
-app._static_folder = ''
+# app._static_folder = ''
+
+static = safe_join(os.path.dirname(__file__), 'static')
 
 
 all_users = []
