@@ -11,13 +11,14 @@ import os
 
 # Flask App
 app = Flask(__name__)
+app._static_folder = ''
 
 
 all_users = []
 all_arrived = []
 
 # Creating The SQLALCHEMY DataBase
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///users.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -211,7 +212,7 @@ def add():
         db.session.commit()
         all_users.append(new_user)
         flash("تمت الإضافة بنجاح ✔!!")
-        return redirect(url_for('add'))
+        # return redirect(url_for('add'))
     return render_template("add.html", form=form)
 
 
