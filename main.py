@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 # app._static_folder = ''
 
-static = safe_join(os.path.dirname(__file__), 'static')
+# static = safe_join(os.path.dirname(__file__), 'static')
 
 
 all_users = []
