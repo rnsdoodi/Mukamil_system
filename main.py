@@ -221,7 +221,7 @@ def add():
         all_users.append(new_user)
         flash("تمت الإضافة بنجاح ✔!!")
         # return redirect(url_for('home'))
-        return render_template("add.html", form=form)
+    return render_template("add.html", form=form)
 
 
 
