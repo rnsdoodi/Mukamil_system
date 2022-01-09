@@ -22,7 +22,7 @@ all_arrived = []
 # Creating The SQLALCHEMY DataBase
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///users.db")
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
@@ -65,6 +65,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
+db.create_all()
 
 # Add Customer Request Flask Form for (السلالم الدولية)
 class AddUser(FlaskForm):
@@ -103,7 +104,7 @@ class DomecEditUser(FlaskForm):
     status = StringField('Status', validators=[DataRequired()])
     submit = SubmitField('Change')
 
-db.create_all()
+
 
 #######################################################################################################################
                        # Authentication Part for (السلالم الدولية) :- #
@@ -216,7 +217,7 @@ def add():
         db.session.commit()
         all_users.append(new_user)
         flash("تمت الإضافة بنجاح ✔!!")
-        # return redirect(url_for('add'))
+        return redirect(url_for('index'))
     return render_template("add.html", form=form)
 
 
