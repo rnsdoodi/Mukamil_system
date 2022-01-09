@@ -222,8 +222,7 @@ def add():
         flash("تمت الإضافة بنجاح ✔!!")
         # return redirect(url_for('home'))
         return render_template("add.html", form=form)
-    else:
-        return render_template("add.html", form=form)
+
 
 
 @app.route("/list")
