@@ -22,9 +22,8 @@ all_arrived = []
 # Creating The SQLALCHEMY DataBase
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///users.db")
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
 
 # Bootstrap App
 Bootstrap(app)
@@ -65,25 +64,29 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
+
 db.create_all()
+
 
 # Add Customer Request Flask Form for (السلالم الدولية)
 class AddUser(FlaskForm):
-
     name = StringField('Employer Name/اسم العميل ', validators=[DataRequired()])
     nid_or_iqama = IntegerField('ID or IQAMA / الهوية الوطنية أو الإقامة', validators=[DataRequired()])
     contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()])
     visa = IntegerField('Visa No./رقم التأشيرة', validators=[DataRequired()])
-    visa_date = DateField('Visa Date/تاريخ التأشيرة', validators=[DataRequired()],format='%Y-%m-%d')
+    visa_date = DateField('Visa Date/تاريخ التأشيرة', validators=[DataRequired()], format='%Y-%m-%d')
     worker_name = StringField('Worker Name/إسم العاملة', validators=[DataRequired()])
-    type = SelectField('Position/المهنة', choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE nURSE", "مربية/NANNY", "سائق خاص/FAMILY DRIVER"],
+    type = SelectField('Position/المهنة',
+                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE nURSE", "مربية/NANNY",
+                                "سائق خاص/FAMILY DRIVER"],
                        validators=[DataRequired()])
     agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"],
                          validators=[DataRequired()])
     selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
                                           choices=["معينة Recommended", "مختارة Selected"], validators=[DataRequired()])
     musaned = SelectField('Musaned Contract/عقد مساند', choices=["✔ نعم", " ❌ لا"], validators=[DataRequired()])
-    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=["✔ نعم", " ❌ لا"], validators=[DataRequired()])
+    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=["✔ نعم", " ❌ لا"],
+                                   validators=[DataRequired()])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', validators=[DataRequired()], format='%Y-%m-%d')
     status = StringField(' Status/الحالة')
     submit = SubmitField('Add إضافة')
@@ -97,6 +100,7 @@ class EditUser(FlaskForm):
     status = StringField('Status/الحالة')
     submit = SubmitField('تعديل')
 
+
 # Edit Worker Status Flask Form for (Domec)
 
 
@@ -105,9 +109,8 @@ class DomecEditUser(FlaskForm):
     submit = SubmitField('Change')
 
 
-
 #######################################################################################################################
-                       # Authentication Part for (السلالم الدولية) :- #
+# Authentication Part for (السلالم الدولية) :- #
 
 
 @app.route("/")
@@ -176,7 +179,7 @@ def logout():
 
 
 #######################################################################################################################
-                # Backend For (السلالم الدولية ) including the CRUD Operations form the DB #
+# Backend For (السلالم الدولية ) including the CRUD Operations form the DB #
 
 @app.route("/")
 def index():
@@ -218,7 +221,9 @@ def add():
         all_users.append(new_user)
         flash("تمت الإضافة بنجاح ✔!!")
         # return redirect(url_for('home'))
-    return render_template("add.html", form=form)
+        return render_template("add.html", form=form)
+    else:
+        return render_template("add.html", form=form)
 
 
 @app.route("/list")
@@ -271,7 +276,7 @@ def privacy():
 
 
 #######################################################################################################################
-                                # Authentication Part for (Domec) :- #
+# Authentication Part for (Domec) :- #
 
 
 @app.route('/domec')
@@ -335,7 +340,7 @@ def domec_logout():
 
 
 #######################################################################################################################
-                   # Backend For (DOMEC) including the CRUD Operations form the DB #
+# Backend For (DOMEC) including the CRUD Operations form the DB #
 
 
 @app.route("/Domec_login")
@@ -350,6 +355,7 @@ def domec_home():
     print(current_user.name)
     all_users = Users.query.all()
     return render_template("domec_index.html", users=all_users, name=current_user.name, logged_in=True)
+
 
 # @app.route("/add", methods=["GET", "POST"])
 # def add():
@@ -413,6 +419,7 @@ def domec_delete():
 def domec_tables():
     added_users = Users.query.all()
     return render_template("domec_tables.html", users=added_users, name=current_user.name, logged_in=True)
+
 
 ########################################################################################################################
 
