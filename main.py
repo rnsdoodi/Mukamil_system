@@ -65,7 +65,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
-db.create_all()
+
 # Add Customer Request Flask Form for (السلالم الدولية)
 class AddUser(FlaskForm):
 
@@ -102,6 +102,8 @@ class EditUser(FlaskForm):
 class DomecEditUser(FlaskForm):
     status = StringField('Status', validators=[DataRequired()])
     submit = SubmitField('Change')
+
+db.create_all()
 
 #######################################################################################################################
                        # Authentication Part for (السلالم الدولية) :- #
