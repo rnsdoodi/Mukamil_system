@@ -94,7 +94,7 @@ class AddUser(FlaskForm):
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    musaned = SelectField('Musaned Contract/عقد مساند', choices=["✔ نعم", " ❌ لا"])
+    musaned = SelectField('Musaned Contract/عقد مساند', choices=["✔ نعم Yes", " ❌ لا No"])
     embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=["✔ نعم", " ❌ لا"])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', validators=[DataRequired()])
     status = StringField('Status/الحالة')
