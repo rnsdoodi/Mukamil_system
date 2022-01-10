@@ -200,7 +200,7 @@ def add():
     form = AddUser()
 
     if form.validate_on_submit():
-        new_user = Users(
+        new_customer = Users(
             name=form.name.data,
             nid_or_iqama=form.nid_or_iqama.data,
             contact_No=form.contact_No.data,
@@ -216,13 +216,12 @@ def add():
             status=form.status.data
         )
 
-        db.session.add(new_user)
+        db.session.add(new_customer)
         db.session.commit()
-        all_users.append(new_user)
+        all_users.append(new_customer)
         flash("تمت الإضافة بنجاح ✔!!")
         # return redirect(url_for('home'))
     return render_template("add.html", form=form)
-
 
 
 @app.route("/list")
