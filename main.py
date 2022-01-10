@@ -77,15 +77,15 @@ class AddUser(FlaskForm):
     visa_date = DateField('Visa Date/تاريخ التأشيرة', validators=[DataRequired()], format='%Y-%m-%d')
     worker_name = StringField('Worker Name/إسم العاملة', validators=[DataRequired()])
     type = SelectField('Position/المهنة',
-                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE nURSE", "مربية/NANNY",
+                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
                                 "سائق خاص/FAMILY DRIVER"],
                        validators=[DataRequired()])
     agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"],
                          validators=[DataRequired()])
     selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
                                           choices=["معينة Recommended", "مختارة Selected"], validators=[DataRequired()])
-    musaned = SelectField('Musaned Contract/عقد مساند', choices=["✔ نعم", " ❌ لا"], validators=[DataRequired()])
-    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=["✔ نعم", " ❌ لا"],
+    musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"], validators=[DataRequired()])
+    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", " لا No"],
                                    validators=[DataRequired()])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', validators=[DataRequired()], format='%Y-%m-%d')
     status = StringField(' Status/الحالة')
@@ -94,8 +94,8 @@ class AddUser(FlaskForm):
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    musaned = SelectField('Musaned Contract/عقد مساند', choices=["✔ نعم Yes", " ❌ لا No"])
-    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=["✔ نعم", " ❌ لا"])
+    musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
+    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", "  لا No"])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', validators=[DataRequired()])
     status = StringField('Status/الحالة')
     submit = SubmitField('تعديل')
