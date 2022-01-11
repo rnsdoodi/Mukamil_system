@@ -78,16 +78,13 @@ class AddUser(FlaskForm):
     worker_name = StringField('Worker Name/إسم العاملة', validators=[DataRequired()])
     type = SelectField('Position/المهنة',
                        choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
-                                "سائق خاص/FAMILY DRIVER"],
-                       validators=[DataRequired()])
-    agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"],
-                         validators=[DataRequired()])
+                                "سائق خاص/FAMILY DRIVER"])
+    agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
     selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
-                                          choices=["معينة Recommended", "مختارة Selected"], validators=[DataRequired()])
-    musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"], validators=[DataRequired()])
-    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", " لا No"],
-                                   validators=[DataRequired()])
-    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', validators=[DataRequired()], format='%Y-%m-%d')
+                                          choices=["معينة Recommended", "مختارة Selected"])
+    musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
+    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", " لا No"])
+    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
     status = StringField(' Status/الحالة')
     submit = SubmitField('Add إضافة')
 
