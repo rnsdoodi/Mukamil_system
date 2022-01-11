@@ -43,9 +43,9 @@ class Users(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
-    nid_or_iqama = db.Column(db.Integer, nullable=False)
+    nid_or_iqama = db.Column(db.String, nullable=False)
     contact_No = db.Column(db.String(250), nullable=False)
-    visa = db.Column(db.Integer, nullable=False)
+    visa = db.Column(db.String, nullable=False)
     visa_date = db.Column(db.Date, nullable=False)
     worker_name = db.Column(db.String(250), nullable=False)
     type = db.Column(db.String(250), nullable=False)
@@ -73,7 +73,7 @@ class AddUser(FlaskForm):
     name = StringField('Employer Name/اسم العميل ', validators=[DataRequired(), length(max=100)])
     nid_or_iqama = StringField('ID or IQAMA / الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
                                description="ادخل رقم هوية صالح مكون من 10 ارقام")
-    contact_No = IntegerField('Mobile No/رقم الجوال', validators=[DataRequired()],
+    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
                              description='05xxxxxxxx : مثال')
     visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                        description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
