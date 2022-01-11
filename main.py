@@ -73,7 +73,7 @@ class AddUser(FlaskForm):
     name = StringField('Employer Name/اسم العميل ', validators=[DataRequired(), length(max=100)])
     nid_or_iqama = StringField('ID or IQAMA / الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
                                description="ادخل رقم هوية صالح مكون من 10 ارقام")
-    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired(), length(max=10)],
+    contact_No = IntegerField('Mobile No/رقم الجوال', validators=[DataRequired(), length(max=10)],
                              description='05xxxxxxxx : مثال')
     visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                        description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
