@@ -5,7 +5,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, length
 from wtforms.fields.html5 import DateField
 import os
 
@@ -70,12 +70,13 @@ db.create_all()
 
 # Add Customer Request Flask Form for (السلالم الدولية)
 class AddUser(FlaskForm):
-    name = StringField('Employer Name/اسم العميل ', validators=[DataRequired()])
-    nid_or_iqama = IntegerField('ID or IQAMA / الهوية الوطنية أو الإقامة', validators=[DataRequired()])
-    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()])
-    visa = IntegerField('Visa No./رقم التأشيرة', validators=[DataRequired()])
+    name = StringField('Employer Name/اسم العميل ', validators=[DataRequired(), length(max=100)])
+    nid_or_iqama = StringField('ID or IQAMA / الهوية الوطنية أو الإقامة', validators=[DataRequired(),length(max=10)],
+                                description="ادخل رقم هوية صالح مكون من 10 ارقام")
+    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired(),length(max=10)],description='05xxxxxxxx : مثال')
+    visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(),length(max=10)], description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
     visa_date = DateField('Visa Date/تاريخ التأشيرة', validators=[DataRequired()], format='%Y-%m-%d')
-    worker_name = StringField('Worker Name/إسم العاملة', validators=[DataRequired()])
+    worker_name = StringField('Worker Name/إسم العاملة', validators=[DataRequired(),length(max=150)],description='كما هو مدون في جواز السفر')
     type = SelectField('Position/المهنة',
                        choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
                                 "سائق خاص/FAMILY DRIVER"])
@@ -85,7 +86,7 @@ class AddUser(FlaskForm):
     musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
     embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", " لا No"])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' Status/الحالة')
+    status = StringField(' Status/الحالة', validators=[length(max=200)])
     submit = SubmitField('Add إضافة')
 
 
@@ -94,7 +95,7 @@ class EditUser(FlaskForm):
     musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
     embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", "  لا No"])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', validators=[DataRequired()])
-    status = StringField('Status/الحالة')
+    status = StringField('Status/الحالة', validators=[length(max=200)])
     submit = SubmitField('تعديل')
 
 
@@ -102,7 +103,7 @@ class EditUser(FlaskForm):
 
 
 class DomecEditUser(FlaskForm):
-    status = StringField('Status', validators=[DataRequired()])
+    status = StringField('Status', validators=[DataRequired(),length(max=200)])
     submit = SubmitField('Change')
 
 
