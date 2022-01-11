@@ -96,7 +96,7 @@ class EditUser(FlaskForm):
     embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", "  لا No"])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', validators=[DataRequired()])
     status = StringField('Status/الحالة', validators=[length(max=200)])
-    submit = SubmitField('تعديل')
+    submit = SubmitField('تــعـديــل')
 
 
 # Edit Worker Status Flask Form for (Domec)
