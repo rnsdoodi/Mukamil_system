@@ -95,13 +95,6 @@ class AddUser(FlaskForm):
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    name = StringField('Employer Name/اسم العميل ', validators=[length(max=100)])
-    nid_or_iqama = StringField('ID or IQAMA / الهوية الوطنية أو الإقامة', validators=[length(max=10)],
-                               description="ادخل رقم هوية صالح مكون من 10 ارقام")
-    contact_No = StringField('Mobile No/رقم الجوال',description='05xxxxxxxx : مثال')
-    visa = StringField('Visa No./رقم التأشيرة', validators=[length(max=10)], description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    worker_name = StringField('Worker Name/إسم العاملة', validators=[length(max=150)],
-                              description='كما هو مدون في جواز السفر')
     musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
     embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", "  لا No"])
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
