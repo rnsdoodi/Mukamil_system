@@ -100,6 +100,8 @@ class EditUser(FlaskForm):
                                description="ادخل رقم هوية صالح مكون من 10 ارقام")
     contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
                              description='05xxxxxxxx : مثال')
+    visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+                       description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
     worker_name = StringField('Worker Name/إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
     musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
@@ -247,6 +249,7 @@ def edit():
         updated_user.name = form.name.data
         updated_user.nid_or_iqama = form.nid_or_iqama.data
         updated_user.contact_No = form.contact_No.data
+        updated_user.visa = form.visa.data
         updated_user.worker_name = form.worker_name.data
         updated_user.musaned = form.musaned.data
         updated_user.embassy_contract = form.embassy_contract.data
