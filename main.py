@@ -393,7 +393,7 @@ def domec_add():
     form = AddCustomer()
 
     if form.validate_on_submit():
-        new_customer = Users(
+        new_request = Users(
             name=form.name.data,
             nid_or_iqama=form.nid_or_iqama.data,
             contact_No=form.contact_No.data,
@@ -409,9 +409,9 @@ def domec_add():
             status=form.status.data
         )
 
-        db.session.add(new_customer)
+        db.session.add(new_request)
         db.session.commit()
-        all_users.append(new_customer)
+        all_users.append(new_request)
         flash("successfully Added New Customer ✔!!")
         return redirect(url_for('domec_add'))
     return render_template("domec_add.html", form=form)
