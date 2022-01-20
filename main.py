@@ -101,6 +101,33 @@ class EditUser(FlaskForm):
     status = StringField('Status/الحالة', validators=[length(max=200)])
     submit = SubmitField('تــعـديــل')
 
+#######################################################################################################################
+
+
+# Add Customer Request Flask Form for (Domec)
+class AddCustomer(FlaskForm):
+    name = StringField('Employer Name ', validators=[DataRequired(), length(max=100)])
+    nid_or_iqama = StringField('ID or IQAMA ', validators=[DataRequired(), length(max=10)],
+                               description="Pleases insert correct ID No.")
+    contact_No = StringField('Mobile No.', validators=[DataRequired()],
+                             description='example : 05xxxxxxxx')
+    visa = StringField('Visa No.', validators=[DataRequired(), length(max=10)],
+                       description="Please insert correct 10 digits visa No.")
+    visa_date = DateField('Request Date', validators=[DataRequired()], format='%Y-%m-%d')
+    worker_name = StringField('Worker Name', validators=[DataRequired(), length(max=150)],
+                              description='As per the Passport')
+    type = SelectField('Position',
+                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
+                                "سائق خاص/FAMILY DRIVER"])
+    agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
+    selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
+                                          choices=["معينة Recommended", "مختارة Selected"])
+    musaned = SelectField('Musaned Contract', choices=[" نعم Yes", "  لا No"])
+    embassy_contract = SelectField('Original Contract', choices=[" نعم Yes", " لا No"])
+    shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
+    status = StringField(' Status/الحالة', validators=[length(max=200)])
+    submit = SubmitField('Add')
+
 
 # Edit Worker Status Flask Form for (Domec)
 
@@ -361,33 +388,33 @@ def domec_home():
     return render_template("domec_index.html", users=all_users, name=current_user.name, logged_in=True)
 
 
-# @app.route("/add", methods=["GET", "POST"])
-# def add():
-#     form = AddUser()
-#
-#     if form.validate_on_submit():
-#         new_user = Users(
-#             name=form.name.data,
-#             nid_or_iqama=form.nid_or_iqama.data,
-#             contact_No=form.contact_No.data,
-#             visa=form.visa.data,
-#             visa_date=form.visa_date.data,
-#             worker_name=form.worker_name.data,
-#             type=form.type.data,
-#             agency=form.agency.data,
-#             selected_or_recommended=form.selected_or_recommended.data,
-#             musaned=form.musaned.data,
-#             embassy_contract=form.embassy_contract.data,
-#             shipment_date=form.shipment_date.data,
-#             status=form.status.data
-#         )
-#
-#         db.session.add(new_user)
-#         db.session.commit()
-#         all_users.append(new_user)
-#         flash("تمت الإضافة بنجاح ✔!!")
-#         return redirect(url_for('add'))
-#     return render_template("add.html", form=form)
+@app.route("/domec_add", methods=["GET", "POST"])
+def domec_add():
+    form = AddCustomer()
+
+    if form.validate_on_submit():
+        new_customer = Users(
+            name=form.name.data,
+            nid_or_iqama=form.nid_or_iqama.data,
+            contact_No=form.contact_No.data,
+            visa=form.visa.data,
+            visa_date=form.visa_date.data,
+            worker_name=form.worker_name.data,
+            type=form.type.data,
+            agency=form.agency.data,
+            selected_or_recommended=form.selected_or_recommended.data,
+            musaned=form.musaned.data,
+            embassy_contract=form.embassy_contract.data,
+            shipment_date=form.shipment_date.data,
+            status=form.status.data
+        )
+
+        db.session.add(new_customer)
+        db.session.commit()
+        all_users.append(new_customer)
+        flash("successfully Added New Customer ✔!!")
+        return redirect(url_for('domec_add'))
+    return render_template("domec_add.html", form=form)
 
 
 @app.route("/domec_list")
