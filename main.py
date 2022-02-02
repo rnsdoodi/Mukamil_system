@@ -57,6 +57,23 @@ class Users(db.Model):
     status = db.Column(db.String(1000), nullable=False)
 
 
+# Creating Table in the DB to Add New skilled Request
+class Skilled(db.Model):
+    __tablename__ = "skills2"
+    id = db.Column(db.Integer, primary_key=True)
+    company_name = db.Column(db.String(250), nullable=False)
+    visa = db.Column(db.String, nullable=False)
+    cr = db.Column(db.String, nullable=False)
+    contact_No = db.Column(db.String(250), nullable=False)
+    country = db.Column(db.String(250), nullable=False)
+    mp_request = db.Column(db.String(250), nullable=False)
+    quantity = db.Column(db.String(250), nullable=False)
+    selected_or_recommended = db.Column(db.String(250), nullable=False)
+    jo_status = db.Column(db.String(250), nullable=False)
+    shipment_date = db.Column(db.Date, nullable=False)
+    status = db.Column(db.String(1000), nullable=False)
+
+
 # CREATE TABLE IN DB To save users login Data (Hashed & Salted)
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -100,6 +117,32 @@ class EditUser(FlaskForm):
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
     status = StringField('Status/الحالة', validators=[length(max=200)])
     submit = SubmitField('تــعـديــل')
+
+# Add new skills Request Flask Form for (السلالم الدولية)
+
+
+class AddSkills(FlaskForm):
+    company_name = StringField('Company Name/اسم المؤسسة  ', validators=[DataRequired(), length(max=100)])
+    visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+                       description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    cr = StringField('Commercila Regestration / السجل التجاري', validators=[DataRequired(), length(max=10)],
+                               description="ادخل الرقم الموحد للمنشأة يبدا ب 70")
+
+    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
+                             description='05xxxxxxxx : مثال')
+
+    country = StringField('Country/الدولة', validators=[DataRequired()])
+    mp_request = StringField('Position/المهنة', validators=[DataRequired(), length(max=150)],
+                              description='كما هو مدون في التأشيرة ')
+    quantity = StringField('Quantity/العدد', validators=[DataRequired(), length(max=150)])
+    selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
+                                      choices=["معينة Recommended", "مختارة Selected"])
+    jo_status = StringField('Job Order Status/حالة الجوب اوردر')
+    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField(' Status/حالة الطلب', validators=[length(max=200)])
+    submit = SubmitField('Add إضافة')
+
+
 
 #######################################################################################################################
 
@@ -453,6 +496,17 @@ def domec_tables():
 
 
 ########################################################################################################################
+
+# Back End for skilled workers
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
