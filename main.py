@@ -264,11 +264,11 @@ def edit():
     user_id = request.args.get("id")
     updated_user = Users.query.get(user_id)
     if form.validate_on_submit():
-        updated_user.name = form.name.data
-        updated_user.nid_or_iqama = form.nid_or_iqama.data
-        updated_user.contact_No = form.contact_No.data
-        updated_user.visa = form.visa.data
-        updated_user.worker_name = form.worker_name.data
+        # updated_user.name = form.name.data
+        # updated_user.nid_or_iqama = form.nid_or_iqama.data
+        # updated_user.contact_No = form.contact_No.data
+        # updated_user.visa = form.visa.data
+        # updated_user.worker_name = form.worker_name.data
         updated_user.musaned = form.musaned.data
         updated_user.embassy_contract = form.embassy_contract.data
         updated_user.shipment_date = form.shipment_date.data
