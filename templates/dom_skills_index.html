@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
-        <title> Edit Worker Status</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="static/css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
+   {%include "domec_header.html"%}
+   <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="{{url_for('domec_home')}}">Domec</a>
             <!-- Sidebar Toggle-->
@@ -25,13 +16,14 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
-            <div style="color:white">Welcome, {{name}}</div>
+
+            <div style="color:white">Welcome,{{name}}</div>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">settings</a></li>
                         <li><a class="dropdown-item" href="#!">Log Activity</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{{url_for('domec_logout')}}">Logout</a></li>
@@ -41,7 +33,7 @@
         </nav>
 
 
-           <div id="layoutSidenav">
+      <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -58,13 +50,13 @@
                             <div class="sb-sidenav-menu-heading">Skilled Workers </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Skilled workers
+                                Skilled Workers
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{url_for('dom_skills')}}">Skilled workers List</a>
-                                    <a class="nav-link" href="{{url_for('domec_skills_list')}}">Edit Skilled workers Request</a>
+                                    <a class="nav-link" href="{{url_for('domec_skills_list')}}">Edit Skilled workers Requests</a>
                                 </nav>
                             </div>
 <!--                            <div class="sb-sidenav-menu-heading">نقل الخدمات</div>-->
@@ -113,7 +105,7 @@
                                 DH Report
                             </a>
 
-                             <a class="nav-link" href="{{url_for('domec_skills_tables')}}">
+                             <a class="nav-link" href="{{url_for('skills_tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Skills Report
                             </a>
@@ -130,46 +122,88 @@
 
 
 
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged In As : </div>
-                       <div class="small" style="color:white" > 🟢 {{name}} </div>
+                    <div class="sb-sidenav-footer" >
+                        <div class="small" > Logged In As : </div>
+                        <div class="small" style="color:white" > 🟢 {{name}}  </div>
+
                     </div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:center"> Edit DH Status</h1>
-                        <ol class="breadcrumb mb-4" >
-                            <li class="breadcrumb-item" ><a href="{{url_for('domec_home')}}" > home Page </a></li>
-                            <li class="breadcrumb-item active">Edit DH Status</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-
-
-                                The Below Table is Containing Our Customers Request that stored in our Data Base Before you Edit the Status you Should be sure From the Correct Information !
-<!--                                .-->
-<!--                                <a target="_blank" href="https://datatables.net/" style="text-align:center">official DataTables documentation</a>-->
-
+                        <h1 class="mt-4" style="text-align:left">The Skilled Workers List</h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body"> Add New Skills Request </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="{{url_for('domec_add_skills')}}">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body"> Edit Skills Request Status  </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="{{url_for('domec_skills_list')}}">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body"> Skills Deployment List </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Skills Backout List</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+
+<!--                                        <i class="fas fa-chart-area me-1"></i>-->
+
+                                    </div>
+                                    <div class="card-body"style="text-align:center"><img src="static/assets/img/domec.jpg" style="width:34% "><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+<!--                                        <i class="fas fa-chart-bar me-1"></i>-->
+
+
+                                    </div>
+                                    <div class="card-body"style="text-align:right"><img src="static/assets/img/salalim.jpg" style="width:75%"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                         <div class="card mb-4">
+
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-
-                                Requests List
-                            </div>
-
-                            <div class="content">
-                                {% with messages = get_flashed_messages() %}
-                                   {% if messages %}
-                                 {% for message in messages %}
-                              <p style="color:white;text-align:center; background-color:blue; ">{{ message }}</p>
-                                  {% endfor %}
-                                    {% endif %}
-                                    {% endwith %}
+                               Requests List
                             </div>
 
                             <div class="card-body">
@@ -177,83 +211,60 @@
                                 <table id="datatablesSimple">
 
                                     <thead>
-
                                         <tr>
-
                                             <th>id</th>
-                                            <th>Employer Name</th>
-                                            <th>National ID No.</th>
-                                            <th>Employer Contact No</th>
+                                            <th>Company Name </th>
                                             <th>Visa No.</th>
-                                            <th>Request Date</th>
-                                            <th>Worker Name</th>
-                                            <th>Position</th>
+                                            <th>C.R No</th>
+                                            <th>Contact No.</th>
+                                            <th>Country</th>
+                                            <th>Position </th>
+                                            <th>Quantity</th>
+                                            <th>Selected or Recommended</th>
                                             <th>Agency</th>
-                                            <th>Type</th>
-                                            <th>Musaned Contract</th>
-                                            <th>POLO Contract</th>
+                                            <th>Job Order Status</th>
                                             <th>Shipment Date</th>
                                             <th>status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
 
-                                    <tfoot>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Employer Name</th>
-                                            <th>National ID No.</th>
-                                            <th>Employer Contact No</th>
-                                            <th>Visa No.</th>
-                                            <th>Request Date</th>
-                                            <th>Worker Name</th>
-                                            <th>Position</th>
-                                            <th>Agency</th>
-                                            <th>Type</th>
-                                            <th>Musaned Contract</th>
-                                            <th>POLO Contract</th>
-                                            <th>Shipment Date</th>
-                                            <th>status</th>
-                                            <th>Action</th>
-                                    </tfoot>
-
-                                    <tbody>
-                                    {% for user in users %}
-                                        <tr>
-                                              <td>{{user.id}}</td>
-                                              <td>{{user.name}}</td>
-                                              <td>{{user.nid_or_iqama}}</td>
-                                              <td>{{user.contact_No}}</td>
-                                              <td>{{user.visa}}</td>
-                                              <td>{{user.visa_date}}</td>
-                                              <td>{{user.worker_name}}</td>
-                                              <td>{{user.type}}</td>
-                                              <td>{{user.agency}}</td>
-                                              <td>{{user.selected_or_recommended}}</td>
-                                               <td>{{user.musaned}}  </td>
-                                               <td>{{user.embassy_contract}}</td>
-                                               <td>{{user.shipment_date}}</td>
-                                              <td>{{user.status}}</td>
-
-                                            <td> <a href="{{url_for('domec_edit',id=user.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i> Edit</a>
-<!--                                                <a href="{{url_for('domec_delete',id=user.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>-->
+                                     <tbody>
+                                        {% for skill in skills %}
+                                          <tr>
+                                              <td>{{skill.id}}</td>
+                                              <td>{{skill.company_name}}</td>
+                                              <td>{{skill.company_visa}}</td>
+                                              <td>{{skill.cr}}</td>
+                                              <td>{{skill.contact_No}}</td>
+                                              <td>{{skill.country}}</td>
+                                              <td>{{skill.mp_request}}</td>
+                                              <td>{{skill.quantity}}</td>
+                                              <td>{{skill.selected_or_recommended}}</td>
+                                              <td>{{skill.agency}}  </td>
+                                              <td>{{skill.jo_status}}</td>
+                                              <td>{{skill.shipment_date}}</td>
+                                              <td>{{skill.status}}</td>
                                         </tr>
-                                {%endfor%}
+                                        {% endfor %}
                                     </tbody>
+
                                 </table>
 
                             </div>
 
                         </div>
+
                     </div>
+
                 </main>
+
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; DOMEC 2022</div>
                             <div class="text-muted">Developed By SkyTech 2022</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <a href="#">Privacy Policy </a>
                                 &middot;
                                 <a href="#">Terms & Conditions</a>
                             </div>
@@ -268,3 +279,6 @@
         <script src="static/js/datatables-simple-demo.js"></script>
     </body>
 </html>
+
+
+

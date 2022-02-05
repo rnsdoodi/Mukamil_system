@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request, url_for, redirect, flash, safe_join
+from flask import Flask, render_template, request, url_for, redirect, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, IntegerField
+from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, length
 from wtforms.fields.html5 import DateField
 import os
@@ -189,6 +189,39 @@ class AddCustomer(FlaskForm):
 class DomecEditUser(FlaskForm):
     status = StringField('Status', validators=[DataRequired(), length(max=200)])
     submit = SubmitField('Change')
+
+
+# Add new skills Request Flask Form for (Domec)
+
+class DomecAddSkills(FlaskForm):
+    company_name = StringField('Company Name/اسم المؤسسة  ', validators=[DataRequired(), length(max=100)])
+    company_visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+                               description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    cr = StringField('Commercial Registration / السجل التجاري', validators=[DataRequired(), length(max=10)],
+                     description="ادخل الرقم الموحد للمنشأة يبدا ب 70")
+
+    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
+                             description='05xxxxxxxx : مثال')
+
+    country = StringField('Country/الدولة', validators=[DataRequired()])
+    mp_request = StringField('Position/المهنة', validators=[DataRequired(), length(max=150)],
+                             description='كما هو مدون في التأشيرة ')
+    quantity = StringField('Quantity/العدد', validators=[DataRequired(), length(max=150)])
+    selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
+                                          choices=["معينة Recommended", "مختارة Selected"])
+    agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
+    jo_status = StringField('Job Order Status/حالة الجوب اوردر')
+    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField(' Status/حالة الطلب', validators=[length(max=500)])
+    submit = SubmitField('Add')
+
+
+# Edit new skills Request Flask Form for (Domec)
+
+class DomecEditSkills(FlaskForm):
+    jo_status = StringField('Job Order Status', validators=[DataRequired(), length(max=200)])
+    status = StringField(' Status', validators=[length(max=500)])
+    submit = SubmitField('Update')
 
 
 #######################################################################################################################
@@ -419,9 +452,6 @@ def skills_tables():
     return render_template("skills_tables.html", skills=added_skills, name=current_user.name, logged_in=True)
 
 
-
-
-
 @app.route("/conditions")
 def conditions():
     return render_template("terms.html")
@@ -514,6 +544,14 @@ def domec_home():
     return render_template("domec_index.html", users=all_users, name=current_user.name, logged_in=True)
 
 
+@app.route("/dom_skills_index.html")
+@login_required
+def dom_skills():
+    print(current_user.name)
+    all_skills = Skilled.query.all()
+    return render_template("dom_skills_index.html", skills=all_skills, name=current_user.name, logged_in=True)
+
+
 @app.route("/domec_add", methods=["GET", "POST"])
 def domec_add():
     form = AddCustomer()
@@ -543,10 +581,44 @@ def domec_add():
     return render_template("domec_add.html", form=form)
 
 
+@app.route("/domec_add_skills", methods=["GET", "POST"])
+def domec_add_skills():
+    form = DomecAddSkills()
+
+    if form.validate_on_submit():
+        new_skills = Skilled(
+            company_name=form.company_name.data,
+            company_visa=form.company_visa.data,
+            cr=form.cr.data,
+            contact_No=form.contact_No.data,
+            country=form.country.data,
+            mp_request=form.mp_request.data,
+            quantity=form.quantity.data,
+            selected_or_recommended=form.selected_or_recommended.data,
+            agency=form.agency.data,
+            jo_status=form.jo_status.data,
+            shipment_date=form.shipment_date.data,
+            status=form.status.data
+        )
+
+        db.session.add(new_skills)
+        db.session.commit()
+        all_users.append(new_skills)
+        flash("successfully Added New Skills Request ✔!!")
+        return redirect(url_for('domec_add_skills'))
+    return render_template("dom_skills_add.html", form=form)
+
+
 @app.route("/domec_list")
 def domec_users_list():
     added_users = Users.query.all()
     return render_template("domec_list.html", users=added_users, name=current_user.name)
+
+
+@app.route("/domec_skills_list")
+def domec_skills_list():
+    added_skills = Skilled.query.all()
+    return render_template("dom_skills_list.html", skills=added_skills, name=current_user.name)
 
 
 @app.route("/domec_edit", methods=["GET", "POST"])
@@ -560,6 +632,20 @@ def domec_edit():
         flash("Status successfully Changed ✔")
         return redirect(url_for('domec_edit'))
     return render_template("domec_edit.html", form=form, user=updated_user)
+
+
+@app.route("/domec_edit_skills", methods=["GET", "POST"])
+def domec_edit_skills():
+    form = DomecEditSkills()
+    skills_id = request.args.get("id")
+    updated_skills = Skilled.query.get(skills_id)
+    if form.validate_on_submit():
+        updated_skills.jo_status = form.jo_status.data
+        updated_skills.status = form.status.data
+        db.session.commit()
+        flash("Status successfully Changed ✔")
+        return redirect(url_for('domec_edit_skills'))
+    return render_template("dom_skills_edit.html", form=form, skill=updated_skills)
 
 
 @app.route("/domec_delete")
@@ -578,9 +664,15 @@ def domec_tables():
     return render_template("domec_tables.html", users=added_users, name=current_user.name, logged_in=True)
 
 
-########################################################################################################################
+@app.route("/domec_skills_tables")
+def domec_skills_tables():
+    added_skills = Skilled.query.all()
+    return render_template("dom_skills_tables.html", skills=added_skills, name=current_user.name, logged_in=True)
 
-# Back End for skilled workers
+
+
+
+########################################################################################################################
 
 
 if __name__ == "__main__":

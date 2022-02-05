@@ -31,71 +31,97 @@
                 </li>
             </ul>
         </nav>
-        <div id="layoutSidenav">
+
+
+      <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Main</div>
+                            <div class="sb-sidenav-menu-heading">Domestic Workers </div>
                             <a class="nav-link" href="{{url_for('domec_home')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                HOME PAGE
+                               DH Main List
                             </a>
                             <a class="nav-link" href="{{url_for('domec_users_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                                EDIT WORKER STATUS
+                              Edit DH Status
                             </a>
-                            <div class="sb-sidenav-menu-heading">Interfaces</div>
+                            <div class="sb-sidenav-menu-heading">Skilled Workers </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                LAYOUT
+                                Skilled workers
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                    <a class="nav-link" href="{{url_for('dom_skills')}}">Skilled workers List</a>
+                                    <a class="nav-link" href="{{url_for('domec_skills_list')}}">Edit Skilled workers Request</a>
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                PAGES
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+<!--                            <div class="sb-sidenav-menu-heading">نقل الخدمات</div>-->
+<!--                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>-->
+<!--                                نقل الخدمات-->
+<!--                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
+<!--                            </a>-->
+
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
+
+<!--                                    <a class="nav-link" href="layout-static.html">إضافة طلب نقل جديد</a>-->
+<!--                                    <a class="nav-link" href="layout-static.html">تعديل طلب نقل</a>-->
+
+
+<!--                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">-->
+<!--                                        التحقق-->
+<!--                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
+<!--                                    </a>-->
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+
+                                        <a class="nav-link" href="layout-static.html">إضافة طلب جديد</a>
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="login.html">Login</a>
                                             <a class="nav-link" href="register.html">Register</a>
                                             <a class="nav-link" href="password.html">Forgot Password</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        ERROR PAGES
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
+<!--                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
+<!--                                        صفحات الأخطاء-->
+<!--                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
+<!--                                    </a>-->
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
+<!--                                        <nav class="sb-sidenav-menu-nested nav">-->
+<!--                                            <a class="nav-link" href="401.html">401 Page</a>-->
+<!--                                            <a class="nav-link" href="404.html">404 Page</a>-->
+<!--                                            <a class="nav-link" href="500.html">500 Page</a>-->
+<!--                                        </nav>-->
                                     </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">ADDITIONS</div>
-
+                            <div class="sb-sidenav-menu-heading">Reports</div>
                             <a class="nav-link" href="{{url_for('domec_tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                REPORTS
+                                DH Report
                             </a>
+
+                             <a class="nav-link" href="{{url_for('domec_skills_tables')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Skills Report
+                            </a>
+
+
+<!--                            <a class="nav-link" href="#">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>-->
+<!--                                تقرير نقل الخدمات-->
+<!--                            </a>-->
+
                         </div>
                     </div>
+
+
+
+
                     <div class="sb-sidenav-footer" >
                         <div class="small" > Logged In As : </div>
                         <div class="small" style="color:white" > 🟢 {{name}}  </div>
@@ -106,12 +132,12 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:left">The Requests List</h1>
+                        <h1 class="mt-4" style="text-align:left">The Domestic Workers List</h1>
                         <br>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body"> Add New Request </div>
+                                    <div class="card-body"> Add New DH Request </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="{{url_for('domec_add')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -120,7 +146,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body"> Edit Worker Status  </div>
+                                    <div class="card-body"> Edit DH Status  </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="{{url_for('domec_users_list')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -129,7 +155,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body"> Deployment List </div>
+                                    <div class="card-body"> DH Deployment List </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -138,7 +164,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Backout List</div>
+                                    <div class="card-body">DH Backout List</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -202,24 +228,6 @@
                                              <th>status</th>
                                         </tr>
                                     </thead>
-
-                                    <tfoot>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Employer Name (AR)</th>
-                                            <th>National ID No.</th>
-                                             <th>Employer Contact No</th>
-                                             <th>Visa No.</th>
-                                            <th>Request Date</th>
-                                            <th>Worker Name</th>
-                                            <th>Position</th>
-                                            <th>Agency</th>
-                                            <th>Type</th>
-                                            <th>Musaned Contract</th>
-                                            <th>POLO Contract</th>
-                                            <th>Shipment Date</th>
-                                             <th>status</th>
-                                    </tfoot>
 
                                     <tbody>
                                         {% for user in users %}

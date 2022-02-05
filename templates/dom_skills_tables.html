@@ -6,11 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <title>REPORTS</title>
         <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
-        <title> Edit Worker Status</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="static/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+
+        <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css" rel="stylesheet" />
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -25,7 +29,7 @@
                     <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </form>
-            <div style="color:white">Welcome, {{name}}</div>
+            <div style="color:white">Welcome, {{name}} </div>
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
@@ -33,15 +37,13 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Log Activity</a></li>
-                        <li><hr class="dropdown-divider" /></li>
+                        <li><hr class="dropdown-divider"/></li>
                         <li><a class="dropdown-item" href="{{url_for('domec_logout')}}">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
-
-
-           <div id="layoutSidenav">
+  <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -58,13 +60,13 @@
                             <div class="sb-sidenav-menu-heading">Skilled Workers </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Skilled workers
+                                Skilled Workers
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{url_for('dom_skills')}}">Skilled workers List</a>
-                                    <a class="nav-link" href="{{url_for('domec_skills_list')}}">Edit Skilled workers Request</a>
+                                    <a class="nav-link" href="{{url_for('domec_skills_list')}}">Edit Skilled workers Requests</a>
                                 </nav>
                             </div>
 <!--                            <div class="sb-sidenav-menu-heading">نقل الخدمات</div>-->
@@ -126,31 +128,27 @@
 
                         </div>
                     </div>
-
-
-
-
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged In As : </div>
-                       <div class="small" style="color:white" > 🟢 {{name}} </div>
+                        <div class="small"> Logged In As: </div>
+                       <div class="small" style="color:white" > 🟢 {{name}}  </div>
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
+               <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:center"> Edit DH Status</h1>
+                        <h1 class="mt-4" style="text-align:center">Skills Report</h1>
                         <ol class="breadcrumb mb-4" >
-                            <li class="breadcrumb-item" ><a href="{{url_for('domec_home')}}" > home Page </a></li>
-                            <li class="breadcrumb-item active">Edit DH Status</li>
+                            <li class="breadcrumb-item" ><a href="{{url_for('domec_home')}}" > Home Page </a></li>
+                            <li class="breadcrumb-item active">Skills Report</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
 
-
                                 The Below Table is Containing Our Customers Request that stored in our Data Base Before you Edit the Status you Should be sure From the Correct Information !
-<!--                                .-->
+<!--                                . -->
 <!--                                <a target="_blank" href="https://datatables.net/" style="text-align:center">official DataTables documentation</a>-->
+
 
                             </div>
                         </div>
@@ -162,83 +160,49 @@
                                 Requests List
                             </div>
 
-                            <div class="content">
-                                {% with messages = get_flashed_messages() %}
-                                   {% if messages %}
-                                 {% for message in messages %}
-                              <p style="color:white;text-align:center; background-color:blue; ">{{ message }}</p>
-                                  {% endfor %}
-                                    {% endif %}
-                                    {% endwith %}
-                            </div>
 
                             <div class="card-body">
 
-                                <table id="datatablesSimple">
+                                <table id="datatablesSimple" class="display">
 
-                                    <thead>
-
+                                   <thead>
                                         <tr>
-
                                             <th>id</th>
-                                            <th>Employer Name</th>
-                                            <th>National ID No.</th>
-                                            <th>Employer Contact No</th>
+                                            <th>Company Name </th>
                                             <th>Visa No.</th>
-                                            <th>Request Date</th>
-                                            <th>Worker Name</th>
-                                            <th>Position</th>
+                                            <th>C.R No</th>
+                                            <th>Contact No.</th>
+                                            <th>Country</th>
+                                            <th>Position </th>
+                                            <th>Quantity</th>
+                                            <th>Selected or Recommended</th>
                                             <th>Agency</th>
-                                            <th>Type</th>
-                                            <th>Musaned Contract</th>
-                                            <th>POLO Contract</th>
+                                            <th>Job Order Status</th>
                                             <th>Shipment Date</th>
                                             <th>status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
 
-                                    <tfoot>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Employer Name</th>
-                                            <th>National ID No.</th>
-                                            <th>Employer Contact No</th>
-                                            <th>Visa No.</th>
-                                            <th>Request Date</th>
-                                            <th>Worker Name</th>
-                                            <th>Position</th>
-                                            <th>Agency</th>
-                                            <th>Type</th>
-                                            <th>Musaned Contract</th>
-                                            <th>POLO Contract</th>
-                                            <th>Shipment Date</th>
-                                            <th>status</th>
-                                            <th>Action</th>
-                                    </tfoot>
-
-                                    <tbody>
-                                    {% for user in users %}
-                                        <tr>
-                                              <td>{{user.id}}</td>
-                                              <td>{{user.name}}</td>
-                                              <td>{{user.nid_or_iqama}}</td>
-                                              <td>{{user.contact_No}}</td>
-                                              <td>{{user.visa}}</td>
-                                              <td>{{user.visa_date}}</td>
-                                              <td>{{user.worker_name}}</td>
-                                              <td>{{user.type}}</td>
-                                              <td>{{user.agency}}</td>
-                                              <td>{{user.selected_or_recommended}}</td>
-                                               <td>{{user.musaned}}  </td>
-                                               <td>{{user.embassy_contract}}</td>
-                                               <td>{{user.shipment_date}}</td>
-                                              <td>{{user.status}}</td>
-
-                                            <td> <a href="{{url_for('domec_edit',id=user.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i> Edit</a>
-<!--                                                <a href="{{url_for('domec_delete',id=user.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>-->
+                                     <tbody>
+                                        {% for skill in skills %}
+                                          <tr>
+                                              <td>{{skill.id}}</td>
+                                              <td>{{skill.company_name}}</td>
+                                              <td>{{skill.company_visa}}</td>
+                                              <td>{{skill.cr}}</td>
+                                              <td>{{skill.contact_No}}</td>
+                                              <td>{{skill.country}}</td>
+                                              <td>{{skill.mp_request}}</td>
+                                              <td>{{skill.quantity}}</td>
+                                              <td>{{skill.selected_or_recommended}}</td>
+                                              <td>{{skill.agency}}  </td>
+                                              <td>{{skill.jo_status}}</td>
+                                              <td>{{skill.shipment_date}}</td>
+                                              <td>{{skill.status}}</td>
                                         </tr>
-                                {%endfor%}
+
+
+                                        {% endfor %}
                                     </tbody>
                                 </table>
 
@@ -265,6 +229,23 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="static/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+
+        <!--       DataTables Scripts for printing  -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
+
+           <script type="text/javascript">
+
+          $('#datatablesSimple').DataTable({
+             dom: 'Bfrtip',
+             buttons: [
+            'print'
+             ]
+          });
+
+        </script>
         <script src="static/js/datatables-simple-demo.js"></script>
     </body>
 </html>
