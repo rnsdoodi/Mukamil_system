@@ -18,6 +18,7 @@ app = Flask(__name__)
 
 all_users = []
 all_arrived = []
+all_skills = []
 
 # Creating The SQLALCHEMY DataBase
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
@@ -59,16 +60,17 @@ class Users(db.Model):
 
 # Creating Table in the DB to Add New skilled Request
 class Skilled(db.Model):
-    __tablename__ = "skills2"
+    __tablename__ = "skills"
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(250), nullable=False)
-    visa = db.Column(db.String, nullable=False)
+    company_visa = db.Column(db.String, nullable=False)
     cr = db.Column(db.String, nullable=False)
     contact_No = db.Column(db.String(250), nullable=False)
     country = db.Column(db.String(250), nullable=False)
     mp_request = db.Column(db.String(250), nullable=False)
     quantity = db.Column(db.String(250), nullable=False)
     selected_or_recommended = db.Column(db.String(250), nullable=False)
+    agency = db.Column(db.String(250), nullable=False)
     jo_status = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
     status = db.Column(db.String(1000), nullable=False)
@@ -118,30 +120,40 @@ class EditUser(FlaskForm):
     status = StringField('Status/الحالة', validators=[length(max=200)])
     submit = SubmitField('تــعـديــل')
 
+
 # Add new skills Request Flask Form for (السلالم الدولية)
 
 
 class AddSkills(FlaskForm):
     company_name = StringField('Company Name/اسم المؤسسة  ', validators=[DataRequired(), length(max=100)])
-    visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
-                       description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    cr = StringField('Commercila Regestration / السجل التجاري', validators=[DataRequired(), length(max=10)],
-                               description="ادخل الرقم الموحد للمنشأة يبدا ب 70")
+    company_visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+                               description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    cr = StringField('Commercial Registration / السجل التجاري', validators=[DataRequired(), length(max=10)],
+                     description="ادخل الرقم الموحد للمنشأة يبدا ب 70")
 
     contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
                              description='05xxxxxxxx : مثال')
 
     country = StringField('Country/الدولة', validators=[DataRequired()])
     mp_request = StringField('Position/المهنة', validators=[DataRequired(), length(max=150)],
-                              description='كما هو مدون في التأشيرة ')
+                             description='كما هو مدون في التأشيرة ')
     quantity = StringField('Quantity/العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
-                                      choices=["معينة Recommended", "مختارة Selected"])
+                                          choices=["معينة Recommended", "مختارة Selected"])
+    agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
     jo_status = StringField('Job Order Status/حالة الجوب اوردر')
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' Status/حالة الطلب', validators=[length(max=200)])
+    status = StringField(' Status/حالة الطلب', validators=[length(max=500)])
     submit = SubmitField('Add إضافة')
 
+
+# Edit new skills Request Flask Form for (السلالم الدولية)
+
+class EditSkills(FlaskForm):
+    jo_status = StringField('Job Order Status/حالة الجوب اوردر')
+    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField(' Status/حالة الطلب', validators=[length(max=500)])
+    submit = SubmitField('تــعـديــل')
 
 
 #######################################################################################################################
@@ -173,7 +185,6 @@ class AddCustomer(FlaskForm):
 
 
 # Edit Worker Status Flask Form for (Domec)
-
 
 class DomecEditUser(FlaskForm):
     status = StringField('Status', validators=[DataRequired(), length(max=200)])
@@ -266,6 +277,14 @@ def home():
     return render_template("index.html", users=all_users, name=current_user.name, logged_in=True)
 
 
+@app.route("/skills_index")
+@login_required
+def skills():
+    print(current_user.name)
+    all_skills = Skilled.query.all()
+    return render_template("skills_index.html", skills=all_skills, name=current_user.name, logged_in=True)
+
+
 @app.route("/add", methods=["GET", "POST"])
 def add():
     form = AddUser()
@@ -295,10 +314,44 @@ def add():
     return render_template("add.html", form=form)
 
 
+@app.route("/skills_add", methods=["GET", "POST"])
+def skills_add():
+    form = AddSkills()
+
+    if form.validate_on_submit():
+        new_skills = Skilled(
+            company_name=form.company_name.data,
+            company_visa=form.company_visa.data,
+            cr=form.cr.data,
+            contact_No=form.contact_No.data,
+            country=form.country.data,
+            mp_request=form.mp_request.data,
+            quantity=form.quantity.data,
+            selected_or_recommended=form.selected_or_recommended.data,
+            agency=form.agency.data,
+            jo_status=form.jo_status.data,
+            shipment_date=form.shipment_date.data,
+            status=form.status.data
+        )
+
+        db.session.add(new_skills)
+        db.session.commit()
+        all_skills.append(new_skills)
+        flash("تمت الإضافة بنجاح ✔!!")
+        # return redirect(url_for('home'))
+    return render_template("skills_add.html", form=form)
+
+
 @app.route("/list")
 def users_list():
     added_users = Users.query.all()
     return render_template("list.html", users=added_users, name=current_user.name)
+
+
+@app.route("/skills_list")
+def skills_list():
+    added_skills = Skilled.query.all()
+    return render_template("skills_list.html", skills=added_skills, name=current_user.name)
 
 
 @app.route("/edit", methods=["GET", "POST"])
@@ -307,11 +360,6 @@ def edit():
     user_id = request.args.get("id")
     updated_user = Users.query.get(user_id)
     if form.validate_on_submit():
-        # updated_user.name = form.name.data
-        # updated_user.nid_or_iqama = form.nid_or_iqama.data
-        # updated_user.contact_No = form.contact_No.data
-        # updated_user.visa = form.visa.data
-        # updated_user.worker_name = form.worker_name.data
         updated_user.musaned = form.musaned.data
         updated_user.embassy_contract = form.embassy_contract.data
         updated_user.shipment_date = form.shipment_date.data
@@ -321,6 +369,22 @@ def edit():
         flash("تم تعديل بيانات العميل بنجاح✔")
         return redirect(url_for('edit'))
     return render_template("edit.html", form=form, user=updated_user)
+
+
+@app.route("/skills_edit", methods=["GET", "POST"])
+def skills_edit():
+    form = EditSkills()
+    skills_id = request.args.get("id")
+    updated_skills = Skilled.query.get(skills_id)
+    if form.validate_on_submit():
+        updated_skills.jo_status = form.jo_status.data
+        updated_skills.shipment_date = form.shipment_date.data
+        updated_skills.status = form.status.data
+
+        db.session.commit()
+        flash("تم تعديل حالة الطلب بنجاح✔")
+        return redirect(url_for('skills_edit'))
+    return render_template("skills_edit.html", form=form, skill=updated_skills)
 
 
 @app.route("/delete")
@@ -333,10 +397,29 @@ def delete():
     return redirect(url_for('users_list'))
 
 
+@app.route("/skills_delete")
+def skills_delete():
+    skills_id = request.args.get("id")
+    skills_to_delete = Skilled.query.get(skills_id)
+    db.session.delete(skills_to_delete)
+    db.session.commit()
+    flash("تم حذف بيانات الطلب بنجاح✔")
+    return redirect(url_for('skills_list'))
+
+
 @app.route("/tables")
 def tables():
     added_users = Users.query.all()
     return render_template("tables.html", users=added_users, name=current_user.name, logged_in=True)
+
+
+@app.route("/skills_tables")
+def skills_tables():
+    added_skills = Skilled.query.all()
+    return render_template("skills_tables.html", skills=added_skills, name=current_user.name, logged_in=True)
+
+
+
 
 
 @app.route("/conditions")
@@ -498,15 +581,6 @@ def domec_tables():
 ########################################################################################################################
 
 # Back End for skilled workers
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

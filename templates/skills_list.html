@@ -6,16 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title style="align:right">تقرير العمالة المنزلية</title>
+        <title>تعديل الطلبات</title>
         <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="static/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-<!--Datatables CDN-->
-        <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css" rel="stylesheet" />
-
-
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -44,7 +39,7 @@
                 </li>
             </ul>
         </nav>
-  <div id="layoutSidenav">
+        <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -52,13 +47,13 @@
                             <div class="sb-sidenav-menu-heading">العمالة المنزلية</div>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                قائمة طلبات العمالة المنزلية
+                                قائمة الطلبات الرئيسية
                             </a>
                              <a class="nav-link" href="{{url_for('users_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                                 تعديل الطلبات
                             </a>
-       <div class="sb-sidenav-menu-heading">العمالة المهنية</div>
+                  <div class="sb-sidenav-menu-heading">العمالة المهنية</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 طلبات الشركات
@@ -132,16 +127,16 @@
 
                     <div class="sb-sidenav-footer">
                         <div class="small"> : تسجيل دخول </div>
-                       <div class="small" style="color:white" > 🟢 {{name}}  </div>
+                       <div class="small" style="color:white" > 🟢 {{name}} </div>
                     </div>
                 </nav>
             </div>
-               <div id="layoutSidenav_content">
+            <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:center">تقرير العمالة المنزلية </h1>
+                        <h1 class="mt-4" style="text-align:center">تعديل طلبات العمالة المهنية</h1>
                         <ol class="breadcrumb mb-4" >
-                            <li class="breadcrumb-item" ><a href="index.html" >العودةإلى الصفحة الرئيسية </a></li>
+                            <li class="breadcrumb-item" ><a href="{{url_for('skills')}}" >العودةإلى الصفحة الرئيسية </a></li>
                             <li class="breadcrumb-item active">القائمة</li>
                         </ol>
                         <div class="card mb-4">
@@ -160,33 +155,42 @@
                                 قائمة الطلبات
                             </div>
 
+                            <div class="content">
+                                {% with messages = get_flashed_messages() %}
+                                   {% if messages %}
+                                 {% for message in messages %}
+                              <p style="color:white;text-align:center; background-color:blue; ">{{ message }}</p>
+                                  {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+                            </div>
 
                             <div class="card-body">
 
-                                <table id="datatablesSimple" class="display">
+                                <table id="datatablesSimple">
 
                                     <thead>
-
                                         <tr>
+                                            <th>Action</th>
                                             <th>الحالة</th>
                                             <th>تاريخ الإرسالية</th>
-                                             <th>عقد السفارة</th>
-                                             <th>عقد مساند</th>
-                                            <th>النوع</th>
-                                            <th>المكتب</th>
-                                            <th>المهنة</th>
-                                            <th>اسم العاملة</th>
-                                            <th>تاريخ الطلب </th>
-                                            <th>رقم التأشيرة</th>
-                                            <th>رقم الجوال</th>
-                                            <th>رقم الهوية/الإقامة</th>
-                                             <th>اسم العميل</th>
+                                             <th>حالة الجوب اوردر</th>
+                                             <th>المكتب</th>
+                                            <th>مختارة ام معينة</th>
+                                            <th>العدد</th>
+                                            <th>نوع العمالة</th>
+                                            <th>الدولة</th>
+                                            <th>رقم التواصل </th>
+                                            <th>السجل التجاري</th>
+                                            <th>رقم ألتأشيرة</th>
+                                             <th>اسم المؤسسة</th>
                                             <th>id</th>
                                         </tr>
                                     </thead>
 
                                     <tfoot>
                                         <tr>
+                                            <th>Action</th>
                                             <th>الحالة</th>
                                             <th>تاريخ الإرسالية</th>
                                              <th>عقد السفارة</th>
@@ -204,22 +208,24 @@
                                     </tfoot>
 
                                     <tbody>
-                                    {% for user in users %}
+                                    {% for skill in skills %}
                                         <tr>
-                                            <td>{{user.status}}</td>
-                                            <td>{{user.shipment_date}}</td>
-                                            <td>{{user.embassy_contract}}</td>
-                                            <td>{{user.musaned}}</td>
-                                            <td>{{user.selected_or_recommended}}</td>
-                                            <td>{{user.agency}}</td>
-                                            <td>{{user.type}}</td>
-                                             <td>{{user.worker_name}}</td>
-                                             <td>{{user.visa_date}}</td>
-                                             <td>{{user.visa}}</td>
-                                             <td>{{user.contact_No}}</td>
-                                            <td>{{user.nid_or_iqama}}</td>
-                                             <td>{{user.name}}</td>
-                                            <td>{{user.id}}</td>
+
+                                            <td> <a href="{{url_for('skills_edit',id=skill.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
+                                                <a href="{{url_for('skills_delete',id=skill.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>
+                                            <td>{{skill.status}}</td>
+                                            <td>{{skill.shipment_date}}</td>
+                                            <td>{{skill.jo_status}}</td>
+                                            <td>{{skill.agency}}  </td>
+                                            <td>{{skill.selected_or_recommended}}</td>
+                                            <td>{{skill.quantity}}</td>
+                                             <td>{{skill.mp_request}}</td>
+                                             <td>{{skill.country}}</td>
+                                             <td>{{skill.contact_No}}</td>
+                                             <td>{{skill.cr}}</td>
+                                            <td>{{skill.company_visa}}</td>
+                                             <td>{{skill.company_name}}</td>
+                                            <td>{{skill.id}}</td>
                                         </tr>
                                 {%endfor%}
                                     </tbody>
@@ -248,27 +254,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="static/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-
-<!--       DataTables Scripts for printing  -->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
-
-        <script type="text/javascript">
-
-          $('#datatablesSimple').DataTable({
-             dom: 'Bfrtip',
-             buttons: [
-            'print'
-             ]
-          });
-
-        </script>
-
-
         <script src="static/js/datatables-simple-demo.js"></script>
     </body>
 </html>
-
-

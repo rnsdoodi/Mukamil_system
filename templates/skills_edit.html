@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
-{% block title %}Add New Worker{% endblock %}
+{% block title %}تعديل بيانات المؤسسة   {% endblock %}
 
 {% block content %}
 <br>
 <div class="content">
 
-    <h1 class="heading" style="text-align:center"><b><u>Add New Request</u></b> </h1>
+    <h1 class="heading" style="text-align:center"><b><u>تعديل بيانات الحالة ل  ({{skill.company_name}})</u></b> </h1>
     <div class="heading">
 <br>
-    <h1 class="heading" style="text-align:center"><a href="{{url_for('domec_home')}}" class="btn btn-dark"> Back To Home Page </a> </h1>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('skills_list')}}" class="btn btn-dark"> العودة إلى صفحة التعديل </a> </h1>
 </div>
 </div>
 
@@ -36,9 +36,9 @@
 
 </div>
 
-<br><br>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {%include "footer.html"%}
-{% endblock %}
+    {% endblock %}
+
 
 

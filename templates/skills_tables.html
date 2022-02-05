@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title style="align:right">تقرير العمالة المنزلية</title>
+        <title style="align:right">تقرير العمالة المهنية </title>
         <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="static/css/styles.css" rel="stylesheet" />
@@ -67,7 +67,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{url_for('skills')}}">قائمة طلبات الشركات</a>
-                                    <a class="nav-link" href="{{url_for('skills_list')}}">تعديل الطلبات الحالية</a>
+                                    <a class="nav-link" href="{{url_for('skills_tables')}}">تعديل الطلبات الحالية</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">نقل الخدمات</div>
@@ -116,7 +116,7 @@
                                 تقرير العمالة المنزلية
                             </a>
 
-                             <a class="nav-link" href="{{url_for('skills_tables')}}">
+                             <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 تقرير العمالة المهنية
                             </a>
@@ -139,7 +139,7 @@
                <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:center">تقرير العمالة المنزلية </h1>
+                        <h1 class="mt-4" style="text-align:center">تقرير العمالة المهنية </h1>
                         <ol class="breadcrumb mb-4" >
                             <li class="breadcrumb-item" ><a href="index.html" >العودةإلى الصفحة الرئيسية </a></li>
                             <li class="breadcrumb-item active">القائمة</li>
@@ -166,62 +166,40 @@
                                 <table id="datatablesSimple" class="display">
 
                                     <thead>
-
                                         <tr>
                                             <th>الحالة</th>
                                             <th>تاريخ الإرسالية</th>
-                                             <th>عقد السفارة</th>
-                                             <th>عقد مساند</th>
-                                            <th>النوع</th>
-                                            <th>المكتب</th>
-                                            <th>المهنة</th>
-                                            <th>اسم العاملة</th>
-                                            <th>تاريخ الطلب </th>
-                                            <th>رقم التأشيرة</th>
-                                            <th>رقم الجوال</th>
-                                            <th>رقم الهوية/الإقامة</th>
-                                             <th>اسم العميل</th>
+                                             <th>حالة الجوب اوردر</th>
+                                             <th>المكتب</th>
+                                            <th>مختارة ام معينة</th>
+                                            <th>العدد</th>
+                                            <th>نوع العمالة</th>
+                                            <th>الدولة</th>
+                                            <th>رقم التواصل </th>
+                                            <th>السجل التجاري</th>
+                                            <th>رقم ألتأشيرة</th>
+                                             <th>اسم المؤسسة</th>
                                             <th>id</th>
                                         </tr>
                                     </thead>
-
-                                    <tfoot>
-                                        <tr>
-                                            <th>الحالة</th>
-                                            <th>تاريخ الإرسالية</th>
-                                             <th>عقد السفارة</th>
-                                             <th>عقد مساند</th>
-                                            <th>النوع</th>
-                                            <th>المكتب</th>
-                                            <th>المهنة</th>
-                                            <th>اسم العاملة</th>
-                                            <th>تاريخ التأشيرة</th>
-                                            <th>رقم التأشيرة</th>
-                                            <th>رقم الجوال</th>
-                                            <th>رقم الهوية/الإقامة</th>
-                                             <th>اسم العميل</th>
-                                            <th>id</th>
-                                    </tfoot>
-
-                                    <tbody>
-                                    {% for user in users %}
-                                        <tr>
-                                            <td>{{user.status}}</td>
-                                            <td>{{user.shipment_date}}</td>
-                                            <td>{{user.embassy_contract}}</td>
-                                            <td>{{user.musaned}}</td>
-                                            <td>{{user.selected_or_recommended}}</td>
-                                            <td>{{user.agency}}</td>
-                                            <td>{{user.type}}</td>
-                                             <td>{{user.worker_name}}</td>
-                                             <td>{{user.visa_date}}</td>
-                                             <td>{{user.visa}}</td>
-                                             <td>{{user.contact_No}}</td>
-                                            <td>{{user.nid_or_iqama}}</td>
-                                             <td>{{user.name}}</td>
-                                            <td>{{user.id}}</td>
+                             <tbody>
+                                        {% for skill in skills %}
+                                          <tr>
+                                            <td>{{skill.status}}</td>
+                                            <td>{{skill.shipment_date}}</td>
+                                            <td>{{skill.jo_status}}</td>
+                                            <td>{{skill.agency}}  </td>
+                                            <td>{{skill.selected_or_recommended}}</td>
+                                            <td>{{skill.quantity}}</td>
+                                             <td>{{skill.mp_request}}</td>
+                                             <td>{{skill.country}}</td>
+                                             <td>{{skill.contact_No}}</td>
+                                             <td>{{skill.cr}}</td>
+                                            <td>{{skill.company_visa}}</td>
+                                             <td>{{skill.company_name}}</td>
+                                            <td>{{skill.id}}</td>
                                         </tr>
-                                {%endfor%}
+                                        {% endfor %}
                                     </tbody>
                                 </table>
 

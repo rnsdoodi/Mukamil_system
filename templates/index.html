@@ -42,7 +42,7 @@
                             <div class="sb-sidenav-menu-heading">العمالة المنزلية</div>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                قائمة الطلبات الرئيسية
+                                قائمة طلبات العمالة المنزلية
                             </a>
                             <a class="nav-link" href="{{url_for('users_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
@@ -56,8 +56,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">إضافة طلب جديد</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">تعديل الطلبات الحالية</a>
+                                    <a class="nav-link" href="{{url_for('skills')}}">قائمة طلبات الشركات</a>
+                                    <a class="nav-link" href="{{url_for('skills_list')}}">تعديل الطلبات الحالية</a>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">نقل الخدمات</div>
@@ -106,7 +106,7 @@
                                 تقرير العمالة المنزلية
                             </a>
 
-                             <a class="nav-link" href="#">
+                             <a class="nav-link" href="{{url_for('skills_tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 تقرير العمالة المهنية
                             </a>
@@ -131,7 +131,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:right">قائمة طلبات المكتب</h1>
+                        <h1 class="mt-4" style="text-align:right">قائمة طلبات العمالة المنزلية</h1>
                         <br>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
