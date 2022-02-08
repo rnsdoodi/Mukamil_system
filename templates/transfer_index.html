@@ -44,7 +44,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 قائمة طلبات العمالة المنزلية
                             </a>
-                            <a class="nav-link" href="{{url_for('users_list')}}">
+                            <a class="nav-link" href="{{url_for('skills_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                                 تعديل الطلبات
                             </a>
@@ -70,8 +70,8 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
 
-                                    <a class="nav-link" href="{{url_for('transfer')}}">قائمة طلبات نقل الخدمات</a>
-                                    <a class="nav-link" href="{{url_for('transfer_list')}}">تعديل طلب نقل</a>
+                                    <a class="nav-link" href="layout-static.html">إضافة طلب نقل جديد</a>
+                                    <a class="nav-link" href="layout-static.html">تعديل طلب نقل</a>
 
 
 <!--                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">-->
@@ -131,12 +131,12 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:right">قائمة طلبات العمالة المنزلية</h1>
+                        <h1 class="mt-4" style="text-align:right">قائمة طلبات نقل الخدمات </h1>
                         <br>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body"> قائمة الرجيع</div>
+                                    <div class="card-body"> قائمة الطلبات المنتهية</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">عرض التفاصيل</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -145,7 +145,7 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">قائمة الوصول</div>
+                                    <div class="card-body">قائمة الطلبات قيد الانتظار</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">عرض التفاصيل</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -154,18 +154,18 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">تعديل الطلبات </div>
+                                    <div class="card-body">تعديل طلبات نقل الخدمات </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{url_for('users_list')}}">عرض التفاصيل</a>
+                                        <a class="small text-white stretched-link" href="{{url_for('skills_list')}}">عرض التفاصيل</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">إضافة طلب جديد</div>
+                                    <div class="card-body">إضافة طلب نقل خدمة جديد</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{url_for('add')}}">عرض التفاصيل</a>
+                                        <a class="small text-white stretched-link" href="{{url_for('add_transfer')}}">عرض التفاصيل</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -213,19 +213,16 @@
 
                                     <thead>
                                         <tr>
-                                            <th>الحالة</th>
-                                            <th>تاريخ الإرسالية</th>
-                                             <th>عقد السفارة</th>
-                                             <th>عقد مساند</th>
-                                            <th>النوع</th>
-                                            <th>المكتب</th>
-                                            <th>المهنة</th>
+                                            <th>ملاحظات</th>
+                                            <th>حالة الطلب</th>
+                                             <th>المكتب</th>
+                                             <th>الاقامة</th>
+                                            <th>رقم جوال الكفيل الثاني</th>
+                                            <th>اسم الكفيل الثاني</th>
+                                            <th>رقم جوال العاملة</th>
                                             <th>اسم العاملة</th>
-                                            <th>تاريخ الطلب </th>
-                                            <th>رقم التأشيرة</th>
-                                            <th>رقم الجوال</th>
-                                            <th>رقم الهوية/الإقامة</th>
-                                             <th>اسم العميل</th>
+                                            <th>رقم جوال الكفيل الأول </th>
+                                            <th>اسم الكفيل الأول</th>
                                             <th>id</th>
                                         </tr>
                                     </thead>
@@ -233,22 +230,19 @@
 
 
                                     <tbody>
-                                        {% for user in users %}
+                                        {% for transfer in transfers %}
                                           <tr>
-                                            <td>{{user.status}}</td>
-                                            <td>{{user.shipment_date}}</td>
-                                            <td>{{user.embassy_contract}}</td>
-                                            <td>{{user.musaned}}  </td>
-                                            <td>{{user.selected_or_recommended}}</td>
-                                            <td>{{user.agency}}</td>
-                                            <td>{{user.type}}</td>
-                                             <td>{{user.worker_name}}</td>
-                                             <td>{{user.visa_date}}</td>
-                                             <td>{{user.visa}}</td>
-                                             <td>{{user.contact_No}}</td>
-                                            <td>{{user.nid_or_iqama}}</td>
-                                             <td>{{user.name}}</td>
-                                            <td>{{user.id}}</td>
+                                            <td>{{transfer.status}}</td>
+                                            <td>{{transfer.request_status}}</td>
+                                            <td>{{transfer.agency}}</td>
+                                            <td>{{transfer.iqama}}  </td>
+                                            <td>{{transfer.second_contact_no}}</td>
+                                            <td>{{transfer.second_employer_name}}</td>
+                                             <td>{{transfer.worker_contact_no}}</td>
+                                             <td>{{transfer.worker_name}}</td>
+                                             <td>{{transfer.first_contact_no}}</td>
+                                             <td>{{transfer.first_employer_name}}</td>
+                                             <td>{{transfer.id}}</td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>

@@ -19,6 +19,7 @@ app = Flask(__name__)
 all_users = []
 all_arrived = []
 all_skills = []
+all_transfers = []
 
 # Creating The SQLALCHEMY DataBase
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
@@ -74,6 +75,21 @@ class Skilled(db.Model):
     jo_status = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
     status = db.Column(db.String(1000), nullable=False)
+
+
+class Transfer(db.Model):
+    __tablename__ = "transfer"
+    id = db.Column(db.Integer, primary_key=True)
+    first_employer_name = db.Column(db.String(250), nullable=False)
+    first_contact_no = db.Column(db.String(250), nullable=False)
+    worker_name = db.Column(db.String(250), nullable=False)
+    worker_contact_no = db.Column(db.String(250), nullable=False)
+    second_employer_name = db.Column(db.String(250), nullable=False)
+    second_contact_no = db.Column(db.String(250), nullable=False)
+    iqama = db.Column(db.String(250), nullable=False)
+    agency = db.Column(db.String(250), nullable=False)
+    request_status = db.Column(db.String(250), nullable=False)
+    status = db.Column(db.String(250), nullable=False)
 
 
 # CREATE TABLE IN DB To save users login Data (Hashed & Salted)
@@ -153,6 +169,33 @@ class EditSkills(FlaskForm):
     jo_status = StringField('Job Order Status/حالة الجوب اوردر')
     shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
     status = StringField(' Status/حالة الطلب', validators=[length(max=500)])
+    submit = SubmitField('تــعـديــل')
+
+
+# Add new Transfer Request Flask Form for (السلالم الدولية)
+
+class AddTransfer(FlaskForm):
+    first_employer_name = StringField('اسم الكفيل الأول ', validators=[DataRequired(), length(max=100)])
+    first_contact_no = StringField('رقم جوال الكفيل الأول', validators=[DataRequired(), length(max=100)],
+                                   description="ادخل رقم جوال صالح مكون من 10 ارقام")
+    worker_name = StringField('  اسم العاملة ', validators=[DataRequired(), length(max=100)],
+                              description="كما هو مدون في جواز السفر")
+    worker_contact_no = StringField('رقم جوال العاملة', description='إن وجد')
+    second_employer_name = StringField('اسم الكفيل الثاني', validators=[DataRequired(), length(max=100)])
+    second_contact_no = StringField('رقم جوال الكفيل الثاني', validators=[DataRequired(), length(max=150)],
+                                    description='ادخل رقم جوال صالح مكون من 10 ارقام ')
+    iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
+    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
+    request_status = StringField('حالة الطلب', validators=[DataRequired(), length(max=300)])
+    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=300)])
+    submit = SubmitField('إضــافـة الطلــب')
+
+
+# Edit new Transfer Request Flask Form for (السلالم الدولية)
+class EditTransfer(FlaskForm):
+    iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
+    reqeust_status = StringField('حالة الطلب', validators=[DataRequired(), length(max=300)])
+    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=300)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -318,6 +361,14 @@ def skills():
     return render_template("skills_index.html", skills=all_skills, name=current_user.name, logged_in=True)
 
 
+@app.route("/transfer_index")
+@login_required
+def transfer():
+    print(current_user.name)
+    all_transfers = Transfer.query.all()
+    return render_template("transfer_index.html", transfers=all_transfers, name=current_user.name, logged_in=True)
+
+
 @app.route("/add", methods=["GET", "POST"])
 def add():
     form = AddUser()
@@ -342,7 +393,7 @@ def add():
         db.session.add(new_customer)
         db.session.commit()
         all_users.append(new_customer)
-        flash("تمت الإضافة بنجاح ✔!!")
+        flash("تمت اضافة طلب العمالة المنزلية بنجاح ✔!!")
         # return redirect(url_for('home'))
     return render_template("add.html", form=form)
 
@@ -350,7 +401,6 @@ def add():
 @app.route("/skills_add", methods=["GET", "POST"])
 def skills_add():
     form = AddSkills()
-
     if form.validate_on_submit():
         new_skills = Skilled(
             company_name=form.company_name.data,
@@ -370,9 +420,33 @@ def skills_add():
         db.session.add(new_skills)
         db.session.commit()
         all_skills.append(new_skills)
-        flash("تمت الإضافة بنجاح ✔!!")
+        flash("تمت اضافة طلب العمالة المهنية بنجاح ✔!!")
         # return redirect(url_for('home'))
     return render_template("skills_add.html", form=form)
+
+
+@app.route("/transfer_add", methods=["GET", "POST"])
+def add_transfer():
+    form = AddTransfer()
+    if form.validate_on_submit():
+        new_transfer = Transfer(
+            first_employer_name=form.first_employer_name.data,
+            first_contact_no=form.first_contact_no.data,
+            worker_name=form.worker_name.data,
+            worker_contact_no=form.worker_contact_no.data,
+            second_employer_name=form.second_employer_name.data,
+            second_contact_no=form.second_contact_no.data,
+            iqama=form.iqama.data,
+            agency=form.agency.data,
+            request_status=form.request_status.data,
+            status=form.status.data,
+        )
+        db.session.add(new_transfer)
+        db.session.commit()
+        all_skills.append(new_transfer)
+        flash("تم اضافة طلب نقل الخدمة بنجاح ✔!!")
+        # return redirect(url_for('home'))
+    return render_template("transfer_add.html", form=form)
 
 
 @app.route("/list")
@@ -387,6 +461,12 @@ def skills_list():
     return render_template("skills_list.html", skills=added_skills, name=current_user.name)
 
 
+@app.route("/transfer_list")
+def transfer_list():
+    added_transfers = Transfer.query.all()
+    return render_template("transfer_list.html", transfers=added_transfers, name=current_user.name)
+
+
 @app.route("/edit", methods=["GET", "POST"])
 def edit():
     form = EditUser()
@@ -399,7 +479,7 @@ def edit():
         updated_user.status = form.status.data
 
         db.session.commit()
-        flash("تم تعديل بيانات العميل بنجاح✔")
+        flash("تم تعديل بيانات طلب العمالة المنزلية بنجاح✔")
         return redirect(url_for('edit'))
     return render_template("edit.html", form=form, user=updated_user)
 
@@ -415,9 +495,25 @@ def skills_edit():
         updated_skills.status = form.status.data
 
         db.session.commit()
-        flash("تم تعديل حالة الطلب بنجاح✔")
+        flash("تم تعديل حالة طلب العمالة المهنية بنجاح✔")
         return redirect(url_for('skills_edit'))
     return render_template("skills_edit.html", form=form, skill=updated_skills)
+
+
+@app.route("/transfer_edit", methods=["GET", "POST"])
+def transfer_edit():
+    form = EditTransfer()
+    transfer_id = request.args.get("id")
+    updated_transfers = Transfer.query.get(transfer_id)
+    if form.validate_on_submit():
+        updated_transfers.iqama = form.iqama.data
+        updated_transfers.request_status = form.reqeust_status.data
+        updated_transfers.status = form.status.data
+
+        db.session.commit()
+        flash("تم تعديل حالة طلب نقل الخدمة بنجاح✔")
+        return redirect(url_for('transfer_edit'))
+    return render_template("transfers_edit.html", form=form, transfer=updated_transfers)
 
 
 @app.route("/delete")
@@ -436,8 +532,18 @@ def skills_delete():
     skills_to_delete = Skilled.query.get(skills_id)
     db.session.delete(skills_to_delete)
     db.session.commit()
-    flash("تم حذف بيانات الطلب بنجاح✔")
+    flash("تم حذف بيانات طلب العمالة المهنية بنجاح✔")
     return redirect(url_for('skills_list'))
+
+
+@app.route("/transfer_delete")
+def transfer_delete():
+    transfer_id = request.args.get("id")
+    transfers_to_delete = Transfer.query.get(transfer_id)
+    db.session.delete(transfers_to_delete)
+    db.session.commit()
+    flash("تم حذف بيانات طلب نقل الخدمة بنجاح✔")
+    return redirect(url_for('transfer_list'))
 
 
 @app.route("/tables")
@@ -450,6 +556,12 @@ def tables():
 def skills_tables():
     added_skills = Skilled.query.all()
     return render_template("skills_tables.html", skills=added_skills, name=current_user.name, logged_in=True)
+
+
+@app.route("/transfer_tables")
+def transfers_tables():
+    added_transfers = Transfer.query.all()
+    return render_template("transfer_tables.html", transfers=added_transfers, name=current_user.name, logged_in=True)
 
 
 @app.route("/conditions")
@@ -668,8 +780,6 @@ def domec_tables():
 def domec_skills_tables():
     added_skills = Skilled.query.all()
     return render_template("dom_skills_tables.html", skills=added_skills, name=current_user.name, logged_in=True)
-
-
 
 
 ########################################################################################################################

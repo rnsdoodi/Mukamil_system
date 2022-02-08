@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
-{% block title %}Add New Worker{% endblock %}
+{% block title %}تعديل بيانات طلب نقل الخدمة   {% endblock %}
 
 {% block content %}
 <br>
 <div class="content">
 
-    <h1 class="heading" style="text-align:center"><b><u>إضافة طلب عمالة مهنية </u></b> </h1>
+    <h1 class="heading" style="text-align:center"><b><u>تعديل بيانات نقل عاملة({{transfer.first_employer_name}})</u></b> </h1>
     <div class="heading">
 <br>
-    <h1 class="heading" style="text-align:center"><a href="{{url_for('skills')}}" class="btn btn-dark"> العودة إلى الصفحة الرئيسية </a> </h1>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('skills_list')}}" class="btn btn-dark"> العودة إلى صفحة التعديل </a> </h1>
 </div>
 </div>
 
@@ -36,9 +36,9 @@
 
 </div>
 
-<br><br>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 {%include "footer.html"%}
-{% endblock %}
+    {% endblock %}
+
 
 
