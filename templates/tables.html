@@ -44,7 +44,7 @@
                 </li>
             </ul>
         </nav>
-  <div id="layoutSidenav">
+          <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -54,11 +54,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 قائمة طلبات العمالة المنزلية
                             </a>
-                             <a class="nav-link" href="{{url_for('users_list')}}">
+                            <a class="nav-link" href="{{url_for('users_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                                 تعديل الطلبات
                             </a>
-       <div class="sb-sidenav-menu-heading">العمالة المهنية</div>
+                            <div class="sb-sidenav-menu-heading">العمالة المهنية</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 طلبات الشركات
@@ -80,8 +80,8 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
 
-                                    <a class="nav-link" href="layout-static.html">إضافة طلب نقل جديد</a>
-                                    <a class="nav-link" href="layout-static.html">تعديل طلب نقل</a>
+                                    <a class="nav-link" href="{{url_for('transfer')}}">قائمة طلبات نقل الخدمات</a>
+                                    <a class="nav-link" href="{{url_for('transfer_list')}}">تعديل طلب نقل</a>
 
 
 <!--                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">-->
@@ -102,15 +102,15 @@
 <!--                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
 <!--                                    </a>-->
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
+<!--                                        <nav class="sb-sidenav-menu-nested nav">-->
+<!--                                            <a class="nav-link" href="401.html">401 Page</a>-->
+<!--                                            <a class="nav-link" href="404.html">404 Page</a>-->
+<!--                                            <a class="nav-link" href="500.html">500 Page</a>-->
+<!--                                        </nav>-->
                                     </div>
                                 </nav>
                             </div>
-                                     <div class="sb-sidenav-menu-heading">التقـارير</div>
+                            <div class="sb-sidenav-menu-heading">التقـارير</div>
                             <a class="nav-link" href="{{url_for('tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 تقرير العمالة المنزلية
@@ -122,7 +122,7 @@
                             </a>
 
 
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{url_for('transfers_tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 تقرير نقل الخدمات
                             </a>
