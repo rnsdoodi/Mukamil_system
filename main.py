@@ -105,35 +105,35 @@ db.create_all()
 
 # Add Customer Request Flask Form for (السلالم الدولية)
 class AddUser(FlaskForm):
-    name = StringField('Employer Name/اسم العميل ', validators=[DataRequired(), length(max=100)])
-    nid_or_iqama = StringField('ID or IQAMA / الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
+    name = StringField('اسم العميل ', validators=[DataRequired(), length(max=100)])
+    nid_or_iqama = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
                                description="ادخل رقم هوية صالح مكون من 10 ارقام")
-    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
+    contact_No = StringField('رقم الجوال', validators=[DataRequired()],
                              description='05xxxxxxxx : مثال')
-    visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+    visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                        description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    visa_date = DateField('Request Date/تاريخ الطلب', validators=[DataRequired()], format='%Y-%m-%d')
-    worker_name = StringField('Worker Name/إسم العاملة', validators=[DataRequired(), length(max=150)],
+    visa_date = DateField('تاريخ الطلب', validators=[DataRequired()], format='%Y-%m-%d')
+    worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
-    type = SelectField('Position/المهنة',
+    type = SelectField('المهنة',
                        choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
                                 "سائق خاص/FAMILY DRIVER"])
-    agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
-    selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
-                                          choices=["معينة Recommended", "مختارة Selected"])
-    musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
-    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", " لا No"])
-    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' Status/الحالة', validators=[length(max=200)])
+    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
+    selected_or_recommended = SelectField('معينة ام مختارة',
+                                          choices=[" Recommended", " Selected"])
+    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
+    embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
+    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField(' الحالة', validators=[length(max=200)])
     submit = SubmitField('Add إضافة')
 
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    musaned = SelectField('Musaned Contract/عقد مساند', choices=[" نعم Yes", "  لا No"])
-    embassy_contract = SelectField('Embassy Contract/عقد السفارة', choices=[" نعم Yes", "  لا No"])
-    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField('Status/الحالة', validators=[length(max=200)])
+    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
+    embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
+    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField('الحالة', validators=[length(max=200)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -141,34 +141,34 @@ class EditUser(FlaskForm):
 
 
 class AddSkills(FlaskForm):
-    company_name = StringField('Company Name/اسم المؤسسة  ', validators=[DataRequired(), length(max=100)])
-    company_visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+    company_name = StringField('اسم المؤسسة  ', validators=[DataRequired(), length(max=100)])
+    company_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                                description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    cr = StringField('Commercial Registration / السجل التجاري', validators=[DataRequired(), length(max=10)],
+    cr = StringField(' السجل التجاري', validators=[DataRequired(), length(max=10)],
                      description="ادخل الرقم الموحد للمنشأة يبدا ب 70")
 
-    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
+    contact_No = StringField('رقم الجوال', validators=[DataRequired()],
                              description='05xxxxxxxx : مثال')
 
-    country = StringField('Country/الدولة', validators=[DataRequired()])
-    mp_request = StringField('Position/المهنة', validators=[DataRequired(), length(max=150)],
+    country = StringField('الدولة', validators=[DataRequired()])
+    mp_request = StringField('المهنة', validators=[DataRequired(), length(max=150)],
                              description='كما هو مدون في التأشيرة ')
-    quantity = StringField('Quantity/العدد', validators=[DataRequired(), length(max=150)])
-    selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
-                                          choices=["معينة Recommended", "مختارة Selected"])
-    agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
-    jo_status = StringField('Job Order Status/حالة الجوب اوردر')
-    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' Status/حالة الطلب', validators=[length(max=500)])
+    quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
+    selected_or_recommended = SelectField('معينة ام مختارة',
+                                          choices=[" Recommended", " Selected"])
+    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
+    jo_status = StringField('حالة الجوب اوردر')
+    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField(' حالة الطلب', validators=[length(max=500)])
     submit = SubmitField('Add إضافة')
 
 
 # Edit new skills Request Flask Form for (السلالم الدولية)
 
 class EditSkills(FlaskForm):
-    jo_status = StringField('Job Order Status/حالة الجوب اوردر')
-    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' Status/حالة الطلب', validators=[length(max=500)])
+    jo_status = StringField('حالة الجوب اوردر')
+    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField(' حالة الطلب', validators=[length(max=500)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -215,15 +215,15 @@ class AddCustomer(FlaskForm):
     worker_name = StringField('Worker Name', validators=[DataRequired(), length(max=150)],
                               description='As per the Passport')
     type = SelectField('Position',
-                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
-                                "سائق خاص/FAMILY DRIVER"])
+                       choices=["DH", "HOUSE BOY", "PRIVATE NURSE", "NANNY",
+                                "FAMILY DRIVER"])
     agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
-    selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
-                                          choices=["معينة Recommended", "مختارة Selected"])
-    musaned = SelectField('Musaned Contract', choices=[" نعم Yes", "  لا No"])
-    embassy_contract = SelectField('Original Contract', choices=[" نعم Yes", " لا No"])
+    selected_or_recommended = SelectField('Selected or Recommended',
+                                          choices=[" Recommended", " Selected"])
+    musaned = SelectField('Musaned Contract', choices=["  Yes", "   No"])
+    embassy_contract = SelectField('Original Contract', choices=["  Yes", "  No"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
-    status = StringField(' Status/الحالة', validators=[length(max=200)])
+    status = StringField(' Status', validators=[length(max=200)])
     submit = SubmitField('Add')
 
 
@@ -237,25 +237,25 @@ class DomecEditUser(FlaskForm):
 # Add new skills Request Flask Form for (Domec)
 
 class DomecAddSkills(FlaskForm):
-    company_name = StringField('Company Name/اسم المؤسسة  ', validators=[DataRequired(), length(max=100)])
-    company_visa = StringField('Visa No./رقم التأشيرة', validators=[DataRequired(), length(max=10)],
-                               description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    cr = StringField('Commercial Registration / السجل التجاري', validators=[DataRequired(), length(max=10)],
-                     description="ادخل الرقم الموحد للمنشأة يبدا ب 70")
+    company_name = StringField('Company Name', validators=[DataRequired(), length(max=100)])
+    company_visa = StringField('Visa No. ', validators=[DataRequired(), length(max=10)],
+                               description="Please insert 10 digits Valid visa No.")
+    cr = StringField('Commercial Registration ', validators=[DataRequired(), length(max=10)],
+                     description="Please Insert valid Unified National Number starting by 70")
 
-    contact_No = StringField('Mobile No/رقم الجوال', validators=[DataRequired()],
-                             description='05xxxxxxxx : مثال')
+    contact_No = StringField('Mobile No.', validators=[DataRequired()],
+                             description=' Example : 05xxxxxxxx ')
 
-    country = StringField('Country/الدولة', validators=[DataRequired()])
-    mp_request = StringField('Position/المهنة', validators=[DataRequired(), length(max=150)],
-                             description='كما هو مدون في التأشيرة ')
-    quantity = StringField('Quantity/العدد', validators=[DataRequired(), length(max=150)])
-    selected_or_recommended = SelectField('Selected or Recommended/معينة ام مختارة',
-                                          choices=["معينة Recommended", "مختارة Selected"])
-    agency = SelectField('Agency/المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
-    jo_status = StringField('Job Order Status/حالة الجوب اوردر')
-    shipment_date = DateField(' Shipment Date/تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' Status/حالة الطلب', validators=[length(max=500)])
+    country = StringField('Country', validators=[DataRequired()])
+    mp_request = StringField('Position', validators=[DataRequired(), length(max=150)],
+                             description='As Per the Visa ')
+    quantity = StringField('Quantity', validators=[DataRequired(), length(max=150)])
+    selected_or_recommended = SelectField('Selected or Recommended ',
+                                          choices=[" Recommended", " Selected"])
+    agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "Pioneer", "Alshareef"])
+    jo_status = StringField('Job Order Status')
+    shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
+    status = StringField(' Status', validators=[length(max=500)])
     submit = SubmitField('Add')
 
 
