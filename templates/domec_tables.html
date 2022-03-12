@@ -209,6 +209,7 @@
 
                                     <tbody>
                                     {% for user in users %}
+                                    {% if user.agency == "Domec" %}
                                         <tr>
                                               <td>{{user.id}}</td>
                                               <td>{{user.name}}</td>
@@ -225,6 +226,7 @@
                                                <td>{{user.shipment_date}}</td>
                                               <td>{{user.status}}</td>
                                         </tr>
+                                    {% endif %}
                                 {%endfor%}
                                     </tbody>
                                 </table>

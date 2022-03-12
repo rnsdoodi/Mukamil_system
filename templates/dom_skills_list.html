@@ -197,6 +197,7 @@
 
                                      <tbody>
                                         {% for skill in skills %}
+                                        {% if skill.agency == "Domec" %}
                                           <tr>
                                               <td>{{skill.id}}</td>
                                               <td>{{skill.company_name}}</td>
@@ -214,8 +215,7 @@
                                               <td> <a href="{{url_for('domec_edit_skills',id=skill.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i> Edit</a>
 
                                         </tr>
-
-
+                                        {% endif %}
                                         {% endfor %}
                                     </tbody>
                                 </table>

@@ -185,6 +185,7 @@
 
                                      <tbody>
                                         {% for skill in skills %}
+                                        {% if skill.agency == "Domec" %}
                                           <tr>
                                               <td>{{skill.id}}</td>
                                               <td>{{skill.company_name}}</td>
@@ -200,8 +201,7 @@
                                               <td>{{skill.shipment_date}}</td>
                                               <td>{{skill.status}}</td>
                                         </tr>
-
-
+                                        {% endif %}
                                         {% endfor %}
                                     </tbody>
                                 </table>
