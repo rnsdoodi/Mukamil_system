@@ -157,18 +157,20 @@ class AddSkills(FlaskForm):
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended", " Selected"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
-    jo_status = StringField('حالة الجوب اوردر')
+    jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
+                                                         "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' حالة الطلب', validators=[length(max=500)])
+    status = SelectField(' حالة الطلب', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
 # Edit new skills Request Flask Form for (السلالم الدولية)
 
 class EditSkills(FlaskForm):
-    jo_status = StringField('حالة الجوب اوردر')
+    jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
+                                                         "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' حالة الطلب', validators=[length(max=500)])
+    status = StringField(' حالة الطلب', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -253,7 +255,8 @@ class DomecAddSkills(FlaskForm):
     selected_or_recommended = SelectField('Selected or Recommended ',
                                           choices=[" Recommended", " Selected"])
     agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "Pioneer", "Alshareef"])
-    jo_status = StringField('Job Order Status')
+    jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
+                                                         "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
     status = StringField(' Status', validators=[length(max=500)])
     submit = SubmitField('Add')
@@ -262,8 +265,9 @@ class DomecAddSkills(FlaskForm):
 # Edit new skills Request Flask Form for (Domec)
 
 class DomecEditSkills(FlaskForm):
-    jo_status = StringField('Job Order Status', validators=[DataRequired(), length(max=200)])
-    status = StringField(' Status', validators=[length(max=500)])
+    jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
+                                                         "For POEA Approval", "POEA Approved"])
+    status = StringField(' Status', validators=[length(max=1000)])
     submit = SubmitField('Update')
 
 
