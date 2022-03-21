@@ -160,7 +160,7 @@ class AddSkills(FlaskForm):
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = SelectField(' حالة الطلب', validators=[DataRequired(), length(max=1000)])
+    status = StringField(' حالة الطلب', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
