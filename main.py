@@ -150,7 +150,8 @@ class AddSkills(FlaskForm):
     contact_No = StringField('رقم الجوال', validators=[DataRequired()],
                              description='05xxxxxxxx : مثال')
 
-    country = StringField('الدولة', validators=[DataRequired()])
+    country = SelectField('الدولة', choices=[" Philippines", "Thailand", "India", "Pakistan", "Nepal", "Tunisia",
+                                             "Morocco", "Egypt", "Sudan"])
     mp_request = StringField('المهنة', validators=[DataRequired(), length(max=150)],
                              description='كما هو مدون في التأشيرة ')
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
