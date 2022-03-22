@@ -189,7 +189,11 @@ class AddTransfer(FlaskForm):
                                     description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
-    request_status = StringField('حالة الطلب', validators=[DataRequired(), length(max=300)])
+    request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
+                                                        "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الخدمات",
+                                                        "في انتظار سداد رسوم الإقامة / نقل الكفالة",
+                                                        "تم نقل الخدمات",
+                                                        "العاملة رفضت نقل الخدمات وتراجعت"])
     status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=300)])
     submit = SubmitField('إضــافـة الطلــب')
 
