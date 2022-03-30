@@ -7788,7 +7788,7 @@ textarea.form-control-lg {
 .text-muted {
   --bs-text-opacity: 1;
   color: #6c757d !important;
-   font-size: 1.2rem;
+   font-size: 1rem;
 }
 
 .text-black-50 {
