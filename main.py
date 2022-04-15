@@ -118,7 +118,7 @@ class AddUser(FlaskForm):
     type = SelectField('المهنة',
                        choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
                                 "سائق خاص/FAMILY DRIVER"])
-    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
+    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran International"])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended", " Selected"])
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
