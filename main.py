@@ -158,9 +158,11 @@ class AddSkills(FlaskForm):
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended", " Selected"])
-    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran International"])
+    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف",
+                                            "Imran International","World Vision Int."])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
-                                                         "For POEA Approval", "POEA Approved", "INDIAN IMMIGRATION APPROVED","World Vision Int."])
+                                                         "For POEA Approval", "POEA Approved",
+                                                         "INDIAN IMMIGRATION APPROVED"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
     status = StringField(' حالة الطلب', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('Add إضافة')
