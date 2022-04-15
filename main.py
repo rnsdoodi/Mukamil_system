@@ -403,7 +403,7 @@ def add():
         db.session.commit()
         all_users.append(new_customer)
         flash("تمت اضافة طلب العمالة المنزلية بنجاح ✔!!")
-        # return redirect(url_for('home'))
+        return redirect(url_for('add'))
     return render_template("add.html", form=form)
 
 
@@ -430,7 +430,7 @@ def skills_add():
         db.session.commit()
         all_skills.append(new_skills)
         flash("تمت اضافة طلب العمالة المهنية بنجاح ✔!!")
-        # return redirect(url_for('home'))
+        return redirect(url_for('skills_add'))
     return render_template("skills_add.html", form=form)
 
 
@@ -454,7 +454,7 @@ def add_transfer():
         db.session.commit()
         all_skills.append(new_transfer)
         flash("تم اضافة طلب نقل الخدمة بنجاح ✔!!")
-        # return redirect(url_for('home'))
+        return redirect(url_for('transfer_add'))
     return render_template("transfer_add.html", form=form)
 
 
