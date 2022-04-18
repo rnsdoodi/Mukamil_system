@@ -215,20 +215,20 @@
 
                                     <thead>
                                         <tr>
-                                            <th>الحالة</th>
-                                            <th>تاريخ الإرسالية</th>
-                                             <th>عقد السفارة</th>
-                                             <th>عقد مساند</th>
-                                            <th>النوع</th>
-                                            <th>المكتب</th>
-                                            <th>المهنة</th>
-                                            <th>اسم العاملة</th>
-                                            <th>تاريخ الطلب </th>
-                                            <th>رقم التأشيرة</th>
-                                            <th>رقم الجوال</th>
-                                            <th>رقم الهوية/الإقامة</th>
-                                             <th>اسم العميل</th>
-                                            <th>id</th>
+                                            <th style="text-align:center;">الحالة</th>
+                                            <th style="text-align:center;">تاريخ الإرسالية</th>
+                                             <th style="text-align:center;">عقد السفارة</th>
+                                             <th style="text-align:center;">عقد مساند</th>
+                                            <th style="text-align:center;">النوع</th>
+                                            <th style="text-align:center;">المكتب</th>
+                                            <th style="text-align:center;">المهنة</th>
+                                            <th style="text-align:center;">اسم العاملة</th>
+                                            <th style="text-align:center;">تاريخ الطلب </th>
+                                            <th style="text-align:center;">رقم التأشيرة</th>
+                                            <th style="text-align:center;">رقم الجوال</th>
+                                            <th style="text-align:center;">رقم الهوية/الإقامة</th>
+                                             <th style="text-align:center;">اسم العميل</th>
+                                            <th style="text-align:center;">id</th>
                                         </tr>
                                     </thead>
 
@@ -237,20 +237,20 @@
                                     <tbody>
                                         {% for user in users %}
                                           <tr>
-                                            <td>{{user.status}}</td>
-                                            <td>{{user.shipment_date}}</td>
-                                            <td>{{user.embassy_contract}}</td>
-                                            <td>{{user.musaned}}  </td>
-                                            <td>{{user.selected_or_recommended}}</td>
-                                            <td>{{user.agency}}</td>
-                                            <td>{{user.type}}</td>
-                                             <td>{{user.worker_name}}</td>
-                                             <td>{{user.visa_date}}</td>
-                                             <td>{{user.visa}}</td>
-                                             <td>{{user.contact_No}}</td>
-                                            <td>{{user.nid_or_iqama}}</td>
-                                             <td>{{user.name}}</td>
-                                            <td>{{user.id}}</td>
+                                            <td style="text-align:center;">{{user.status}}</td>
+                                            <td style="text-align:center;">{{user.shipment_date}}</td>
+                                            <td style="text-align:center;">{{user.embassy_contract}}</td>
+                                            <td style="text-align:center;">{{user.musaned}}  </td>
+                                            <td style="text-align:center;">{{user.selected_or_recommended}}</td>
+                                            <td style="text-align:center;">{{user.agency}}</td>
+                                            <td style="text-align:center;">{{user.type}}</td>
+                                             <td style="text-align:center;">{{user.worker_name}}</td>
+                                             <td style="text-align:center;">{{user.visa_date}}</td>
+                                             <td style="text-align:center;">{{user.visa}}</td>
+                                             <td style="text-align:center;">{{user.contact_No}}</td>
+                                            <td style="text-align:center;">{{user.nid_or_iqama}}</td>
+                                             <td style="text-align:center;">{{user.name}}</td>
+                                            <td style="text-align:center;">{{user.id}}</td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
