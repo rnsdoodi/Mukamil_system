@@ -171,61 +171,61 @@
 
                                     <thead>
                                         <tr>
-                                            <th>Action</th>
-                                            <th>الحالة</th>
-                                            <th>تاريخ الإرسالية</th>
-                                             <th>حالة الجوب اوردر</th>
-                                             <th>المكتب</th>
-                                            <th>مختارة ام معينة</th>
-                                            <th>العدد</th>
-                                            <th>نوع العمالة</th>
-                                            <th>الدولة</th>
-                                            <th>رقم التواصل </th>
-                                            <th>السجل التجاري</th>
-                                            <th>رقم ألتأشيرة</th>
-                                             <th>اسم المؤسسة</th>
-                                            <th>id</th>
+                                            <th style="text-align:center;">Action</th>
+                                            <th style="text-align:center;">الحالة</th>
+                                            <th style="text-align:center;">تاريخ الإرسالية</th>
+                                             <th style="text-align:center;">حالة الجوب اوردر</th>
+                                             <th style="text-align:center;">المكتب</th>
+                                            <th style="text-align:center;">مختارة ام معينة</th>
+                                            <th style="text-align:center;">العدد</th>
+                                            <th style="text-align:center;">نوع العمالة</th>
+                                            <th style="text-align:center;">الدولة</th>
+                                            <th style="text-align:center;">رقم التواصل </th>
+                                            <th style="text-align:center;">السجل التجاري</th>
+                                            <th style="text-align:center;">رقم ألتأشيرة</th>
+                                             <th style="text-align:center;">اسم المؤسسة</th>
+                                            <th style="text-align:center;">id</th>
                                         </tr>
                                     </thead>
 
                                     <tfoot>
                                         <tr>
-                                            <th>Action</th>
-                                            <th>الحالة</th>
-                                            <th>تاريخ الإرسالية</th>
-                                             <th>عقد السفارة</th>
-                                             <th>عقد مساند</th>
-                                            <th>النوع</th>
-                                            <th>المكتب</th>
-                                            <th>المهنة</th>
-                                            <th>اسم العاملة</th>
-                                            <th>تاريخ التأشيرة</th>
-                                            <th>رقم التأشيرة</th>
-                                            <th>رقم الجوال</th>
-                                            <th>رقم الهوية/الإقامة</th>
-                                             <th>اسم العميل</th>
-                                            <th>id</th>
+                                            <th style="text-align:center;">Action</th>
+                                            <th style="text-align:center;">الحالة</th>
+                                            <th style="text-align:center;">تاريخ الإرسالية</th>
+                                             <th style="text-align:center;">عقد السفارة</th>
+                                             <th style="text-align:center;">عقد مساند</th>
+                                            <th style="text-align:center;">النوع</th>
+                                            <th style="text-align:center;">المكتب</th>
+                                            <th style="text-align:center;">المهنة</th>
+                                            <th style="text-align:center;">اسم العاملة</th>
+                                            <th style="text-align:center;">تاريخ التأشيرة</th>
+                                            <th style="text-align:center;">رقم التأشيرة</th>
+                                            <th style="text-align:center;">رقم الجوال</th>
+                                            <th style="text-align:center;">رقم الهوية/الإقامة</th>
+                                             <th style="text-align:center;">اسم العميل</th>
+                                            <th style="text-align:center;">id</th>
                                     </tfoot>
 
                                     <tbody>
                                     {% for skill in skills %}
                                         <tr>
 
-                                            <td> <a href="{{url_for('skills_edit',id=skill.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
+                                            <td style="text-align:center;"> <a href="{{url_for('skills_edit',id=skill.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
                                                 <a href="{{url_for('skills_delete',id=skill.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>
-                                            <td>{{skill.status}}</td>
-                                            <td>{{skill.shipment_date}}</td>
-                                            <td>{{skill.jo_status}}</td>
-                                            <td>{{skill.agency}}  </td>
-                                            <td>{{skill.selected_or_recommended}}</td>
-                                            <td>{{skill.quantity}}</td>
-                                             <td>{{skill.mp_request}}</td>
-                                             <td>{{skill.country}}</td>
-                                             <td>{{skill.contact_No}}</td>
-                                             <td>{{skill.cr}}</td>
-                                            <td>{{skill.company_visa}}</td>
-                                             <td>{{skill.company_name}}</td>
-                                            <td>{{skill.id}}</td>
+                                            <td style="text-align:center;">{{skill.status}}</td>
+                                            <td style="text-align:center;">{{skill.shipment_date}}</td>
+                                            <td style="text-align:center;">{{skill.jo_status}}</td>
+                                            <td style="text-align:center;">{{skill.agency}}  </td>
+                                            <td style="text-align:center;">{{skill.selected_or_recommended}}</td>
+                                            <td style="text-align:center;">{{skill.quantity}}</td>
+                                             <td style="text-align:center;">{{skill.mp_request}}</td>
+                                             <td style="text-align:center;">{{skill.country}}</td>
+                                             <td style="text-align:center;">{{skill.contact_No}}</td>
+                                             <td style="text-align:center;">{{skill.cr}}</td>
+                                            <td style="text-align:center;">{{skill.company_visa}}</td>
+                                             <td style="text-align:center;">{{skill.company_name}}</td>
+                                            <td style="text-align:center;">{{skill.id}}</td>
                                         </tr>
                                 {%endfor%}
                                     </tbody>
