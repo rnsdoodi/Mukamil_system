@@ -292,14 +292,19 @@ class AddCustomer(FlaskForm):
     musaned = SelectField('Musaned Contract', choices=["  Yes", "   No"])
     embassy_contract = SelectField('Original Contract', choices=["  Yes", "  No"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
-    status = StringField(' Status', validators=[length(max=200)])
+    status = StringField(' Status', validators=[length(max=1000)])
     submit = SubmitField('Add')
 
 
 # Edit Worker Status Flask Form for (Domec)
 
 class DomecEditUser(FlaskForm):
-    status = StringField('Status', validators=[DataRequired(), length(max=200)])
+    status = StringField('Status', validators=[DataRequired(), length(max=1000)])
+    submit = SubmitField('Change')
+
+
+class DomecEditNominated(FlaskForm):
+    status = StringField('Status', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('Change')
 
 
@@ -760,7 +765,7 @@ def domec_register():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        flash("تم التسجيل بنجاح, فضلاً قم بالعودة الى صفحة الدخول")
+        flash("Registered Successfully,Please Log in Again")
         return redirect(url_for("domec_register"))
 
     return render_template("domec_register.html", logged_in=current_user.is_authenticated)
@@ -809,6 +814,14 @@ def domec_home():
     print(current_user.name)
     all_users = Users.query.all()
     return render_template("domec_index.html", users=all_users, name=current_user.name, logged_in=True)
+
+
+@app.route("/domec-nominated-index.html")
+@login_required
+def domec_nominated_home():
+    print(current_user.name)
+    all_nominates = Nominated.query.all()
+    return render_template("domec_nominated_index.html", nominates=all_nominates, name=current_user.name, logged_in=True)
 
 
 @app.route("/dom_skills_index.html")
@@ -888,6 +901,12 @@ def domec_skills_list():
     return render_template("dom_skills_list.html", skills=added_skills, name=current_user.name)
 
 
+@app.route("/domec_nominated_list")
+def domec_nominated_list():
+    added_nominates = Nominated.query.all()
+    return render_template("domec_nominated_list.html", nominates=added_nominates, name=current_user.name)
+
+
 @app.route("/domec_edit", methods=["GET", "POST"])
 def domec_edit():
     form = DomecEditUser()
@@ -915,6 +934,19 @@ def domec_edit_skills():
     return render_template("dom_skills_edit.html", form=form, skill=updated_skills)
 
 
+@app.route("/domec_edit_nominated", methods=["GET", "POST"])
+def domec_edit_nominated():
+    form = DomecEditNominated()
+    nominated_id = request.args.get("id")
+    updated_nominates = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominates.status = form.status.data
+        db.session.commit()
+        flash("Status successfully Changed ✔")
+        return redirect(url_for('domec_edit_nominated'))
+    return render_template("domec_edit_nominated.html", form=form, nominated=updated_nominates)
+
+
 @app.route("/domec_delete")
 def domec_delete():
     user_id = request.args.get("id")
@@ -935,6 +967,12 @@ def domec_tables():
 def domec_skills_tables():
     added_skills = Skilled.query.all()
     return render_template("dom_skills_tables.html", skills=added_skills, name=current_user.name, logged_in=True)
+
+
+@app.route("/domec_nominated_tables")
+def domec_nominated_tables():
+    added_nominates = Nominated.query.all()
+    return render_template("domec_nominated_tables.html", nominates=added_nominates, name=current_user.name, logged_in=True)
 
 
 ########################################################################################################################
