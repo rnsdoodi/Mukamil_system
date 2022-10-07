@@ -20,6 +20,7 @@ all_users = []
 all_arrived = []
 all_skills = []
 all_transfers = []
+all_nominates = []
 
 # Creating The SQLALCHEMY DataBase
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
@@ -92,6 +93,27 @@ class Transfer(db.Model):
     status = db.Column(db.String(250), nullable=False)
 
 
+# Creating Table in the DB to Add New recommended Customer Request
+class Nominated(db.Model):
+    __tablename__ = "nominates"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), nullable=False)
+    nid_or_iq = db.Column(db.String, nullable=False)
+    phone_No = db.Column(db.String(250), nullable=False)
+    n_visa = db.Column(db.String, nullable=False)
+    n_visa_date = db.Column(db.Date, nullable=False)
+    worker_name = db.Column(db.String(250), nullable=False)
+    worker_contact_No = db.Column(db.String(250), nullable=False)
+    type = db.Column(db.String(250), nullable=False)
+    agency = db.Column(db.String(250), nullable=False)
+    selected_or_recommended = db.Column(db.String(250), nullable=False)
+    musaned = db.Column(db.String(250), nullable=False)
+    embassy_contract = db.Column(db.String(250), nullable=False)
+    shipment_date = db.Column(db.Date, nullable=False)
+    ppt_image = db.Column(db.String(1000), nullable=False)
+    status = db.Column(db.String(1000), nullable=False)
+
+
 # CREATE TABLE IN DB To save users login Data (Hashed & Salted)
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -120,12 +142,11 @@ class AddUser(FlaskForm):
                                 "سائق خاص/FAMILY DRIVER"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
                                                                                                             "International"])
-    selected_or_recommended = SelectField('معينة ام مختارة',
-                                          choices=[" Recommended", " Selected"])
+    selected_or_recommended = SelectField('معينة ام مختارة',choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' الحالة', validators=[length(max=200)])
+    status = StringField(' الحالة', validators=[length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
@@ -206,6 +227,44 @@ class EditTransfer(FlaskForm):
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     reqeust_status = StringField('حالة الطلب', validators=[DataRequired(), length(max=300)])
     status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=300)])
+    submit = SubmitField('تــعـديــل')
+
+
+# Add Recommended Customer Request Flask Form for (السلالم الدولية)
+class AddNominated(FlaskForm):
+    name = StringField('اسم العميل ', validators=[DataRequired(), length(max=100)])
+    nid_or_iq = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
+                               description="ادخل رقم هوية صالح مكون من 10 ارقام")
+    phone_No = StringField('رقم الجوال', validators=[DataRequired()],
+                             description='05xxxxxxxx : مثال')
+    n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+                       description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    n_visa_date = DateField('تاريخ التأشيرة', validators=[DataRequired()], format='%Y-%m-%d')
+    worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
+                              description='كما هو مدون في جواز السفر')
+
+    worker_contact_No = StringField('رقم جوال العاملة', validators=[DataRequired(), length(max=150)],
+                              description='لابد من ان يكون الرقم صحيحاً')
+    type = SelectField('المهنة',
+                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
+                                "سائق خاص/FAMILY DRIVER"])
+    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
+                                                                                                            "International"])
+    selected_or_recommended = SelectField('معينة ام مختارة',
+                                          choices=[" Recommended"])
+    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
+    embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
+    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    ppt_image = StringField('صــورة الـجواز ', validators=[DataRequired(), length(max=2000)])
+    status = StringField(' الحالة', validators=[length(max=1000)])
+    submit = SubmitField('Add إضافة')
+
+
+class EditNominated(FlaskForm):
+    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
+    embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
+    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    status = StringField('الحالة', validators=[length(max=200)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -381,6 +440,14 @@ def transfer():
     return render_template("transfer_index.html", transfers=all_transfers, name=current_user.name, logged_in=True)
 
 
+@app.route("/nominated_index")
+@login_required
+def nominated():
+    print(current_user.name)
+    all_nominates = Nominated.query.all()
+    return render_template("nominated_index.html", nominates=all_nominates, name=current_user.name, logged_in=True)
+
+
 @app.route("/add", methods=["GET", "POST"])
 def add():
     form = AddUser()
@@ -457,8 +524,39 @@ def add_transfer():
         db.session.commit()
         all_skills.append(new_transfer)
         flash("تم اضافة طلب نقل الخدمة بنجاح ✔!!")
-        return redirect(url_for('transfer_add'))
+        return redirect(url_for('add_transfer'))
     return render_template("transfer_add.html", form=form)
+
+
+@app.route("/nominated_add", methods=["GET", "POST"])
+def add_nominated():
+    form = AddNominated()
+
+    if form.validate_on_submit():
+        new_nominated = Nominated(
+            name=form.name.data,
+            nid_or_iq=form.nid_or_iq.data,
+            phone_No=form.phone_No.data,
+            n_visa=form.n_visa.data,
+            n_visa_date=form.n_visa_date.data,
+            worker_name=form.worker_name.data,
+            worker_contact_No=form.worker_contact_No.data,
+            type=form.type.data,
+            agency=form.agency.data,
+            selected_or_recommended=form.selected_or_recommended.data,
+            musaned=form.musaned.data,
+            embassy_contract=form.embassy_contract.data,
+            shipment_date=form.shipment_date.data,
+            ppt_image=form.ppt_image.data,
+            status=form.status.data
+        )
+
+        db.session.add(new_nominated)
+        db.session.commit()
+        all_users.append(new_nominated)
+        flash("تمت اضافة طلب العاملة المنزلية المعينة بنجاح ✔!!")
+        return redirect(url_for('add_nominated'))
+    return render_template("nominated_add.html", form=form)
 
 
 @app.route("/list")
@@ -477,6 +575,12 @@ def skills_list():
 def transfer_list():
     added_transfers = Transfer.query.all()
     return render_template("transfer_list.html", transfers=added_transfers, name=current_user.name)
+
+
+@app.route("/nominated_list")
+def nominated_list():
+    added_nominates = Nominated.query.all()
+    return render_template("nominated_list.html", nominates=added_nominates, name=current_user.name)
 
 
 @app.route("/edit", methods=["GET", "POST"])
@@ -528,6 +632,24 @@ def transfer_edit():
     return render_template("transfers_edit.html", form=form, transfer=updated_transfers)
 
 
+@app.route("/nominated_edit", methods=["GET", "POST"])
+def nominated_edit():
+    form = EditNominated()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.musaned = form.musaned.data
+        updated_nominated.embassy_contract = form.embassy_contract.data
+        updated_nominated.shipment_date = form.shipment_date.data
+        updated_nominated.status = form.status.data
+
+        db.session.commit()
+        flash("تم تعديل حالة الطلب بنجاح✔")
+        return redirect(url_for('nominated_edit'))
+    return render_template("nominated_edit.html", form=form, nominated=updated_nominated)
+
+
+
 @app.route("/delete")
 def delete():
     user_id = request.args.get("id")
@@ -558,6 +680,16 @@ def transfer_delete():
     return redirect(url_for('transfer_list'))
 
 
+@app.route("/nominated_delete")
+def nominated_delete():
+    nominated_id = request.args.get("id")
+    nominated_to_delete = Nominated.query.get(nominated_id)
+    db.session.delete(nominated_to_delete)
+    db.session.commit()
+    flash("تم حذف بيانات الطلب بنجاح✔")
+    return redirect(url_for('nominated_list'))
+
+
 @app.route("/tables")
 def tables():
     added_users = Users.query.all()
@@ -574,6 +706,12 @@ def skills_tables():
 def transfers_tables():
     added_transfers = Transfer.query.all()
     return render_template("transfer_tables.html", transfers=added_transfers, name=current_user.name, logged_in=True)
+
+
+@app.route("/nominated_tables")
+def nominated_tables():
+    added_nominates = Nominated.query.all()
+    return render_template("nominated_tables.html", nominates=added_nominates, name=current_user.name, logged_in=True)
 
 
 @app.route("/conditions")

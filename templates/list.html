@@ -42,50 +42,60 @@
 
 
 
-        <div id="layoutSidenav">
+           <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">العمالة المنزلية</div>
+                            <div class="sb-sidenav-menu-heading">العمالة المنزلية المختارة (Selected) </div>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                قائمة طلبات العمالة المنزلية
+                                قائمة طلبات العمالة المنزلية المختارة (Selected)
                             </a>
                             <a class="nav-link" href="{{url_for('users_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                                تعديل الطلبات
+                                تعديل طلبات العمالة المنزلية المختارة (Selected)
                             </a>
-                            <div class="sb-sidenav-menu-heading">العمالة المهنية</div>
+
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">العمالة المنزلية المعينة (Recommended)</div>
+                            <a class="nav-link" href="{{url_for('nominated')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                 قائمة طلبات العمالة المنزلية المعينة (Recommended)
+                            </a>
+                            <a class="nav-link" href="{{url_for('nominated_list')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                                تعديل طلبات العمالة المنزلية المعينة (Recommended)
+                            </a>
+
+
+                            <div class="sb-sidenav-menu-heading"> (Skills)العمالة المهنية </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                طلبات الشركات
+                                  (Skills)طلبات العمالة المهنية
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{url_for('skills')}}">قائمة طلبات الشركات</a>
-                                    <a class="nav-link" href="{{url_for('skills_list')}}">تعديل الطلبات الحالية</a>
+                                    <a class="nav-link" href="{{url_for('skills')}}"> قائمة طلبات العمالة المهنية(Skills)</a>
+                                    <a class="nav-link" href="{{url_for('skills_list')}}">تعديل طلبات العمالة المهنية (Skills)</a>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">نقل الخدمات</div>
+                            <div class="sb-sidenav-menu-heading">نقل الكفالة</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                نقل الخدمات
+                                نقل الكفالة
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
 
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
 
-                                    <a class="nav-link" href="{{url_for('transfer')}}">قائمة طلبات نقل الخدمات</a>
-                                    <a class="nav-link" href="{{url_for('transfer_list')}}">تعديل طلب نقل</a>
+                                    <a class="nav-link" href="{{url_for('transfer')}}">قائمة طلبات نقل الكفالة</a>
+                                    <a class="nav-link" href="{{url_for('transfer_list')}}">تعديل طلب نقل الكفالة</a>
 
 
-<!--                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">-->
-<!--                                        التحقق-->
-<!--                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
-<!--                                    </a>-->
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 
                                         <a class="nav-link" href="layout-static.html">إضافة طلب جديد</a>
@@ -111,22 +121,30 @@
                             <div class="sb-sidenav-menu-heading">التقـارير</div>
                             <a class="nav-link" href="{{url_for('tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                تقرير العمالة المنزلية
+                                  تقرير العمالة المنزلية(selected)
+                            </a>
+
+                             <a class="nav-link" href="{{url_for('nominated_tables')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                تقرير العمالة المنزلية (recommended)
                             </a>
 
                              <a class="nav-link" href="{{url_for('skills_tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                تقرير العمالة المهنية
+                                تقرير العمالة المهنية(skills)
                             </a>
 
 
                             <a class="nav-link" href="{{url_for('transfers_tables')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                تقرير نقل الخدمات
+                                تقرير نقل الكفالة
                             </a>
 
                         </div>
                     </div>
+
+
+
 
                     <div class="sb-sidenav-footer">
                         <div class="small"> : تسجيل دخول </div>
@@ -137,19 +155,19 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:center">تعديل طلبات العمالة المنزلية</h1>
+                        <h1 class="mt-4" style="text-align:center">(Selected) تعديل طلبات العمالة المنزلية </h1>
                         <ol class="breadcrumb mb-4" >
                             <li class="breadcrumb-item" ><a href="index.html" >العودةإلى الصفحة الرئيسية </a></li>
                             <li class="breadcrumb-item active">القائمة</li>
                         </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                 <a target="_blank" href="https://datatables.net/" style="text-align:center">official DataTables documentation</a>
-                                .
-                                تحتوي هذه القائمة على خيارات لتعديل بعض البيانات الخاصة بطلبات العملاء لذا لابد من التأكد من صحة البيانات ولمذيد من التفاصيل اضغط هنا
+<!--                        <div class="card mb-4">-->
+<!--                            <div class="card-body">-->
+<!--                                 <a target="_blank" href="https://datatables.net/" style="text-align:center">official DataTables documentation</a>-->
+<!--                                .-->
+<!--                                تحتوي هذه القائمة على خيارات لتعديل بعض البيانات الخاصة بطلبات العملاء لذا لابد من التأكد من صحة البيانات ولمذيد من التفاصيل اضغط هنا-->
 
-                            </div>
-                        </div>
+<!--                            </div>-->
+<!--                        </div>-->
 
                         <div class="card mb-4">
                             <div class="card-header">
