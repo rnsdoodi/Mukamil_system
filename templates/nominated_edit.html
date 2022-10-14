@@ -13,7 +13,7 @@
 <br>
 <div class="content">
 
-    <h1 class="heading" style="text-align:center"><b><u>تعديل بيانات({{nominated.name}})</u></b> </h1>
+    <h1 class="heading" style="text-align:center"><b><u>({{nominated.name}})  تعديل بيانات العميل</u></b> </h1>
     <div class="heading">
 <br>
     <h1 class="heading" style="text-align:center"><a href="{{url_for('nominated_list')}}" class="btn btn-dark"> العودة إلى صفحة التعديل </a> </h1>
@@ -25,7 +25,8 @@
  {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
-         <p style="color:white;text-align:center; background-color:blue; ">{{ message }}</p>
+
+    <div class="alert alert-success" style="text-align:center;" role="alert">{{ message }}</div>
         {% endfor %}
       {% endif %}
     {% endwith %}

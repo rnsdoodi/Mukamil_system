@@ -21,6 +21,7 @@ all_arrived = []
 all_skills = []
 all_transfers = []
 all_nominates = []
+all_complaints = []
 
 # Creating The SQLALCHEMY DataBase
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
@@ -90,7 +91,7 @@ class Transfer(db.Model):
     iqama = db.Column(db.String(250), nullable=False)
     agency = db.Column(db.String(250), nullable=False)
     request_status = db.Column(db.String(250), nullable=False)
-    status = db.Column(db.String(250), nullable=False)
+    status = db.Column(db.String(1000), nullable=False)
 
 
 # Creating Table in the DB to Add New recommended Customer Request
@@ -112,6 +113,20 @@ class Nominated(db.Model):
     shipment_date = db.Column(db.Date, nullable=False)
     ppt_image = db.Column(db.String(1000), nullable=False)
     status = db.Column(db.String(1000), nullable=False)
+
+
+# Creating Table in the DB  to Add new worker Complaint
+
+class Complaint(db.Model):
+    __tablename__ = "complaint"
+    id = db.Column(db.Integer, primary_key=True)
+    worker_name = db.Column(db.String(250), nullable=False)
+    Employer_name = db.Column(db.String(250), nullable=False)
+    Worker_contact_No = db.Column(db.String(250), nullable=False)
+    Employer_contact_No = db.Column(db.String(250), nullable=False)
+    Deployment_Date = db.Column(db.Date, nullable=False)
+    Complaint_Description = db.Column(db.String(1000), nullable=False)
+    Status = db.Column(db.String(1000), nullable=False)
 
 
 # CREATE TABLE IN DB To save users login Data (Hashed & Salted)
@@ -142,7 +157,7 @@ class AddUser(FlaskForm):
                                 "سائق خاص/FAMILY DRIVER"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
                                                                                                             "International"])
-    selected_or_recommended = SelectField('معينة ام مختارة',choices=[" Selected"])
+    selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
@@ -155,7 +170,7 @@ class EditUser(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField('الحالة', validators=[length(max=200)])
+    status = StringField('الحالة', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -180,7 +195,7 @@ class AddSkills(FlaskForm):
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended", " Selected"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف",
-                                            "Imran International","World Vision Int."])
+                                            "Imran International", "World Vision Int."])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
@@ -218,7 +233,7 @@ class AddTransfer(FlaskForm):
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
                                                         "تم نقل الخدمات",
                                                         "العاملة رفضت نقل الخدمات وتراجعت"])
-    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=300)])
+    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('إضــافـة الطلــب')
 
 
@@ -226,7 +241,7 @@ class AddTransfer(FlaskForm):
 class EditTransfer(FlaskForm):
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     reqeust_status = StringField('حالة الطلب', validators=[DataRequired(), length(max=300)])
-    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=300)])
+    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -234,17 +249,17 @@ class EditTransfer(FlaskForm):
 class AddNominated(FlaskForm):
     name = StringField('اسم العميل ', validators=[DataRequired(), length(max=100)])
     nid_or_iq = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
-                               description="ادخل رقم هوية صالح مكون من 10 ارقام")
+                            description="ادخل رقم هوية صالح مكون من 10 ارقام")
     phone_No = StringField('رقم الجوال', validators=[DataRequired()],
-                             description='05xxxxxxxx : مثال')
+                           description='05xxxxxxxx : مثال')
     n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
-                       description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+                         description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
     n_visa_date = DateField('تاريخ التأشيرة', validators=[DataRequired()], format='%Y-%m-%d')
     worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
 
     worker_contact_No = StringField('رقم جوال العاملة', validators=[DataRequired(), length(max=150)],
-                              description='لابد من ان يكون الرقم صحيحاً')
+                                    description='لابد من ان يكون الرقم صحيحاً')
     type = SelectField('المهنة',
                        choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
                                 "سائق خاص/FAMILY DRIVER"])
@@ -264,8 +279,24 @@ class EditNominated(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField('الحالة', validators=[length(max=200)])
+    status = StringField('الحالة', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
+
+
+class AddComplaint(FlaskForm):
+    worker_name = StringField('اسم العاملة', validators=[length(max=200)])
+    Employer_name = StringField('اسم الكفيل', validators=[length(max=200)])
+    Worker_contact_No = StringField('رقم جوال العاملة', validators=[length(max=200)])
+    Employer_contact_No = StringField(' رقم جوال الكفيل', validators=[length(max=200)])
+    Deployment_Date = DateField(' تاريخ الوصول', format='%Y-%m-%d')
+    Complaint_Description = StringField(' شكوى العاملة', validators=[length(max=1000)])
+    Status = StringField('حالة الشكوى', validators=[length(max=1000)])
+    submit = SubmitField('إضـافــة')
+
+
+class EditComplaint(FlaskForm):
+    Status = StringField('الحالة', validators=[length(max=1000)])
+    submit = SubmitField('تــعـديـل')
 
 
 #######################################################################################################################
@@ -293,7 +324,7 @@ class AddCustomer(FlaskForm):
     embassy_contract = SelectField('Original Contract', choices=["  Yes", "  No"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
     status = StringField(' Status', validators=[length(max=1000)])
-    submit = SubmitField('Add')
+    submit = SubmitField('Submit')
 
 
 # Edit Worker Status Flask Form for (Domec)
@@ -331,7 +362,7 @@ class DomecAddSkills(FlaskForm):
                                                          "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
     status = StringField(' Status', validators=[length(max=500)])
-    submit = SubmitField('Add')
+    submit = SubmitField('Submit')
 
 
 # Edit new skills Request Flask Form for (Domec)
@@ -341,6 +372,22 @@ class DomecEditSkills(FlaskForm):
                                                          "For POEA Approval", "POEA Approved"])
     status = StringField(' Status', validators=[length(max=1000)])
     submit = SubmitField('Update')
+
+
+class DomecAddComplaint(FlaskForm):
+    worker_name = StringField('Worker Name', validators=[length(max=200)])
+    Employer_name = StringField('Employer Name', validators=[length(max=200)])
+    Worker_contact_No = StringField('Worker Contact No.', validators=[length(max=200)])
+    Employer_contact_No = StringField('Employer Contact No.', validators=[length(max=200)])
+    Deployment_Date = DateField(' Deployment Date', format='%Y-%m-%d')
+    Complaint_Description = StringField('Complaint Details', validators=[length(max=1000)])
+    Status = StringField('Complaint Status', validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+
+class DomecEditComplaint(FlaskForm):
+    Status = StringField('Status', validators=[length(max=1000)])
+    submit = SubmitField('Submit')
 
 
 #######################################################################################################################
@@ -363,7 +410,7 @@ def register():
 
         if User.query.filter_by(email=request.form.get('email')).first():
             # User already exists
-            flash("You've already signed up with that email, log in instead!")
+            flash("الحساب مسجل مسبقاً, فضلا قم بتسجيل الدخول")
             return redirect(url_for('login'))
 
         hash_and_salted_password = generate_password_hash(
@@ -379,7 +426,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        flash("تم التسجيل بنجاح, رجاءا قم بالعودة الى صفحة الدخول")
+        flash("تم التسجيل بنجاح, فضلاً قم بالعودة الى الصفحة الرئيسية ومن ثم تسجيل الدخول")
         return redirect(url_for("register"))
 
     return render_template("register.html", logged_in=current_user.is_authenticated)
@@ -394,10 +441,10 @@ def login():
         user = User.query.filter_by(email=email).first()
         # Email doesn't exist or password incorrect.
         if not user:
-            flash("That email does not exist, please try again.")
+            flash("الحساب غير مسجل, الرجاء تسجيل الحساب والدخول مرة أخرى")
             return redirect(url_for('login'))
         elif not check_password_hash(user.password, password):
-            flash('Password incorrect, please try again.')
+            flash('كلمة مرور خاطئة, الرجاء التأكد من كلمة المرور والمحاولة مرة أخرى')
             return redirect(url_for('login'))
         else:
             login_user(user)
@@ -424,7 +471,6 @@ def index():
 @app.route("/index.html")
 @login_required
 def home():
-    print(current_user.name)
     all_users = Users.query.all()
     return render_template("index.html", users=all_users, name=current_user.name, logged_in=True)
 
@@ -432,7 +478,6 @@ def home():
 @app.route("/skills_index")
 @login_required
 def skills():
-    print(current_user.name)
     all_skills = Skilled.query.all()
     return render_template("skills_index.html", skills=all_skills, name=current_user.name, logged_in=True)
 
@@ -440,7 +485,6 @@ def skills():
 @app.route("/transfer_index")
 @login_required
 def transfer():
-    print(current_user.name)
     all_transfers = Transfer.query.all()
     return render_template("transfer_index.html", transfers=all_transfers, name=current_user.name, logged_in=True)
 
@@ -448,9 +492,15 @@ def transfer():
 @app.route("/nominated_index")
 @login_required
 def nominated():
-    print(current_user.name)
     all_nominates = Nominated.query.all()
     return render_template("nominated_index.html", nominates=all_nominates, name=current_user.name, logged_in=True)
+
+
+@app.route("/complaint_index")
+@login_required
+def complaint():
+    all_complaints = Complaint.query.all()
+    return render_template("complaint_index.html", complaints=all_complaints, name=current_user.name, logged_in=True)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -477,7 +527,7 @@ def add():
         db.session.add(new_customer)
         db.session.commit()
         all_users.append(new_customer)
-        flash("تمت اضافة طلب العمالة المنزلية بنجاح ✔!!")
+        flash("✔  تم إضافة طلب العمالة المنزلية بنجاح ")
         return redirect(url_for('add'))
     return render_template("add.html", form=form)
 
@@ -504,7 +554,7 @@ def skills_add():
         db.session.add(new_skills)
         db.session.commit()
         all_skills.append(new_skills)
-        flash("تمت اضافة طلب العمالة المهنية بنجاح ✔!!")
+        flash("✔ تم إضافة طلب العمالة المهنية بنجاح ")
         return redirect(url_for('skills_add'))
     return render_template("skills_add.html", form=form)
 
@@ -528,7 +578,7 @@ def add_transfer():
         db.session.add(new_transfer)
         db.session.commit()
         all_skills.append(new_transfer)
-        flash("تم اضافة طلب نقل الخدمة بنجاح ✔!!")
+        flash("✔ تم إضافة طلب نقل الخدمة بنجاح ")
         return redirect(url_for('add_transfer'))
     return render_template("transfer_add.html", form=form)
 
@@ -559,9 +609,32 @@ def add_nominated():
         db.session.add(new_nominated)
         db.session.commit()
         all_users.append(new_nominated)
-        flash("تمت اضافة طلب العاملة المنزلية المعينة بنجاح ✔!!")
+        flash("✔ تم إضافة طلب العاملة المنزلية المعينة بنجاح ")
         return redirect(url_for('add_nominated'))
     return render_template("nominated_add.html", form=form)
+
+
+@app.route("/complaint_add", methods=["GET", "POST"])
+def add_complaint():
+    form = AddComplaint()
+
+    if form.validate_on_submit():
+        new_complaint = Complaint(
+            worker_name=form.worker_name.data,
+            Employer_name=form.Employer_name.data,
+            Worker_contact_No=form.Worker_contact_No.data,
+            Employer_contact_No=form.Employer_contact_No.data,
+            Deployment_Date=form.Deployment_Date.data,
+            Complaint_Description=form.Complaint_Description.data,
+            Status=form.Status.data
+        )
+
+        db.session.add(new_complaint)
+        db.session.commit()
+        all_users.append(new_complaint)
+        flash("تم اضافة الشكوى ✔!!")
+        return redirect(url_for('add_complaint'))
+    return render_template("complaint_add.html", form=form)
 
 
 @app.route("/list")
@@ -588,6 +661,12 @@ def nominated_list():
     return render_template("nominated_list.html", nominates=added_nominates, name=current_user.name)
 
 
+@app.route("/complaint_list")
+def complaint_list():
+    added_complaints = Complaint.query.all()
+    return render_template("complaint_list.html", complaints=added_complaints, name=current_user.name)
+
+
 @app.route("/edit", methods=["GET", "POST"])
 def edit():
     form = EditUser()
@@ -600,7 +679,7 @@ def edit():
         updated_user.status = form.status.data
 
         db.session.commit()
-        flash("تم تعديل بيانات طلب العمالة المنزلية بنجاح✔")
+        flash("✔ تم تعديل بيانات طلب العمالة المنزلية بنجاح")
         return redirect(url_for('edit'))
     return render_template("edit.html", form=form, user=updated_user)
 
@@ -616,7 +695,7 @@ def skills_edit():
         updated_skills.status = form.status.data
 
         db.session.commit()
-        flash("تم تعديل حالة طلب العمالة المهنية بنجاح✔")
+        flash("✔ تم تعديل حالة طلب العمالة المهنية بنجاح")
         return redirect(url_for('skills_edit'))
     return render_template("skills_edit.html", form=form, skill=updated_skills)
 
@@ -632,7 +711,7 @@ def transfer_edit():
         updated_transfers.status = form.status.data
 
         db.session.commit()
-        flash("تم تعديل حالة طلب نقل الخدمة بنجاح✔")
+        flash("✔ تم تعديل  طلب نقل الكفالة بنجاح")
         return redirect(url_for('transfer_edit'))
     return render_template("transfers_edit.html", form=form, transfer=updated_transfers)
 
@@ -649,10 +728,22 @@ def nominated_edit():
         updated_nominated.status = form.status.data
 
         db.session.commit()
-        flash("تم تعديل حالة الطلب بنجاح✔")
+        flash("✔ تم تعديل الطلب بنجاح")
         return redirect(url_for('nominated_edit'))
     return render_template("nominated_edit.html", form=form, nominated=updated_nominated)
 
+
+@app.route("/complaint_edit", methods=["GET", "POST"])
+def complaint_edit():
+    form = EditComplaint()
+    complaint_id = request.args.get("id")
+    updated_complaint = Complaint.query.get(complaint_id)
+    if form.validate_on_submit():
+        updated_complaint.Status = form.Status.data
+        db.session.commit()
+        flash("✔ تم تعديل حالة الشكوى بنجاح")
+        return redirect(url_for('complaint_edit'))
+    return render_template("complaint_edit.html", form=form, complaint=updated_complaint)
 
 
 @app.route("/delete")
@@ -661,7 +752,7 @@ def delete():
     user_to_delete = Users.query.get(user_id)
     db.session.delete(user_to_delete)
     db.session.commit()
-    flash("تم حذف بيانات العميل بنجاح✔")
+    flash("✔ تم حذف بيانات العميل بنجاح")
     return redirect(url_for('users_list'))
 
 
@@ -671,7 +762,7 @@ def skills_delete():
     skills_to_delete = Skilled.query.get(skills_id)
     db.session.delete(skills_to_delete)
     db.session.commit()
-    flash("تم حذف بيانات طلب العمالة المهنية بنجاح✔")
+    flash("✔ تم حذف بيانات طلب العمالة المهنية بنجاح")
     return redirect(url_for('skills_list'))
 
 
@@ -691,8 +782,18 @@ def nominated_delete():
     nominated_to_delete = Nominated.query.get(nominated_id)
     db.session.delete(nominated_to_delete)
     db.session.commit()
-    flash("تم حذف بيانات الطلب بنجاح✔")
+    flash("✔ تم حذف بيانات الطلب بنجاح")
     return redirect(url_for('nominated_list'))
+
+
+@app.route("/complaint_delete")
+def complaint_delete():
+    complaint_id = request.args.get("id")
+    complaint_to_delete = Complaint.query.get(complaint_id)
+    db.session.delete(complaint_to_delete)
+    db.session.commit()
+    flash("✔ تم حذف الشكوى بنجاح")
+    return redirect(url_for('complaint_list'))
 
 
 @app.route("/tables")
@@ -717,6 +818,12 @@ def transfers_tables():
 def nominated_tables():
     added_nominates = Nominated.query.all()
     return render_template("nominated_tables.html", nominates=added_nominates, name=current_user.name, logged_in=True)
+
+
+@app.route("/complaint_tables")
+def complaint_tables():
+    added_complaints = Complaint.query.all()
+    return render_template("complaint_tables.html", complaints=added_complaints, name=current_user.name, logged_in=True)
 
 
 @app.route("/conditions")
@@ -811,7 +918,6 @@ def domec_index():
 @app.route("/domec-index.html")
 @login_required
 def domec_home():
-    print(current_user.name)
     all_users = Users.query.all()
     return render_template("domec_index.html", users=all_users, name=current_user.name, logged_in=True)
 
@@ -819,17 +925,24 @@ def domec_home():
 @app.route("/domec-nominated-index.html")
 @login_required
 def domec_nominated_home():
-    print(current_user.name)
     all_nominates = Nominated.query.all()
-    return render_template("domec_nominated_index.html", nominates=all_nominates, name=current_user.name, logged_in=True)
+    return render_template("domec_nominated_index.html", nominates=all_nominates, name=current_user.name,
+                           logged_in=True)
 
 
 @app.route("/dom_skills_index.html")
 @login_required
 def dom_skills():
-    print(current_user.name)
     all_skills = Skilled.query.all()
     return render_template("dom_skills_index.html", skills=all_skills, name=current_user.name, logged_in=True)
+
+
+@app.route("/dom_complaint_index.html")
+@login_required
+def dom_complaint():
+    all_complaints = Complaint.query.all()
+    return render_template("dom_complaint_index.html", complaints=all_complaints, name=current_user.name,
+                           logged_in=True)
 
 
 @app.route("/domec_add", methods=["GET", "POST"])
@@ -856,7 +969,7 @@ def domec_add():
         db.session.add(new_request)
         db.session.commit()
         all_users.append(new_request)
-        flash("successfully Added New Customer ✔!!")
+        flash("Request Added successfully ✔!!")
         return redirect(url_for('domec_add'))
     return render_template("domec_add.html", form=form)
 
@@ -889,6 +1002,28 @@ def domec_add_skills():
     return render_template("dom_skills_add.html", form=form)
 
 
+@app.route("/domec_add_complaint", methods=["GET", "POST"])
+def domec_add_complaint():
+    form = DomecAddComplaint()
+
+    if form.validate_on_submit():
+        new_complaint = Complaint(
+            worker_name=form.worker_name.data,
+            Employer_name=form.Employer_name.data,
+            Worker_contact_No=form.Worker_contact_No.data,
+            Employer_contact_No=form.Employer_contact_No.data,
+            Deployment_Date=form.Deployment_Date.data,
+            Complaint_Description=form.Complaint_Description.data,
+            Status=form.Status.data
+        )
+        db.session.add(new_complaint)
+        db.session.commit()
+        all_users.append(new_complaint)
+        flash(" New Complaint Added successfully ✔")
+        return redirect(url_for('domec_add_complaint'))
+    return render_template("dom_complaint_add.html", form=form)
+
+
 @app.route("/domec_list")
 def domec_users_list():
     added_users = Users.query.all()
@@ -907,6 +1042,12 @@ def domec_nominated_list():
     return render_template("domec_nominated_list.html", nominates=added_nominates, name=current_user.name)
 
 
+@app.route("/domec_complaint_list")
+def domec_complaint_list():
+    added_complaints = Complaint.query.all()
+    return render_template("domec_complaint_list.html", complaints=added_complaints, name=current_user.name)
+
+
 @app.route("/domec_edit", methods=["GET", "POST"])
 def domec_edit():
     form = DomecEditUser()
@@ -915,7 +1056,7 @@ def domec_edit():
     if form.validate_on_submit():
         updated_user.status = form.status.data
         db.session.commit()
-        flash("Status successfully Changed ✔")
+        flash("Request Status successfully Modified ✔")
         return redirect(url_for('domec_edit'))
     return render_template("domec_edit.html", form=form, user=updated_user)
 
@@ -942,9 +1083,22 @@ def domec_edit_nominated():
     if form.validate_on_submit():
         updated_nominates.status = form.status.data
         db.session.commit()
-        flash("Status successfully Changed ✔")
+        flash("Request Status successfully Modified ✔")
         return redirect(url_for('domec_edit_nominated'))
     return render_template("domec_edit_nominated.html", form=form, nominated=updated_nominates)
+
+
+@app.route("/domec_edit_complaint", methods=["GET", "POST"])
+def domec_edit_complaint():
+    form = DomecEditComplaint()
+    complaint_id = request.args.get("id")
+    updated_complaints = Complaint.query.get(complaint_id)
+    if form.validate_on_submit():
+        updated_complaints.Status = form.Status.data
+        db.session.commit()
+        flash("Status successfully Changed ✔")
+        return redirect(url_for('domec_edit_complaint'))
+    return render_template("domec_edit_complaint.html", form=form, complaint=updated_complaints)
 
 
 @app.route("/domec_delete")
@@ -972,7 +1126,15 @@ def domec_skills_tables():
 @app.route("/domec_nominated_tables")
 def domec_nominated_tables():
     added_nominates = Nominated.query.all()
-    return render_template("domec_nominated_tables.html", nominates=added_nominates, name=current_user.name, logged_in=True)
+    return render_template("domec_nominated_tables.html", nominates=added_nominates, name=current_user.name,
+                           logged_in=True)
+
+
+@app.route("/domec_complaints_tables")
+def domec_complaints_tables():
+    added_complaints = Complaint.query.all()
+    return render_template("dom_complaints_tables.html", complaints=added_complaints, name=current_user.name,
+                           logged_in=True)
 
 
 ########################################################################################################################

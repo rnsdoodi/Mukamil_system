@@ -42,7 +42,7 @@
 
 
 
-        <div id="layoutSidenav">
+  <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -68,7 +68,17 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                                 تعديل طلبات العمالة المنزلية المعينة (Recommended)
                             </a>
-
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">الشكاوى والمشاكل</div>
+                            <a class="nav-link" href="{{url_for('complaint')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                 قائمة شكاوى العاملات
+                            </a>
+                            <a class="nav-link" href="{{url_for('complaint_list')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                                تعديل الشكاوى
+                            </a>
 
                             <div class="sb-sidenav-menu-heading"> (Skills)العمالة المهنية </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -94,8 +104,6 @@
 
                                     <a class="nav-link" href="{{url_for('transfer')}}">قائمة طلبات نقل الكفالة</a>
                                     <a class="nav-link" href="{{url_for('transfer_list')}}">تعديل طلب نقل الكفالة</a>
-
-
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 
                                         <a class="nav-link" href="layout-static.html">إضافة طلب جديد</a>
@@ -139,6 +147,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 تقرير نقل الكفالة
                             </a>
+                            <a class="nav-link" href="{{url_for('complaint_tables')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                تقرير الشكاوى
+                            </a>
 
                         </div>
                     </div>
@@ -178,7 +190,7 @@
                                 {% with messages = get_flashed_messages() %}
                                    {% if messages %}
                                  {% for message in messages %}
-                              <p style="color:white;text-align:center; background-color:blue; ">{{ message }}</p>
+                              <div class="alert alert-success" style="text-align:center;" role="alert">{{ message }}</div>
                                   {% endfor %}
                                     {% endif %}
                                     {% endwith %}

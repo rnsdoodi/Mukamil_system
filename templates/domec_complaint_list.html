@@ -41,7 +41,7 @@
         </nav>
 
 
-      <div id="layoutSidenav">
+  <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -65,18 +65,6 @@
                             <a class="nav-link" href="{{url_for('domec_nominated_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                               Edit Nominated DH Status
-                            </a>
-
-
-
-                              <div class="sb-sidenav-menu-heading"> Complaints & Issues </div>
-                            <a class="nav-link" href="{{url_for('dom_complaint')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                               DH Complaint List
-                            </a>
-                            <a class="nav-link" href="{{url_for('domec_complaint_list')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                              Edit Complaint Status
                             </a>
 
 
@@ -128,11 +116,6 @@
                                 Skills Report
                             </a>
 
-
-                              <a class="nav-link" href="{{url_for('domec_complaints_tables')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Complaints Report
-                            </a>
                         </div>
                     </div>
 
@@ -147,16 +130,16 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:center"> Edit Nominated DH Status</h1>
+                        <h1 class="mt-4" style="text-align:center"> Edit Complaint Status</h1>
                         <ol class="breadcrumb mb-4" >
-                            <li class="breadcrumb-item" ><a href="{{url_for('domec_nominated_home')}}" > home Page </a></li>
+                            <li class="breadcrumb-item" ><a href="{{url_for('dom_complaint')}}" > home Page </a></li>
                             <li class="breadcrumb-item active">Edit DH Status</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
 
 
-                                The Below Table is Containing Our Customers Request that stored in our Data Base Before you Edit the Status you Should be sure From the Correct Information !
+                                The Below Table is Containing Our Workers Complaints that stored in our Data Base Before you Edit the Status you Should be sure From the Correct Information !
 <!--                                .-->
 <!--                                <a target="_blank" href="https://datatables.net/" style="text-align:center">official DataTables documentation</a>-->
 
@@ -167,14 +150,14 @@
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
 
-                                Requests List
+                                Complaints List
                             </div>
 
                             <div class="content">
                                 {% with messages = get_flashed_messages() %}
                                    {% if messages %}
                                  {% for message in messages %}
-                             <div class="alert alert-success" style="text-align:center;" role="alert">{{ message }}</div>
+                              <p style="color:white;text-align:center; background-color:blue; ">{{ message }}</p>
                                   {% endfor %}
                                     {% endif %}
                                     {% endwith %}
@@ -184,57 +167,37 @@
 
                                 <table id="datatablesSimple">
 
-                                   <thead>
+                                     <thead>
                                         <tr>
                                             <th style="text-align:center;">id</th>
+                                            <th style="text-align:center;">Worker Name </th>
                                             <th style="text-align:center;">Employer Name</th>
-                                            <th style="text-align:center;">Visa No.</th>
-                                            <th style="text-align:center;">ID No.</th>
-                                            <th style="text-align:center;">Employer Contact No. </th>
-                                            <th style="text-align:center;">Visa Date </th>
-                                            <th style="text-align:center;">Worker Name</th>
                                             <th style="text-align:center;">Worker Contact No.</th>
-                                            <th style="text-align:center;">Type</th>
-                                            <th style="text-align:center;">Agency</th>
-                                            <th style="text-align:center;">Selected Or Nominated</th>
-                                            <th style="text-align:center;">Musaned Contract</th>
-                                            <th style="text-align:center;">Embassy Contract</th>
-                                            <th style="text-align:center;">Shipment Date </th>
-                                            <th style="text-align:center;">Passport Copy</th>
-                                            <th style="text-align:center;">Status</th>
+                                            <th style="text-align:center;">Employer Contact No.</th>
+                                            <th style="text-align:center;">Deployment Date</th>
+                                            <th style="text-align:center;">Complaint Description </th>
+                                            <th style="text-align:center;">Complaint Status</th>
                                             <th style="text-align:center;">Action</th>
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-                                        {% for nominated in nominates %}
-                                        {% if nominated.agency == "Domec" %}
+                                     <tbody>
+                                        {% for complaint in complaints %}
                                           <tr>
-                                              <td style="text-align:center;">{{nominated.id}}</td>
-                                              <td style="text-align:center;">{{nominated.name}}</td>
-                                             <td style="text-align:center;">{{nominated.nid_or_iq}}</td>
-                                              <td style="text-align:center;">{{nominated.phone_No}}</td>
-                                              <td style="text-align:center;">{{nominated.n_visa}}</td>
-                                              <td style="text-align:center;">{{nominated.n_visa_date}}</td>
-                                              <td style="text-align:center;">{{nominated.worker_name}}</td>
-                                              <td style="text-align:center;">{{nominated.worker_contact_No}}</td>
-                                              <td style="text-align:center;">{{nominated.type}}</td>
-                                              <td style="text-align:center;">{{nominated.agency}}</td>
-                                               <td style="text-align:center;">{{nominated.selected_or_recommended}}</td>
-                                               <td style="text-align:center;">{{nominated.musaned}}</td>
-                                               <td style="text-align:center;">{{nominated.embassy_contract}}  </td>
-                                              <td style="text-align:center;">{{nominated.shipment_date}}</td>
-                                              <td style="text-align:center;">
-                                                <a href="{{nominated.ppt_image}}}" class="btn btn-primary" target="_blank">Passport Copy</a>
-                                            </td>
-                                              <td style="text-align:center;">{{nominated.status}}</td>
-                                              <td style="text-align:center;"><a href="{{url_for('domec_edit_nominated',id=nominated.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i> Edit</a>
+                                              <td style="text-align:center;">{{complaint.id}}</td>
+                                              <td style="text-align:center;">{{complaint.worker_name}}</td>
+                                              <td style="text-align:center;">{{complaint.Employer_name}}</td>
+                                              <td style="text-align:center;">{{complaint.Worker_contact_No}}</td>
+                                              <td style="text-align:center;">{{complaint.Employer_contact_No}}</td>
+                                              <td style="text-align:center;">{{complaint.Deployment_Date}}</td>
+                                              <td style="text-align:center;">{{complaint.Complaint_Description}}</td>
+                                              <td style="text-align:center;">{{complaint.Status}}</td>
+                                              <td> <a href="{{url_for('domec_edit_complaint',id=complaint.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i> Edit</a>
 
                                         </tr>
-                                        {% endif %}
                                         {% endfor %}
-
                                     </tbody>
+                                </table>
 
                             </div>
 

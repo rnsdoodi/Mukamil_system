@@ -40,7 +40,7 @@
             </ul>
         </nav>
 
- <div id="layoutSidenav">
+      <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
@@ -64,6 +64,18 @@
                             <a class="nav-link" href="{{url_for('domec_nominated_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                               Edit Nominated DH Status
+                            </a>
+
+
+
+                              <div class="sb-sidenav-menu-heading"> Complaints & Issues </div>
+                            <a class="nav-link" href="{{url_for('dom_complaint')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                               DH Complaint List
+                            </a>
+                            <a class="nav-link" href="{{url_for('domec_complaint_list')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
+                              Edit Complaint Status
                             </a>
 
 
@@ -115,6 +127,11 @@
                                 Skills Report
                             </a>
 
+
+                              <a class="nav-link" href="{{url_for('domec_complaints_tables')}}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Complaints Report
+                            </a>
                         </div>
                     </div>
 
@@ -157,7 +174,7 @@
                                 {% with messages = get_flashed_messages() %}
                                    {% if messages %}
                                  {% for message in messages %}
-                              <p style="color:white;text-align:center; background-color:blue; ">{{ message }}</p>
+                                <div class="alert alert-success" style="text-align:center;" role="alert">{{ message }}</div>
                                   {% endfor %}
                                     {% endif %}
                                     {% endwith %}

@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
-{% block title %}تعديل بيانات المؤسسة   {% endblock %}
+{% block title %}Edit Worker Status {% endblock %}
 
 {% block content %}
 <br>
 <div class="content">
 
-    <h1 class="heading" style="text-align:center"><b><u>تعديل بيانات الحالة ل  ({{skill.company_name}})</u></b> </h1>
+    <h1 class="heading" style="text-align:center"><b><u>Change the Status For Ms.{{complaint.worker_name}}</u></b> </h1>
     <div class="heading">
 <br>
-    <h1 class="heading" style="text-align:center"><a href="{{url_for('skills_list')}}" class="btn btn-dark"> العودة إلى صفحة التعديل </a> </h1>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('domec_complaint_list')}}" class="btn btn-dark"> Back to Edit Page </a> </h1>
 </div>
 </div>
 
@@ -25,10 +25,12 @@
  {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
-         <div class="alert alert-success" style="text-align:center;" role="alert">{{ message }}</div>
+                  <div class="alert alert-success" style="text-align:center;" role="alert">{{ message }}</div>
         {% endfor %}
       {% endif %}
     {% endwith %}
+
+    <br>
     <div class="content">
       {{ wtf.quick_form(form,novalidate=True,button_map={'submit':'primary'}, form_type="horizontal",horizontal_columns=('md',5, 5))}}
 </div>
@@ -36,9 +38,9 @@
 
 </div>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br>
-{%include "footer.html"%}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
+{%include "domec_footer.html"%}
     {% endblock %}
 
 
