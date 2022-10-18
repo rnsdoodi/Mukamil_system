@@ -656,6 +656,14 @@ def add_nominated():
             embassy_contract=form.embassy_contract.data,
             shipment_date=form.shipment_date.data,
             ppt_image=form.ppt_image.data,
+            medical=form.medical.data,
+            mmr_vaccine=form.mmr_vaccine.data,
+            owwa=form.owwa.data,
+            tesda=form.tesda.data,
+            biometric=form.biometric.data,
+            stamping=form.stamping.data,
+            oec=form.oec.data,
+            deployment_date=form.deployment_date.data,
             status=form.status.data
         )
 
