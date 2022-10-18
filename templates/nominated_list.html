@@ -204,7 +204,7 @@
                               <thead>
                                         <tr>
                                             <th style="text-align:center;">Action</th>
-                                            <th style="text-align:center;">الحالة</th>
+                                            <th style="text-align:center;">ملاحظات</th>
                                             <th style="text-align:center;">صورة الجواز</th>
                                             <th style="text-align:center;">تاريخ الارسالية</th>
                                             <th style="text-align:center;">عقد السفارة</th>
@@ -215,9 +215,9 @@
                                             <th style="text-align:center;">رقم تواصل العاملة</th>
                                             <th style="text-align:center;">اسم العاملة</th>
                                             <th style="text-align:center;">تاريخ التأشيرة</th>
+                                            <th style="text-align:center;">رقم ألتأشيرة</th>
                                             <th style="text-align:center;">رقم التواصل </th>
                                             <th style="text-align:center;">رقم الهُوِيَّة أو الإقامة</th>
-                                            <th style="text-align:center;">رقم ألتأشيرة</th>
                                              <th style="text-align:center;">اسم العميل</th>
                                             <th style="text-align:center;">الرقم</th>
                                         </tr>
@@ -228,10 +228,9 @@
                                           <tr>
                                                <td style="text-align:center;"> <a href="{{url_for('nominated_edit',id=nominated.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
                                                 <a href="{{url_for('nominated_delete',id=nominated.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>
-                                            <td style="text-align:center;">{{nominated.status}}</td>
+                                        <td style="text-align:center;">{{nominated.status}}</td>
                                             <td style="text-align:center;">
-                                                <a href="{{nominated.ppt_image}}}" class="btn btn-primary" target="_blank">صورة الجواز</a>
-                                            </td>
+                                                <a href="{{nominated.ppt_image}}}" class="btn btn-primary" target="_blank">صورة الجواز</a></td>
                                             <td style="text-align:center;">{{nominated.shipment_date}}</td>
                                             <td style="text-align:center;">{{nominated.embassy_contract}}  </td>
                                             <td style="text-align:center;">{{nominated.musaned}}</td>

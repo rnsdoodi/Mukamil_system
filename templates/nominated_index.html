@@ -244,7 +244,15 @@
 
                                     <thead>
                                         <tr>
-                                            <th style="text-align:center;">الحالة</th>
+                                            <th style="text-align:center;">ملاحظات</th>
+                                             <th style="text-align:center;">تاريخ الوصول</th>
+                                             <th style="text-align:center;">OEC</th>
+                                             <th style="text-align:center;">Stamping</th>
+                                             <th style="text-align:center;">Biometric</th>
+                                             <th style="text-align:center;">TESDA</th>
+                                            <th style="text-align:center;">OWWA</th>
+                                            <th style="text-align:center;">MMR-Vaccine</th>
+                                            <th style="text-align:center;">Medical</th>
                                             <th style="text-align:center;">صورة الجواز</th>
                                             <th style="text-align:center;">تاريخ الارسالية</th>
                                             <th style="text-align:center;">عقد السفارة</th>
@@ -255,9 +263,9 @@
                                             <th style="text-align:center;">رقم تواصل العاملة</th>
                                             <th style="text-align:center;">اسم العاملة</th>
                                             <th style="text-align:center;">تاريخ التأشيرة</th>
+                                            <th style="text-align:center;">رقم ألتأشيرة</th>
                                             <th style="text-align:center;">رقم التواصل </th>
                                             <th style="text-align:center;">رقم الهُوِيَّة أو الإقامة</th>
-                                            <th style="text-align:center;">رقم ألتأشيرة</th>
                                              <th style="text-align:center;">اسم العميل</th>
                                             <th style="text-align:center;">الرقم</th>
                                         </tr>
@@ -269,12 +277,16 @@
                                         {% for nominated in nominates %}
                                           <tr>
                                             <td style="text-align:center;">{{nominated.status}}</td>
+                                               <td style="text-align:center;">{{nominated.deployment_date}}</td>
+                                               <td style="text-align:center;">{{nominated.oec}}</td>
+                                            <td style="text-align:center;">{{nominated.stamping}}</td>
+                                            <td style="text-align:center;">{{nominated.biometric}}  </td>
+                                            <td style="text-align:center;">{{nominated.tesda}}</td>
+                                            <td style="text-align:center;">{{nominated.owwa}}</td>
+                                            <td style="text-align:center;">{{nominated.mmr_vaccine}}</td>
+                                             <td style="text-align:center;">{{nominated.medical}}</td>
                                             <td style="text-align:center;">
                                                 <a href="{{nominated.ppt_image}}}" class="btn btn-primary" target="_blank">صورة الجواز</a></td>
-<!--                                              <td style="text-align:center;"> <a href="{{nominated.ppt_image}}}" class="btn" style="color:blue" target="_blank"><i class="fas fa-passport"></i>Passport Copy</i></a></td>-->
-
-
-                                            </td>
                                             <td style="text-align:center;">{{nominated.shipment_date}}</td>
                                             <td style="text-align:center;">{{nominated.embassy_contract}}  </td>
                                             <td style="text-align:center;">{{nominated.musaned}}</td>

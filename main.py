@@ -4,16 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
+from wtforms import StringField, SubmitField, SelectField,IntegerField
 from wtforms.validators import DataRequired, length
 from wtforms.fields.html5 import DateField
 import os
 
 # Flask App
 app = Flask(__name__)
-
-# app._static_folder = ''
-# static = safe_join(os.path.dirname(__file__), 'static')
 
 
 all_users = []
@@ -44,12 +41,12 @@ def load_user(user_id):
 
 # Creating Table in the DB to Add New Customer Request
 class Users(db.Model):
-    __tablename__ = "users"
+    __tablename__ = "users1"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
-    nid_or_iqama = db.Column(db.String, nullable=False)
-    contact_No = db.Column(db.String(250), nullable=False)
-    visa = db.Column(db.String, nullable=False)
+    nid_or_iqama = db.Column(db.BIGINT, nullable=False)
+    contact_No = db.Column(db.BIGINT, nullable=False)
+    visa = db.Column(db.BIGINT, nullable=False)
     visa_date = db.Column(db.Date, nullable=False)
     worker_name = db.Column(db.String(250), nullable=False)
     type = db.Column(db.String(250), nullable=False)
@@ -58,6 +55,14 @@ class Users(db.Model):
     musaned = db.Column(db.String(250), nullable=False)
     embassy_contract = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
+    medical = db.Column(db.String(500), nullable=True)
+    mmr_vaccine = db.Column(db.String(500), nullable=True)
+    owwa = db.Column(db.String(500), nullable=True)
+    tesda = db.Column(db.String(500), nullable=True)
+    biometric = db.Column(db.String(500), nullable=True)
+    stamping = db.Column(db.String(500), nullable=True)
+    oec = db.Column(db.String(500), nullable=True)
+    deployment_date = db.Column(db.String(500), nullable=True)
     status = db.Column(db.String(1000), nullable=False)
 
 
@@ -66,9 +71,9 @@ class Skilled(db.Model):
     __tablename__ = "skills"
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(250), nullable=False)
-    company_visa = db.Column(db.String, nullable=False)
-    cr = db.Column(db.String, nullable=False)
-    contact_No = db.Column(db.String(250), nullable=False)
+    company_visa = db.Column(db.BIGINT, nullable=False)
+    cr = db.Column(db.BIGINT, nullable=False)
+    contact_No = db.Column(db.BIGINT, nullable=False)
     country = db.Column(db.String(250), nullable=False)
     mp_request = db.Column(db.String(250), nullable=False)
     quantity = db.Column(db.String(250), nullable=False)
@@ -83,11 +88,12 @@ class Transfer(db.Model):
     __tablename__ = "transfer"
     id = db.Column(db.Integer, primary_key=True)
     first_employer_name = db.Column(db.String(250), nullable=False)
-    first_contact_no = db.Column(db.String(250), nullable=False)
+    first_contact_no = db.Column(db.BIGINT, nullable=False)
     worker_name = db.Column(db.String(250), nullable=False)
-    worker_contact_no = db.Column(db.String(250), nullable=False)
+    worker_contact_no = db.Column(db.BIGINT, nullable=False)
     second_employer_name = db.Column(db.String(250), nullable=False)
-    second_contact_no = db.Column(db.String(250), nullable=False)
+    second_contact_no = db.Column(db.BIGINT, nullable=False)
+    request_date = db.Column(db.Date, nullable=False)
     iqama = db.Column(db.String(250), nullable=False)
     agency = db.Column(db.String(250), nullable=False)
     request_status = db.Column(db.String(250), nullable=False)
@@ -99,12 +105,12 @@ class Nominated(db.Model):
     __tablename__ = "nominates"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
-    nid_or_iq = db.Column(db.String, nullable=False)
-    phone_No = db.Column(db.String(250), nullable=False)
-    n_visa = db.Column(db.String, nullable=False)
+    nid_or_iq = db.Column(db.BIGINT, nullable=False)
+    phone_No = db.Column(db.BIGINT, nullable=False)
+    n_visa = db.Column(db.BIGINT, nullable=False)
     n_visa_date = db.Column(db.Date, nullable=False)
     worker_name = db.Column(db.String(250), nullable=False)
-    worker_contact_No = db.Column(db.String(250), nullable=False)
+    worker_contact_No = db.Column(db.BIGINT, nullable=False)
     type = db.Column(db.String(250), nullable=False)
     agency = db.Column(db.String(250), nullable=False)
     selected_or_recommended = db.Column(db.String(250), nullable=False)
@@ -112,6 +118,14 @@ class Nominated(db.Model):
     embassy_contract = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
     ppt_image = db.Column(db.String(1000), nullable=False)
+    medical = db.Column(db.String(500), nullable=True)
+    mmr_vaccine = db.Column(db.String(500), nullable=True)
+    owwa = db.Column(db.String(500), nullable=True)
+    tesda = db.Column(db.String(500), nullable=True)
+    biometric = db.Column(db.String(500), nullable=True)
+    stamping = db.Column(db.String(500), nullable=True)
+    oec = db.Column(db.String(500), nullable=True)
+    deployment_date = db.Column(db.String(500), nullable=True)
     status = db.Column(db.String(1000), nullable=False)
 
 
@@ -122,8 +136,8 @@ class Complaint(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     worker_name = db.Column(db.String(250), nullable=False)
     Employer_name = db.Column(db.String(250), nullable=False)
-    Worker_contact_No = db.Column(db.String(250), nullable=False)
-    Employer_contact_No = db.Column(db.String(250), nullable=False)
+    Worker_contact_No = db.Column(db.BIGINT, nullable=False)
+    Employer_contact_No = db.Column(db.BIGINT, nullable=False)
     Deployment_Date = db.Column(db.Date, nullable=False)
     Complaint_Description = db.Column(db.String(1000), nullable=False)
     Status = db.Column(db.String(1000), nullable=False)
@@ -131,6 +145,7 @@ class Complaint(db.Model):
 
 # CREATE TABLE IN DB To save users login Data (Hashed & Salted)
 class User(UserMixin, db.Model):
+    __tablename__ = "admins"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
@@ -161,7 +176,14 @@ class AddUser(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' الحالة', validators=[length(max=1000)])
+    # medical = StringField('Medical', validators=[length(max=1000)])
+    # mmr_vaccine = StringField('MMR-VACCINE', validators=[length(max=1000)])
+    # owwa = StringField('OWWA', validators=[length(max=1000)])
+    # tesda = StringField('TESDA',validators=[length(max=1000)])
+    # biometric = StringField('Biometric', validators=[length(max=1000)])
+    # stamping = StringField('Stamping',validators=[length(max=1000)])
+    # oec = StringField('OEC', validators=[length(max=1000)])
+    status = StringField(' ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
@@ -224,7 +246,7 @@ class AddTransfer(FlaskForm):
                               description="كما هو مدون في جواز السفر")
     worker_contact_no = StringField('رقم جوال العاملة', description='إن وجد')
     second_employer_name = StringField('اسم الكفيل الثاني', validators=[DataRequired(), length(max=100)])
-    second_contact_no = StringField('رقم جوال الكفيل الثاني', validators=[DataRequired(), length(max=150)],
+    second_contact_no = IntegerField('رقم جوال الكفيل الثاني', validators=[DataRequired(), length(max=150)],
                                     description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
@@ -271,6 +293,13 @@ class AddNominated(FlaskForm):
     embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
     ppt_image = StringField('صــورة الـجواز ', validators=[DataRequired(), length(max=2000)])
+    # medical = StringField('Medical', validators=[length(max=1000)])
+    # mmr_vaccine = StringField('MMR-VACCINE', validators=[length(max=1000)])
+    # owwa = StringField('OWWA', validators=[length(max=1000)])
+    # tesda = StringField('TESDA',validators=[length(max=1000)])
+    # biometric = StringField('Biometric', validators=[length(max=1000)])
+    # stamping = StringField('Stamping',validators=[length(max=1000)])
+    # oec = StringField('OEC', validators=[length(max=1000)])
     status = StringField(' الحالة', validators=[length(max=1000)])
     submit = SubmitField('Add إضافة')
 
@@ -330,12 +359,28 @@ class AddCustomer(FlaskForm):
 # Edit Worker Status Flask Form for (Domec)
 
 class DomecEditUser(FlaskForm):
-    status = StringField('Status', validators=[DataRequired(), length(max=1000)])
+    medical = StringField('Medical', validators=[DataRequired(), length(max=1000)])
+    mmr_vaccine = StringField('MMR-VACCINE', validators=[DataRequired(), length(max=1000)])
+    owwa = StringField('OWWA', validators=[DataRequired(), length(max=1000)])
+    tesda = StringField('TESDA', validators=[DataRequired(), length(max=1000)])
+    biometric = StringField('Biometric', validators=[DataRequired(), length(max=1000)])
+    stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
+    oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
+    deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
+    status = StringField('Remarks', validators=[length(max=1000)])
     submit = SubmitField('Change')
 
 
 class DomecEditNominated(FlaskForm):
-    status = StringField('Status', validators=[DataRequired(), length(max=1000)])
+    medical = StringField('Medical', validators=[DataRequired(), length(max=1000)])
+    mmr_vaccine = StringField('MMR-Vaccine', validators=[DataRequired(), length(max=1000)])
+    owwa = StringField('OWWA', validators=[DataRequired(), length(max=1000)])
+    tesda = StringField('TESDA', validators=[DataRequired(), length(max=1000)])
+    biometric = StringField('Biometric', validators=[DataRequired(), length(max=1000)])
+    stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
+    oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
+    deployment_date = StringField('Deployment Date', validators=[DataRequired(), length(max=1000)])
+    status = StringField('Status', validators=[length(max=1000)])
     submit = SubmitField('Change')
 
 
@@ -521,6 +566,14 @@ def add():
             musaned=form.musaned.data,
             embassy_contract=form.embassy_contract.data,
             shipment_date=form.shipment_date.data,
+            # medical=form.medical.data,
+            # mmr_vaccine=form.mmr_vaccine.data,
+            # owwa=form.owwa.data,
+            # tesda=form.tesda.data,
+            # biometric=form.biometric.data,
+            # stamping=form.stamping.data,
+            # oec=form.oec.data,
+            # deployment_date=form.deployment_date.data,
             status=form.status.data
         )
 
@@ -1054,9 +1107,17 @@ def domec_edit():
     user_id = request.args.get("id")
     updated_user = Users.query.get(user_id)
     if form.validate_on_submit():
+        updated_user.medical = form.medical.data
+        updated_user.mmr_vaccine = form.mmr_vaccine.data
+        updated_user.owwa = form.owwa.data
+        updated_user.tesda = form.tesda.data
+        updated_user.biometric = form.biometric.data
+        updated_user.stamping = form.stamping.data
+        updated_user.oec = form.oec.data
+        updated_user.deployment_date = form.deployment_date.data
         updated_user.status = form.status.data
         db.session.commit()
-        flash("Request Status successfully Modified ✔")
+        flash("Request Modified successfully  ✔")
         return redirect(url_for('domec_edit'))
     return render_template("domec_edit.html", form=form, user=updated_user)
 
@@ -1081,9 +1142,17 @@ def domec_edit_nominated():
     nominated_id = request.args.get("id")
     updated_nominates = Nominated.query.get(nominated_id)
     if form.validate_on_submit():
+        updated_nominates.medical = form.medical.data
+        updated_nominates.mmr_vaccine = form.mmr_vaccine.data
+        updated_nominates.owwa = form.owwa.data
+        updated_nominates.tesda = form.tesda.data
+        updated_nominates.biometric = form.biometric.data
+        updated_nominates.stamping = form.stamping.data
+        updated_nominates.oec = form.oec.data
+        updated_nominates.deployment_date = form.deployment_date.data
         updated_nominates.status = form.status.data
         db.session.commit()
-        flash("Request Status successfully Modified ✔")
+        flash("Request Modified successfully  ✔")
         return redirect(url_for('domec_edit_nominated'))
     return render_template("domec_edit_nominated.html", form=form, nominated=updated_nominates)
 
