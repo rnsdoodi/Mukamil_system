@@ -252,10 +252,10 @@ class AddTransfer(FlaskForm):
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
-                                                        "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الخدمات",
+                                                        "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الكفالة",
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
                                                         "تم نقل الخدمات",
-                                                        "العاملة رفضت نقل الخدمات وتراجعت"])
+                                                        "العاملة رفضت نقل الكفالة وتراجعت"])
     status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('إضــافـة الطلــب')
 
@@ -263,7 +263,11 @@ class AddTransfer(FlaskForm):
 # Edit new Transfer Request Flask Form for (السلالم الدولية)
 class EditTransfer(FlaskForm):
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
-    reqeust_status = StringField('حالة الطلب', validators=[DataRequired(), length(max=300)])
+    reqeust_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
+                                                        "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الكفالة",
+                                                        "في انتظار سداد رسوم الإقامة / نقل الكفالة",
+                                                        "تم نقل الكفالة بنجاح",
+                                                        "العاملة رفضت نقل الكفالة وتراجعت"])
     status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
