@@ -246,7 +246,7 @@ class AddTransfer(FlaskForm):
                               description="كما هو مدون في جواز السفر")
     worker_contact_no = StringField('رقم جوال العاملة', description='إن وجد')
     second_employer_name = StringField('اسم الكفيل الثاني', validators=[DataRequired(), length(max=100)])
-    second_contact_no = IntegerField('رقم جوال الكفيل الثاني', validators=[DataRequired(), length(max=150)],
+    second_contact_no = IntegerField('رقم جوال الكفيل الثاني', validators=[DataRequired()],
                                      description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
