@@ -248,6 +248,7 @@ class AddTransfer(FlaskForm):
     second_employer_name = StringField('اسم الكفيل الثاني', validators=[DataRequired(), length(max=100)])
     second_contact_no = IntegerField('رقم جوال الكفيل الثاني', validators=[DataRequired()],
                                      description='ادخل رقم جوال صالح مكون من 10 ارقام ')
+    request_date = DateField(' تاريخ الطلب', format='%Y-%m-%d')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
