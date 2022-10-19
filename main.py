@@ -4,14 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField,IntegerField
+from wtforms import StringField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
 from wtforms.fields.html5 import DateField
 import os
 
 # Flask App
 app = Flask(__name__)
-
 
 all_users = []
 all_arrived = []
@@ -183,6 +182,7 @@ class AddUser(FlaskForm):
     # biometric = StringField('Biometric', validators=[length(max=1000)])
     # stamping = StringField('Stamping',validators=[length(max=1000)])
     # oec = StringField('OEC', validators=[length(max=1000)])
+    # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
     status = StringField(' ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('Add إضافة')
 
@@ -192,7 +192,7 @@ class EditUser(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField('الحالة', validators=[length(max=1000)])
+    status = StringField('ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -222,7 +222,7 @@ class AddSkills(FlaskForm):
                                                          "For POEA Approval", "POEA Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' حالة الطلب', validators=[DataRequired(), length(max=1000)])
+    status = StringField(' ملاحظات', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
@@ -247,7 +247,7 @@ class AddTransfer(FlaskForm):
     worker_contact_no = StringField('رقم جوال العاملة', description='إن وجد')
     second_employer_name = StringField('اسم الكفيل الثاني', validators=[DataRequired(), length(max=100)])
     second_contact_no = IntegerField('رقم جوال الكفيل الثاني', validators=[DataRequired(), length(max=150)],
-                                    description='ادخل رقم جوال صالح مكون من 10 ارقام ')
+                                     description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
@@ -296,11 +296,12 @@ class AddNominated(FlaskForm):
     medical = StringField('Medical', validators=[length(max=1000)])
     mmr_vaccine = StringField('MMR-VACCINE', validators=[length(max=1000)])
     owwa = StringField('OWWA', validators=[length(max=1000)])
-    tesda = StringField('TESDA',validators=[length(max=1000)])
+    tesda = StringField('TESDA', validators=[length(max=1000)])
     biometric = StringField('Biometric', validators=[length(max=1000)])
-    stamping = StringField('Stamping',validators=[length(max=1000)])
+    stamping = StringField('Stamping', validators=[length(max=1000)])
     oec = StringField('OEC', validators=[length(max=1000)])
-    status = StringField(' الحالة', validators=[length(max=1000)])
+    deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
+    status = StringField(' ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
@@ -319,12 +320,12 @@ class AddComplaint(FlaskForm):
     Employer_contact_No = StringField(' رقم جوال الكفيل', validators=[length(max=200)])
     Deployment_Date = DateField(' تاريخ الوصول', format='%Y-%m-%d')
     Complaint_Description = StringField(' شكوى العاملة', validators=[length(max=1000)])
-    Status = StringField('حالة الشكوى', validators=[length(max=1000)])
+    Status = StringField('ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('إضـافــة')
 
 
 class EditComplaint(FlaskForm):
-    Status = StringField('الحالة', validators=[length(max=1000)])
+    Status = StringField('ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('تــعـديـل')
 
 
@@ -352,7 +353,7 @@ class AddCustomer(FlaskForm):
     musaned = SelectField('Musaned Contract', choices=["  Yes", "   No"])
     embassy_contract = SelectField('Original Contract', choices=["  Yes", "  No"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
-    status = StringField(' Status', validators=[length(max=1000)])
+    status = StringField('Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 
@@ -380,7 +381,7 @@ class DomecEditNominated(FlaskForm):
     stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
     oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
     deployment_date = StringField('Deployment Date', validators=[DataRequired(), length(max=1000)])
-    status = StringField('Status', validators=[length(max=1000)])
+    status = StringField('Remarks', validators=[length(max=1000)])
     submit = SubmitField('Change')
 
 
@@ -406,7 +407,7 @@ class DomecAddSkills(FlaskForm):
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
-    status = StringField(' Status', validators=[length(max=500)])
+    status = StringField(' Remarks', validators=[length(max=500)])
     submit = SubmitField('Submit')
 
 
@@ -415,7 +416,7 @@ class DomecAddSkills(FlaskForm):
 class DomecEditSkills(FlaskForm):
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    status = StringField(' Status', validators=[length(max=1000)])
+    status = StringField(' Remarks', validators=[length(max=1000)])
     submit = SubmitField('Update')
 
 
@@ -431,7 +432,7 @@ class DomecAddComplaint(FlaskForm):
 
 
 class DomecEditComplaint(FlaskForm):
-    Status = StringField('Status', validators=[length(max=1000)])
+    Status = StringField('Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 
