@@ -626,6 +626,7 @@ def add_transfer():
             second_employer_name=form.second_employer_name.data,
             second_contact_no=form.second_contact_no.data,
             iqama=form.iqama.data,
+            request_date=form.request_date.data,
             agency=form.agency.data,
             request_status=form.request_status.data,
             status=form.status.data,
