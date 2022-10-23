@@ -40,7 +40,7 @@ def load_user(user_id):
 
 # Creating Table in the DB to Add New Customer Request
 class Users(db.Model):
-    __tablename__ = "users1"
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     nid_or_iqama = db.Column(db.BIGINT, nullable=False)
@@ -101,7 +101,7 @@ class Transfer(db.Model):
 
 # Creating Table in the DB to Add New recommended Customer Request
 class Nominated(db.Model):
-    __tablename__ = "nominates"
+    __tablename__ = "nominates1"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     nid_or_iq = db.Column(db.BIGINT, nullable=False)
