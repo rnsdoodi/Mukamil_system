@@ -46,7 +46,6 @@ class Users(db.Model):
     nid_or_iqama = db.Column(db.BIGINT, nullable=False)
     contact_No = db.Column(db.BIGINT, nullable=False)
     visa = db.Column(db.BIGINT, nullable=False)
-    visa_date = db.Column(db.Date, nullable=False)
     worker_name = db.Column(db.String(250), nullable=False)
     type = db.Column(db.String(250), nullable=False)
     agency = db.Column(db.String(250), nullable=False)
@@ -107,7 +106,6 @@ class Nominated(db.Model):
     nid_or_iq = db.Column(db.BIGINT, nullable=False)
     phone_No = db.Column(db.BIGINT, nullable=False)
     n_visa = db.Column(db.BIGINT, nullable=False)
-    n_visa_date = db.Column(db.Date, nullable=False)
     worker_name = db.Column(db.String(250), nullable=False)
     worker_contact_No = db.Column(db.BIGINT, nullable=False)
     type = db.Column(db.String(250), nullable=False)
@@ -163,7 +161,6 @@ class AddUser(FlaskForm):
                              description='05xxxxxxxx : مثال')
     visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                        description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    visa_date = DateField('تاريخ الطلب', validators=[DataRequired()], format='%Y-%m-%d')
     worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
     type = SelectField('المهنة',
@@ -281,7 +278,6 @@ class AddNominated(FlaskForm):
                            description='05xxxxxxxx : مثال')
     n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                          description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    n_visa_date = DateField('تاريخ التأشيرة', validators=[DataRequired()], format='%Y-%m-%d')
     worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
 
@@ -346,7 +342,6 @@ class AddCustomer(FlaskForm):
                              description='example : 05xxxxxxxx')
     visa = StringField('Visa No.', validators=[DataRequired(), length(max=10)],
                        description="Please insert correct 10 digits visa No.")
-    visa_date = DateField('Request Date', validators=[DataRequired()], format='%Y-%m-%d')
     worker_name = StringField('Worker Name', validators=[DataRequired(), length(max=150)],
                               description='As per the Passport')
     type = SelectField('Position',
@@ -564,7 +559,6 @@ def add():
             nid_or_iqama=form.nid_or_iqama.data,
             contact_No=form.contact_No.data,
             visa=form.visa.data,
-            visa_date=form.visa_date.data,
             worker_name=form.worker_name.data,
             type=form.type.data,
             agency=form.agency.data,
@@ -653,7 +647,6 @@ def add_nominated():
             nid_or_iq=form.nid_or_iq.data,
             phone_No=form.phone_No.data,
             n_visa=form.n_visa.data,
-            n_visa_date=form.n_visa_date.data,
             worker_name=form.worker_name.data,
             worker_contact_No=form.worker_contact_No.data,
             type=form.type.data,
@@ -1023,7 +1016,6 @@ def domec_add():
             nid_or_iqama=form.nid_or_iqama.data,
             contact_No=form.contact_No.data,
             visa=form.visa.data,
-            visa_date=form.visa_date.data,
             worker_name=form.worker_name.data,
             type=form.type.data,
             agency=form.agency.data,
