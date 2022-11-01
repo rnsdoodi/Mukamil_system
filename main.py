@@ -189,6 +189,14 @@ class AddUser(FlaskForm):
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
+    # name = StringField('اسم العميل ', validators=[length(max=100)])
+    nid_or_iqama = StringField(' الهوية الوطنية أو الإقامة', validators=[length(max=10)],
+                               description="ادخل رقم هوية صالح مكون من 10 ارقام")
+
+    visa = StringField('رقم التأشيرة', validators=[length(max=10)],
+                       description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    worker_name = StringField('إسم العاملة', validators=[length(max=150)],
+                              description='كما هو مدون في جواز السفر')
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
@@ -311,6 +319,13 @@ class AddNominated(FlaskForm):
 
 
 class EditNominated(FlaskForm):
+
+    nid_or_iq = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
+                            description="ادخل رقم هوية صالح مكون من 10 ارقام")
+    n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+                         description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
+                              description='كما هو مدون في جواز السفر')
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
@@ -741,6 +756,10 @@ def edit():
     user_id = request.args.get("id")
     updated_user = Users.query.get(user_id)
     if form.validate_on_submit():
+        # updated_user.name = form.name.data
+        updated_user.nid_or_iqama = form.nid_or_iqama.data
+        updated_user.visa = form.visa.data
+        updated_user.worker_name = form.worker_name.data
         updated_user.musaned = form.musaned.data
         updated_user.embassy_contract = form.embassy_contract.data
         updated_user.shipment_date = form.shipment_date.data
@@ -790,6 +809,9 @@ def nominated_edit():
     nominated_id = request.args.get("id")
     updated_nominated = Nominated.query.get(nominated_id)
     if form.validate_on_submit():
+        updated_nominated.nid_or_iq = form.nid_or_iq.data
+        updated_nominated.n_visa = form.n_visa.data
+        updated_nominated.worker_name = form.worker_name.data
         updated_nominated.musaned = form.musaned.data
         updated_nominated.embassy_contract = form.embassy_contract.data
         updated_nominated.shipment_date = form.shipment_date.data
