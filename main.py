@@ -54,14 +54,14 @@ class Users(db.Model):
     musaned = db.Column(db.String(250), nullable=False)
     embassy_contract = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
-    medical = db.Column(db.String(500), nullable=True)
-    mmr_vaccine = db.Column(db.String(500), nullable=True)
-    owwa = db.Column(db.String(500), nullable=True)
-    tesda = db.Column(db.String(500), nullable=True)
-    biometric = db.Column(db.String(500), nullable=True)
-    stamping = db.Column(db.String(500), nullable=True)
-    oec = db.Column(db.String(500), nullable=True)
-    deployment_date = db.Column(db.String(500), nullable=True)
+    # medical = db.Column(db.String(500), nullable=True)
+    # mmr_vaccine = db.Column(db.String(500), nullable=True)
+    # owwa = db.Column(db.String(500), nullable=True)
+    # tesda = db.Column(db.String(500), nullable=True)
+    # biometric = db.Column(db.String(500), nullable=True)
+    # stamping = db.Column(db.String(500), nullable=True)
+    # oec = db.Column(db.String(500), nullable=True)
+    deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
     status = db.Column(db.String(1000), nullable=False)
 
 
@@ -117,14 +117,14 @@ class Nominated(db.Model):
     embassy_contract = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
     ppt_image = db.Column(db.String(1000), nullable=False)
-    medical = db.Column(db.String(500), nullable=True)
-    mmr_vaccine = db.Column(db.String(500), nullable=True)
-    owwa = db.Column(db.String(500), nullable=True)
-    tesda = db.Column(db.String(500), nullable=True)
-    biometric = db.Column(db.String(500), nullable=True)
-    stamping = db.Column(db.String(500), nullable=True)
-    oec = db.Column(db.String(500), nullable=True)
-    deployment_date = db.Column(db.String(500), nullable=True)
+    # medical = db.Column(db.String(500), nullable=True)
+    # mmr_vaccine = db.Column(db.String(500), nullable=True)
+    # owwa = db.Column(db.String(500), nullable=True)
+    # tesda = db.Column(db.String(500), nullable=True)
+    # biometric = db.Column(db.String(500), nullable=True)
+    # stamping = db.Column(db.String(500), nullable=True)
+    # oec = db.Column(db.String(500), nullable=True)
+    deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
     status = db.Column(db.String(1000), nullable=False)
 
 
@@ -182,9 +182,9 @@ class AddUser(FlaskForm):
     # biometric = StringField('Biometric', validators=[length(max=1000)])
     # stamping = StringField('Stamping',validators=[length(max=1000)])
     # oec = StringField('OEC', validators=[length(max=1000)])
-    # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
-    status = StringField(' ملاحظات', validators=[length(max=1000)])
-    submit = SubmitField('Add إضافة')
+    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
+    # status = StringField(' ملاحظات دوميك', validators=[length(max=1000)])
+    submit = SubmitField('Submit إضافة')
 
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
@@ -200,7 +200,7 @@ class EditUser(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField('ملاحظات', validators=[length(max=1000)])
+    deployment_date = StringField('ملاحظات السلالم الدولية ', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -313,13 +313,12 @@ class AddNominated(FlaskForm):
     # biometric = StringField('Biometric', validators=[length(max=1000)])
     # stamping = StringField('Stamping', validators=[length(max=1000)])
     # oec = StringField('OEC', validators=[length(max=1000)])
-    # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
-    status = StringField(' ملاحظات', validators=[length(max=1000)])
-    submit = SubmitField('Add إضافة')
+    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
+    # status = StringField(' ملاحظات دوميك', validators=[length(max=1000)])
+    submit = SubmitField('Submit إضافة')
 
 
 class EditNominated(FlaskForm):
-
     nid_or_iq = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
                             description="ادخل رقم هوية صالح مكون من 10 ارقام")
     n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
@@ -329,7 +328,7 @@ class EditNominated(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField('الحالة', validators=[length(max=1000)])
+    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -380,29 +379,29 @@ class AddCustomer(FlaskForm):
 # Edit Worker Status Flask Form for (Domec)
 
 class DomecEditUser(FlaskForm):
-    medical = StringField('Medical', validators=[DataRequired(), length(max=1000)])
-    mmr_vaccine = StringField('MMR-VACCINE', validators=[DataRequired(), length(max=1000)])
-    owwa = StringField('OWWA', validators=[DataRequired(), length(max=1000)])
-    tesda = StringField('TESDA', validators=[DataRequired(), length(max=1000)])
-    biometric = StringField('Biometric', validators=[DataRequired(), length(max=1000)])
-    stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
-    oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
-    deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
-    status = StringField('Remarks', validators=[length(max=1000)])
-    submit = SubmitField('Change')
+    # medical = StringField('Medical', validators=[DataRequired(), length(max=1000)])
+    # mmr_vaccine = StringField('MMR-VACCINE', validators=[DataRequired(), length(max=1000)])
+    # owwa = StringField('OWWA', validators=[DataRequired(), length(max=1000)])
+    # tesda = StringField('TESDA', validators=[DataRequired(), length(max=1000)])
+    # biometric = StringField('Biometric', validators=[DataRequired(), length(max=1000)])
+    # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
+    # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
+    # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
+    status = StringField('Domec Remarks', validators=[length(max=1000)])
+    submit = SubmitField('Submit Changes')
 
 
 class DomecEditNominated(FlaskForm):
-    medical = StringField('Medical', validators=[DataRequired(), length(max=1000)])
-    mmr_vaccine = StringField('MMR-Vaccine', validators=[DataRequired(), length(max=1000)])
-    owwa = StringField('OWWA', validators=[DataRequired(), length(max=1000)])
-    tesda = StringField('TESDA', validators=[DataRequired(), length(max=1000)])
-    biometric = StringField('Biometric', validators=[DataRequired(), length(max=1000)])
-    stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
-    oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
-    deployment_date = StringField('Deployment Date', validators=[DataRequired(), length(max=1000)])
-    status = StringField('Remarks', validators=[length(max=1000)])
-    submit = SubmitField('Change')
+    # medical = StringField('Medical', validators=[DataRequired(), length(max=1000)])
+    # mmr_vaccine = StringField('MMR-Vaccine', validators=[DataRequired(), length(max=1000)])
+    # owwa = StringField('OWWA', validators=[DataRequired(), length(max=1000)])
+    # tesda = StringField('TESDA', validators=[DataRequired(), length(max=1000)])
+    # biometric = StringField('Biometric', validators=[DataRequired(), length(max=1000)])
+    # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
+    # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
+    # deployment_date = StringField('Deployment Date', validators=[DataRequired(), length(max=1000)])
+    status = StringField('Domec Remarks', validators=[length(max=1000)])
+    submit = SubmitField('Submit Changes')
 
 
 # Add new skills Request Flask Form for (Domec)
@@ -594,7 +593,7 @@ def add():
             # biometric=form.biometric.data,
             # stamping=form.stamping.data,
             # oec=form.oec.data,
-            # deployment_date=form.deployment_date.data,
+            deployment_date=form.deployment_date.data,  # salalim Remarks
             status=form.status.data
         )
 
@@ -685,7 +684,7 @@ def add_nominated():
             # biometric=form.biometric.data,
             # stamping=form.stamping.data,
             # oec=form.oec.data,
-            # deployment_date=form.deployment_date.data,
+            deployment_date=form.deployment_date.data, # Salalim Remarks
             status=form.status.data
         )
 
@@ -763,7 +762,7 @@ def edit():
         updated_user.musaned = form.musaned.data
         updated_user.embassy_contract = form.embassy_contract.data
         updated_user.shipment_date = form.shipment_date.data
-        updated_user.status = form.status.data
+        updated_user.deployment_date = form.deployment_date.data  # salalim Remarks
 
         db.session.commit()
         flash("✔ تم تعديل بيانات طلب العمالة المنزلية بنجاح")
@@ -815,7 +814,7 @@ def nominated_edit():
         updated_nominated.musaned = form.musaned.data
         updated_nominated.embassy_contract = form.embassy_contract.data
         updated_nominated.shipment_date = form.shipment_date.data
-        updated_nominated.status = form.status.data
+        updated_nominated.deployment_date = form.deployment_date.data  # Salalim Remarks
 
         db.session.commit()
         flash("✔ تم تعديل الطلب بنجاح")
@@ -1144,14 +1143,14 @@ def domec_edit():
     user_id = request.args.get("id")
     updated_user = Users.query.get(user_id)
     if form.validate_on_submit():
-        updated_user.medical = form.medical.data
-        updated_user.mmr_vaccine = form.mmr_vaccine.data
-        updated_user.owwa = form.owwa.data
-        updated_user.tesda = form.tesda.data
-        updated_user.biometric = form.biometric.data
-        updated_user.stamping = form.stamping.data
-        updated_user.oec = form.oec.data
-        updated_user.deployment_date = form.deployment_date.data
+        # updated_user.medical = form.medical.data
+        # updated_user.mmr_vaccine = form.mmr_vaccine.data
+        # updated_user.owwa = form.owwa.data
+        # updated_user.tesda = form.tesda.data
+        # updated_user.biometric = form.biometric.data
+        # updated_user.stamping = form.stamping.data
+        # updated_user.oec = form.oec.data
+        # updated_user.deployment_date = form.deployment_date.data
         updated_user.status = form.status.data
         db.session.commit()
         flash("Request Modified successfully  ✔")
@@ -1179,14 +1178,14 @@ def domec_edit_nominated():
     nominated_id = request.args.get("id")
     updated_nominates = Nominated.query.get(nominated_id)
     if form.validate_on_submit():
-        updated_nominates.medical = form.medical.data
-        updated_nominates.mmr_vaccine = form.mmr_vaccine.data
-        updated_nominates.owwa = form.owwa.data
-        updated_nominates.tesda = form.tesda.data
-        updated_nominates.biometric = form.biometric.data
-        updated_nominates.stamping = form.stamping.data
-        updated_nominates.oec = form.oec.data
-        updated_nominates.deployment_date = form.deployment_date.data
+        # updated_nominates.medical = form.medical.data
+        # updated_nominates.mmr_vaccine = form.mmr_vaccine.data
+        # updated_nominates.owwa = form.owwa.data
+        # updated_nominates.tesda = form.tesda.data
+        # updated_nominates.biometric = form.biometric.data
+        # updated_nominates.stamping = form.stamping.data
+        # updated_nominates.oec = form.oec.data
+        # updated_nominates.deployment_date = form.deployment_date.data
         updated_nominates.status = form.status.data
         db.session.commit()
         flash("Request Modified successfully  ✔")

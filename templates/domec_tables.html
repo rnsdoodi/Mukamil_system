@@ -193,43 +193,17 @@
                                             <th style="text-align:center;">Musaned Contract</th>
                                             <th style="text-align:center;">POLO Contract</th>
                                             <th style="text-align:center;">Shipment Date</th>
-                                            <th style="text-align:center;">Medical</th>
-                                            <th style="text-align:center;">MMR-Vaccine</th>
-                                             <th style="text-align:center;">OWWA</th>
-                                            <th style="text-align:center;">TESDA</th>
-                                            <th style="text-align:center;">Biometric</th>
-                                            <th style="text-align:center;">Stamping</th>
-                                            <th style="text-align:center;">OEC</th>
-                                            <th style="text-align:center;">Deployment Date</th>
-                                             <th style="text-align:center;">Remarks</th>
+<!--                                            <th style="text-align:center;">Medical</th>-->
+<!--                                            <th style="text-align:center;">MMR-Vaccine</th>-->
+<!--                                             <th style="text-align:center;">OWWA</th>-->
+<!--                                            <th style="text-align:center;">TESDA</th>-->
+<!--                                            <th style="text-align:center;">Biometric</th>-->
+<!--                                            <th style="text-align:center;">Stamping</th>-->
+<!--                                            <th style="text-align:center;">OEC</th>-->
+                                            <th style="text-align:center;">International Stairs Remarks</th>
+                                             <th style="text-align:center;">Domec Remarks</th>
                                         </tr>
                                     </thead>
-
-                                    <tfoot>
-                                        <tr>
-                                             <th style="text-align:center;">id</th>
-                                            <th style="text-align:center;">Employer Name </th>
-                                            <th style="text-align:center;">National ID No.</th>
-                                             <th style="text-align:center;">Employer Contact No</th>
-                                             <th style="text-align:center;">Visa No.</th>
-                                            <th style="text-align:center;">Request Date</th>
-                                            <th style="text-align:center;">Worker Name</th>
-                                            <th style="text-align:center;">Position</th>
-                                            <th style="text-align:center;">Agency</th>
-                                            <th style="text-align:center;">Type</th>
-                                            <th style="text-align:center;">Musaned Contract</th>
-                                            <th style="text-align:center;">POLO Contract</th>
-                                            <th style="text-align:center;">Shipment Date</th>
-                                            <th style="text-align:center;">Medical</th>
-                                            <th style="text-align:center;">MMR-Vaccine</th>
-                                             <th style="text-align:center;">OWWA</th>
-                                            <th style="text-align:center;">TESDA</th>
-                                            <th style="text-align:center;">Biometric</th>
-                                            <th style="text-align:center;">Stamping</th>
-                                            <th style="text-align:center;">OEC</th>
-                                            <th style="text-align:center;">Deployment Date</th>
-                                             <th style="text-align:center;">Remarks</th>
-                                    </tfoot>
 
                                     <tbody>
                                     {% for user in users %}
@@ -240,7 +214,7 @@
                                               <td style="text-align:center;">{{user.nid_or_iqama}}</td>
                                               <td style="text-align:center;">{{user.contact_No}}</td>
                                               <td style="text-align:center;">{{user.visa}}</td>
-                                              <td style="text-align:center;">{{user.visa_date}}</td>
+                                              <td style="text-align:center;">{{user.request_date}}</td>
                                               <td style="text-align:center;">{{user.worker_name}}</td>
                                               <td style="text-align:center;">{{user.type}}</td>
                                               <td style="text-align:center;">{{user.agency}}</td>
@@ -248,13 +222,13 @@
                                                <td style="text-align:center;">{{user.musaned}}  </td>
                                                <td style="text-align:center;">{{user.embassy_contract}}</td>
                                                <td style="text-align:center;">{{user.shipment_date}}</td>
-                                              <td style="text-align:center;">{{user.medical}}</td>
-                                              <td style="text-align:center;">{{user.mmr_vaccine}}</td>
-                                              <td style="text-align:center;">{{user.owwa}}</td>
-                                              <td style="text-align:center;">{{user.tesda}}</td>
-                                              <td style="text-align:center;">{{user.biometric}} </td>
-                                              <td style="text-align:center;">{{user.stamping}}</td>
-                                              <td style="text-align:center;">{{user.oec}}</td>
+<!--                                              <td style="text-align:center;">{{user.medical}}</td>-->
+<!--                                              <td style="text-align:center;">{{user.mmr_vaccine}}</td>-->
+<!--                                              <td style="text-align:center;">{{user.owwa}}</td>-->
+<!--                                              <td style="text-align:center;">{{user.tesda}}</td>-->
+<!--                                              <td style="text-align:center;">{{user.biometric}} </td>-->
+<!--                                              <td style="text-align:center;">{{user.stamping}}</td>-->
+<!--                                              <td style="text-align:center;">{{user.oec}}</td>-->
                                               <td style="text-align:center;">{{user.deployment_date}}</td>
                                               <td style="text-align:center;">{{user.status}}</td>
                                         </tr>
