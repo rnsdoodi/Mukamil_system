@@ -62,7 +62,7 @@ class Users(db.Model):
     # stamping = db.Column(db.String(500), nullable=True)
     # oec = db.Column(db.String(500), nullable=True)
     deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
-    status = db.Column(db.String(1000), nullable=False)
+    # status = db.Column(db.String(1000), nullable=False)
 
 
 # Creating Table in the DB to Add New skilled Request
@@ -125,7 +125,7 @@ class Nominated(db.Model):
     # stamping = db.Column(db.String(500), nullable=True)
     # oec = db.Column(db.String(500), nullable=True)
     deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
-    status = db.Column(db.String(1000), nullable=False)
+    # status = db.Column(db.String(1000), nullable=False)
 
 
 # Creating Table in the DB  to Add new worker Complaint
@@ -200,7 +200,7 @@ class EditUser(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    deployment_date = StringField('ملاحظات السلالم الدولية ', validators=[length(max=1000)])
+    deployment_date = StringField('ملاحظات السلالم الدولية ', validators=[length(max=1000)]) # Salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -328,7 +328,7 @@ class EditNominated(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])
+    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -685,7 +685,7 @@ def add_nominated():
             # stamping=form.stamping.data,
             # oec=form.oec.data,
             deployment_date=form.deployment_date.data, # Salalim Remarks
-            status=form.status.data
+            # status=form.status.data
         )
 
         db.session.add(new_nominated)
