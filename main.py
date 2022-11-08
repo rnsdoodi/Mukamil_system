@@ -172,8 +172,8 @@ class AddUser(FlaskForm):
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
                                                                                                             "International"])
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
-    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
-    embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
+    musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
+    embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
     # medical = StringField('Medical', validators=[length(max=1000)])
     # mmr_vaccine = StringField('MMR-VACCINE', validators=[length(max=1000)])
@@ -302,8 +302,8 @@ class AddNominated(FlaskForm):
                                                                                                             "International"])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended"])
-    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
-    embassy_contract = SelectField('عقد السفارة', choices=["  Yes", "  No"])
+    musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
+    embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
     ppt_image = StringField('صــورة الـجواز ', validators=[DataRequired(), length(max=2000)])
     # medical = StringField('Medical', validators=[length(max=1000)])
