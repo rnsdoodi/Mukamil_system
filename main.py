@@ -101,7 +101,7 @@ class Transfer(db.Model):
 
 # Creating Table in the DB to Add New recommended Customer Request
 class Nominated(db.Model):
-    __tablename__ = "nominates11"
+    __tablename__ = "nominates1"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     nid_or_iq = db.Column(db.BIGINT, nullable=False)
@@ -125,7 +125,7 @@ class Nominated(db.Model):
     # stamping = db.Column(db.String(500), nullable=True)
     # oec = db.Column(db.String(500), nullable=True)
     deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
-    status = db.Column(db.String(1000), nullable=False)
+    status = db.Column(db.String(1000), nullable=True)
 
 
 # Creating Table in the DB  to Add new worker Complaint
@@ -686,7 +686,7 @@ def add_nominated():
             # stamping=form.stamping.data,
             # oec=form.oec.data,
             deployment_date=form.deployment_date.data, # Salalim Remarks
-            status=form.status.data
+            # status=form.status.data
 
         )
 
