@@ -594,7 +594,7 @@ def add():
             # stamping=form.stamping.data,
             # oec=form.oec.data,
             deployment_date=form.deployment_date.data,  # salalim Remarks
-            status=form.status.data
+            # status=form.status.data
         )
 
         db.session.add(new_customer)
