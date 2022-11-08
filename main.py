@@ -62,7 +62,7 @@ class Users(db.Model):
     # stamping = db.Column(db.String(500), nullable=True)
     # oec = db.Column(db.String(500), nullable=True)
     deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
-    # status = db.Column(db.String(1000), nullable=False)
+    status = db.Column(db.String(1000), nullable=False)
 
 
 # Creating Table in the DB to Add New skilled Request
@@ -125,7 +125,7 @@ class Nominated(db.Model):
     # stamping = db.Column(db.String(500), nullable=True)
     # oec = db.Column(db.String(500), nullable=True)
     deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
-    # status = db.Column(db.String(1000), nullable=False)
+    status = db.Column(db.String(1000), nullable=False)
 
 
 # Creating Table in the DB  to Add new worker Complaint
@@ -594,7 +594,7 @@ def add():
             # stamping=form.stamping.data,
             # oec=form.oec.data,
             deployment_date=form.deployment_date.data,  # salalim Remarks
-            # status=form.status.data
+
         )
 
         db.session.add(new_customer)
@@ -685,7 +685,7 @@ def add_nominated():
             # stamping=form.stamping.data,
             # oec=form.oec.data,
             deployment_date=form.deployment_date.data, # Salalim Remarks
-            # status=form.status.data
+
         )
 
         db.session.add(new_nominated)
