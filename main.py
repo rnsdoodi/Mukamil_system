@@ -223,7 +223,7 @@ class AddSkills(FlaskForm):
                              description='كما هو مدون في التأشيرة ')
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
-                                          choices=[" Recommended", " Selected"])
+                                          choices=["Selected", " Recommended"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف",
                                             "Imran International", "World Vision Int."])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
