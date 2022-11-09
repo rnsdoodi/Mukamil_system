@@ -67,7 +67,7 @@ class Users(db.Model):
 
 # Creating Table in the DB to Add New skilled Request
 class Skilled(db.Model):
-    __tablename__ = "skills1"
+    __tablename__ = "skills"
     id = db.Column(db.Integer, primary_key=True)
     company_name = db.Column(db.String(250), nullable=False)
     company_visa = db.Column(db.BIGINT, nullable=False)
@@ -79,8 +79,8 @@ class Skilled(db.Model):
     selected_or_recommended = db.Column(db.String(250), nullable=False)
     agency = db.Column(db.String(250), nullable=False)
     jo_status = db.Column(db.String(250), nullable=False)
-    shipment_date = db.Column(db.Date, nullable=False)
-    status = db.Column(db.String(1000), nullable=False)
+    shipment_date = db.Column(db.String(250), nullable=True) # salalim remarks
+    status = db.Column(db.String(1000), nullable=True)
 
 
 class Transfer(db.Model):
@@ -229,8 +229,8 @@ class AddSkills(FlaskForm):
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
-    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' ملاحظات', validators=[DataRequired(), length(max=1000)])
+    shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)])
+    # status = StringField(' ملاحظات دوميك', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
@@ -239,8 +239,8 @@ class AddSkills(FlaskForm):
 class EditSkills(FlaskForm):
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    status = StringField(' حالة الطلب', validators=[length(max=1000)])
+    shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim remarks
+    # status = StringField(' حالة الطلب', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -319,15 +319,15 @@ class AddNominated(FlaskForm):
 
 
 class EditNominated(FlaskForm):
-    nid_or_iq = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
-                            description="ادخل رقم هوية صالح مكون من 10 ارقام")
-    n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
-                         description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
-                              description='كما هو مدون في جواز السفر')
-    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
-    embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
-    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    # nid_or_iq = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
+    #                         description="ادخل رقم هوية صالح مكون من 10 ارقام")
+    # n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
+    #                      description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    # worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
+    #                           description='كما هو مدون في جواز السفر')
+    # musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
+    # embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
+    # shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
     deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim Remarks
     submit = SubmitField('تــعـديــل')
 
@@ -622,7 +622,7 @@ def skills_add():
             agency=form.agency.data,
             jo_status=form.jo_status.data,
             shipment_date=form.shipment_date.data,
-            status=form.status.data
+            # status=form.status.data
         )
 
         db.session.add(new_skills)
@@ -780,7 +780,7 @@ def skills_edit():
     if form.validate_on_submit():
         updated_skills.jo_status = form.jo_status.data
         updated_skills.shipment_date = form.shipment_date.data
-        updated_skills.status = form.status.data
+        # updated_skills.status = form.status.data
 
         db.session.commit()
         flash("✔ تم تعديل حالة طلب العمالة المهنية بنجاح")
@@ -810,12 +810,12 @@ def nominated_edit():
     nominated_id = request.args.get("id")
     updated_nominated = Nominated.query.get(nominated_id)
     if form.validate_on_submit():
-        updated_nominated.nid_or_iq = form.nid_or_iq.data
-        updated_nominated.n_visa = form.n_visa.data
-        updated_nominated.worker_name = form.worker_name.data
-        updated_nominated.musaned = form.musaned.data
-        updated_nominated.embassy_contract = form.embassy_contract.data
-        updated_nominated.shipment_date = form.shipment_date.data
+        # updated_nominated.nid_or_iq = form.nid_or_iq.data
+        # updated_nominated.n_visa = form.n_visa.data
+        # updated_nominated.worker_name = form.worker_name.data
+        # updated_nominated.musaned = form.musaned.data
+        # updated_nominated.embassy_contract = form.embassy_contract.data
+        # updated_nominated.shipment_date = form.shipment_date.data
         updated_nominated.deployment_date = form.deployment_date.data  # Salalim Remarks
 
         db.session.commit()
