@@ -435,7 +435,7 @@ class DomecAddSkills(FlaskForm):
 class DomecEditSkills(FlaskForm):
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    status = StringField(' Remarks', validators=[length(max=1000)])
+    status = StringField('Domec Remarks', validators=[length(max=1000)])
     submit = SubmitField('Update')
 
 
