@@ -812,13 +812,14 @@ def nominated_edit():
     nominated_id = request.args.get("id")
     updated_nominated = Nominated.query.get(nominated_id)
     if form.validate_on_submit():
+        updated_nominated.name = form.name.data
         # updated_nominated.nid_or_iq = form.nid_or_iq.data
         # updated_nominated.n_visa = form.n_visa.data
         # updated_nominated.worker_name = form.worker_name.data
         # updated_nominated.musaned = form.musaned.data
         # updated_nominated.embassy_contract = form.embassy_contract.data
         # updated_nominated.shipment_date = form.shipment_date.data
-        updated_nominated.deployment_date = form.deployment_date.data  # Salalim Remarks
+        # updated_nominated.deployment_date = form.deployment_date.data  # Salalim Remarks
 
         db.session.commit()
         flash("✔ تم تعديل الطلب بنجاح")
