@@ -156,7 +156,8 @@ db.create_all()
 
 # Add Customer Request Flask Form for (السلالم الدولية)
 class AddUser(FlaskForm):
-    name = StringField('اسم العميل ', validators=[DataRequired(), length(max=100)])
+    name = StringField('اسم العميل ', validators=[DataRequired(), length(max=100)],
+                       description="الرجاء إدخال الاسم باللغة الانجليزية")
     nid_or_iqama = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
                                description="ادخل رقم هوية صالح مكون من 10 ارقام")
     contact_No = StringField('رقم الجوال', validators=[DataRequired()],
@@ -189,18 +190,18 @@ class AddUser(FlaskForm):
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    # name = StringField('اسم العميل ', validators=[length(max=100)])
-    nid_or_iqama = StringField(' الهوية الوطنية أو الإقامة', validators=[length(max=10)],
-                               description="ادخل رقم هوية صالح مكون من 10 ارقام")
-
-    visa = StringField('رقم التأشيرة', validators=[length(max=10)],
-                       description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    worker_name = StringField('إسم العاملة', validators=[length(max=150)],
-                              description='كما هو مدون في جواز السفر')
-    musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
-    embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
-    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    deployment_date = StringField('ملاحظات السلالم الدولية ', validators=[length(max=1000)]) # Salalim Remarks
+    name = StringField('اسم العميل ', validators=[length(max=100)])
+    # nid_or_iqama = StringField(' الهوية الوطنية أو الإقامة', validators=[length(max=10)],
+    #                            description="ادخل رقم هوية صالح مكون من 10 ارقام")
+    #
+    # visa = StringField('رقم التأشيرة', validators=[length(max=10)],
+    #                    description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
+    # worker_name = StringField('إسم العاملة', validators=[length(max=150)],
+    #                           description='كما هو مدون في جواز السفر')
+    # musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
+    # embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
+    # shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    # deployment_date = StringField('ملاحظات السلالم الدولية ', validators=[length(max=1000)]) # Salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -757,14 +758,14 @@ def edit():
     user_id = request.args.get("id")
     updated_user = Users.query.get(user_id)
     if form.validate_on_submit():
-        # updated_user.name = form.name.data
-        updated_user.nid_or_iqama = form.nid_or_iqama.data
-        updated_user.visa = form.visa.data
-        updated_user.worker_name = form.worker_name.data
-        updated_user.musaned = form.musaned.data
-        updated_user.embassy_contract = form.embassy_contract.data
-        updated_user.shipment_date = form.shipment_date.data
-        updated_user.deployment_date = form.deployment_date.data  # salalim Remarks
+        updated_user.name = form.name.data
+        # updated_user.nid_or_iqama = form.nid_or_iqama.data
+        # updated_user.visa = form.visa.data
+        # updated_user.worker_name = form.worker_name.data
+        # updated_user.musaned = form.musaned.data
+        # updated_user.embassy_contract = form.embassy_contract.data
+        # updated_user.shipment_date = form.shipment_date.data
+        # updated_user.deployment_date = form.deployment_date.data  # salalim Remarks
 
         db.session.commit()
         flash("✔ تم تعديل بيانات طلب العمالة المنزلية بنجاح")
