@@ -251,12 +251,12 @@
                                         {% if user.agency == "Domec" %}
                                           <tr>
                                               <td style="text-align:center;">{{user.id}}</td>
-                                              <td style="text-align:center;">{{user.name}}</td>
+                                              <td style="text-align:center;"><b>{{user.name}}</b></td>
                                               <td style="text-align:center;">{{user.nid_or_iqama}}</td>
                                               <td style="text-align:center;">{{user.contact_No}}</td>
                                               <td style="text-align:center;">{{user.visa}}</td>
                                               <td style="text-align:center;">{{user.request_date}}</td>
-                                              <td style="text-align:center;">{{user.worker_name}}</td>
+                                              <td style="text-align:center;"><b>{{user.worker_name}}</b></td>
                                               <td style="text-align:center;">{{user.type}}</td>
                                               <td style="text-align:center;">{{user.agency}}</td>
                                               <td style="text-align:center;">{{user.selected_or_recommended}}</td>
@@ -270,8 +270,8 @@
 <!--                                              <td style="text-align:center;">{{user.biometric}} </td>-->
 <!--                                              <td style="text-align:center;">{{user.stamping}}</td>-->
 <!--                                              <td style="text-align:center;">{{user.oec}}</td>-->
-                                              <td style="text-align:center;">{{user.deployment_date}}</td>
-                                              <td style="text-align:center;">{{user.status}}</td>
+                                              <td style="text-align:center; color:green;">{{user.deployment_date}}</td>
+                                              <td style="text-align:center; color:blue;">{{user.status}}</td>
                                         </tr>
                                         {% endif %}
                                         {% endfor %}
