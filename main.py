@@ -320,7 +320,7 @@ class AddNominated(FlaskForm):
 
 
 class EditNominated(FlaskForm):
-    name = StringField('اسم العميل ', validators=[DataRequired(), length(max=100)])
+    # name = StringField('اسم العميل ', validators=[DataRequired(), length(max=100)])
     # nid_or_iq = StringField(' الهوية الوطنية أو الإقامة', validators=[DataRequired(), length(max=10)],
     #                         description="ادخل رقم هوية صالح مكون من 10 ارقام")
     # n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
@@ -330,7 +330,7 @@ class EditNominated(FlaskForm):
     # musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     # embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     # shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    # deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim Remarks
+    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -812,14 +812,14 @@ def nominated_edit():
     nominated_id = request.args.get("id")
     updated_nominated = Nominated.query.get(nominated_id)
     if form.validate_on_submit():
-        updated_nominated.name = form.name.data
+        # updated_nominated.name = form.name.data
         # updated_nominated.nid_or_iq = form.nid_or_iq.data
         # updated_nominated.n_visa = form.n_visa.data
         # updated_nominated.worker_name = form.worker_name.data
         # updated_nominated.musaned = form.musaned.data
         # updated_nominated.embassy_contract = form.embassy_contract.data
         # updated_nominated.shipment_date = form.shipment_date.data
-        # updated_nominated.deployment_date = form.deployment_date.data  # Salalim Remarks
+        updated_nominated.deployment_date = form.deployment_date.data  # Salalim Remarks
 
         db.session.commit()
         flash("✔ تم تعديل الطلب بنجاح")
