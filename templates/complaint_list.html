@@ -220,7 +220,7 @@
                                         {% for complaint in complaints %}
                                           <tr>
                                               <td style="text-align:center;"> <a href="{{url_for('complaint_edit',id=complaint.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
-                                                <br> <p>..</p>
+                                                <br> <p>...</p>
                                                 <a href="{{url_for('complaint_delete',id=complaint.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>
 
                                             <td style="text-align:center;">{{complaint.Status}}</td>
