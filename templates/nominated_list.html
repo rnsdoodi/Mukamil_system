@@ -235,7 +235,7 @@
                                  {% for nominated in nominates %}
                                           <tr>
                                                <td style="text-align:center;"> <a href="{{url_for('nominated_edit',id=nominated.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
-                                                   ______
+
                                                 <a href="{{url_for('nominated_delete',id=nominated.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>
                                             <td style="text-align:center; color:blue;">{{nominated.status}}</td>
                                               <td style="text-align:center; color:green;">{{nominated.deployment_date}}</td>
