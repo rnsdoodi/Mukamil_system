@@ -1405,7 +1405,7 @@ def nominated_medical_update():
         updated_nominated.medical = form.medical.data
         db.session.commit()
         flash("Medical Status successfully Changed ✔")
-        return redirect(url_for('domec_edit_nominated_procedures'))
+        return redirect(url_for('nominated_medical_update'))
 
     return render_template("nominated_medical_edit.html", form=form, nominated=updated_nominated)
 
