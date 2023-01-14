@@ -1246,25 +1246,25 @@ def domec_edit_skills():
     return render_template("dom_skills_edit.html", form=form, skill=updated_skills)
 
 
-@app.route("/domec_edit_nominated", methods=["GET", "POST"])
-def domec_edit_nominated():
-    form = DomecEditNominated()
-    nominated_id = request.args.get("id")
-    updated_nominates = Nominated.query.get(nominated_id)
-    if form.validate_on_submit():
-        # updated_nominates.medical = form.medical.data
-        # updated_nominates.mmr_vaccine = form.mmr_vaccine.data
-        # updated_nominates.owwa = form.owwa.data
-        # updated_nominates.tesda = form.tesda.data
-        # updated_nominates.biometric = form.biometric.data
-        # updated_nominates.stamping = form.stamping.data
-        # updated_nominates.oec = form.oec.data
-        # updated_nominates.deployment_date = form.deployment_date.data
-        updated_nominates.status = form.status.data
-        db.session.commit()
-        flash("Request Modified successfully  ✔")
-        return redirect(url_for('domec_edit_nominated'))
-    return render_template("domec_edit_nominated.html", form=form, nominated=updated_nominates)
+# @app.route("/domec_edit_nominated", methods=["GET", "POST"])
+# def domec_edit_nominated():
+#     form = DomecEditNominated()
+#     nominated_id = request.args.get("id")
+#     updated_nominates = Nominated.query.get(nominated_id)
+#     if form.validate_on_submit():
+#         # updated_nominates.medical = form.medical.data
+#         # updated_nominates.mmr_vaccine = form.mmr_vaccine.data
+#         # updated_nominates.owwa = form.owwa.data
+#         # updated_nominates.tesda = form.tesda.data
+#         # updated_nominates.biometric = form.biometric.data
+#         # updated_nominates.stamping = form.stamping.data
+#         # updated_nominates.oec = form.oec.data
+#         # updated_nominates.deployment_date = form.deployment_date.data
+#         updated_nominates.status = form.status.data
+#         db.session.commit()
+#         flash("Request Modified successfully  ✔")
+#         return redirect(url_for('domec_edit_nominated'))
+#     return render_template("domec_edit_nominated.html", form=form, nominated=updated_nominates)
 
 
 @app.route("/domec_edit_complaint", methods=["GET", "POST"])
