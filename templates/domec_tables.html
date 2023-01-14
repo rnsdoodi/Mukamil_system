@@ -55,9 +55,13 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                Selected DH List
                             </a>
-                            <a class="nav-link" href="{{url_for('domec_users_list')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                              Edit Selected DH Status
+<!--                            <a class="nav-link" href="{{url_for('domec_users_list')}}">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>-->
+<!--                              Edit Selected DH Status-->
+<!--                            </a>-->
+                             <a class="nav-link" style="color:red;" href="domec_procedures">
+                                <div class="sb-nav-link-icon" style="color:red;"><i class="fas fa-user-edit"></i></div>
+                              Procedures
                             </a>
 
 
@@ -66,9 +70,13 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                Nominated DH List
                             </a>
-                            <a class="nav-link" href="{{url_for('domec_nominated_list')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                              Edit Nominated DH Status
+<!--                            <a class="nav-link" href="{{url_for('domec_nominated_list')}}">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>-->
+<!--                              Edit Nominated DH Status-->
+<!--                            </a>-->
+                            <a class="nav-link" style="color:red;" href="{{url_for('domec_nominated_procedures')}}">
+                                <div class="sb-nav-link-icon" style="color:red;"><i class="fas fa-user-edit"></i></div>
+                              Procedures
                             </a>
 
 
@@ -180,28 +188,21 @@
                                     <thead>
 
                                         <tr>
-                                            <th style="text-align:center;">id</th>
-                                            <th style="text-align:center;">Employer Name </th>
+                                              <th style="text-align:center;">id</th>
+                                            <th style="text-align:center;">Employer Name</th>
                                             <th style="text-align:center;">National ID No.</th>
-                                             <th style="text-align:center;">Employer Contact No</th>
-                                             <th style="text-align:center;">Visa No.</th>
-                                            <th style="text-align:center;">Request Date</th>
                                             <th style="text-align:center;">Worker Name</th>
                                             <th style="text-align:center;">Position</th>
-                                            <th style="text-align:center;">Agency</th>
-                                            <th style="text-align:center;">Type</th>
-                                            <th style="text-align:center;">Musaned Contract</th>
-                                            <th style="text-align:center;">POLO Contract</th>
-                                            <th style="text-align:center;">Shipment Date</th>
-<!--                                            <th style="text-align:center;">Medical</th>-->
-<!--                                            <th style="text-align:center;">MMR-Vaccine</th>-->
-<!--                                             <th style="text-align:center;">OWWA</th>-->
-<!--                                            <th style="text-align:center;">TESDA</th>-->
-<!--                                            <th style="text-align:center;">Biometric</th>-->
-<!--                                            <th style="text-align:center;">Stamping</th>-->
-<!--                                            <th style="text-align:center;">OEC</th>-->
+                                              <th style="text-align:center;">Medical</th>
+                                            <th style="text-align:center;">MMR-Vaccine</th>
+                                             <th style="text-align:center;">OWWA</th>
+                                            <th style="text-align:center;">TESDA</th>
+                                            <th style="text-align:center;">Biometric</th>
+                                            <th style="text-align:center;">Stamping</th>
+                                            <th style="text-align:center;">OEC</th>
+                                            <th style="text-align:center;">Deployment Details</th>
                                             <th style="text-align:center;">International Stairs Remarks</th>
-                                             <th style="text-align:center;">Domec Remarks</th>
+                                            <th style="text-align:center;">Domec Remarks</th>
                                         </tr>
                                     </thead>
 
@@ -209,26 +210,19 @@
                                     {% for user in users %}
                                     {% if user.agency == "Domec" %}
                                         <tr>
-                                               <td style="text-align:center;">{{user.id}}</td>
+                                          <td style="text-align:center;">{{user.id}}</td>
                                               <td style="text-align:center;"><b>{{user.name}}</b></td>
                                               <td style="text-align:center;">{{user.nid_or_iqama}}</td>
-                                              <td style="text-align:center;">{{user.contact_No}}</td>
-                                              <td style="text-align:center;">{{user.visa}}</td>
-                                              <td style="text-align:center;">{{user.request_date}}</td>
                                               <td style="text-align:center;"><b>{{user.worker_name}}</b></td>
                                               <td style="text-align:center;">{{user.type}}</td>
-                                              <td style="text-align:center;">{{user.agency}}</td>
-                                              <td style="text-align:center;">{{user.selected_or_recommended}}</td>
-                                               <td style="text-align:center;">{{user.musaned}}  </td>
-                                               <td style="text-align:center;">{{user.embassy_contract}}</td>
-                                               <td style="text-align:center;">{{user.shipment_date}}</td>
-<!--                                              <td style="text-align:center;">{{user.medical}}</td>-->
-<!--                                              <td style="text-align:center;">{{user.mmr_vaccine}}</td>-->
-<!--                                              <td style="text-align:center;">{{user.owwa}}</td>-->
-<!--                                              <td style="text-align:center;">{{user.tesda}}</td>-->
-<!--                                              <td style="text-align:center;">{{user.biometric}} </td>-->
-<!--                                              <td style="text-align:center;">{{user.stamping}}</td>-->
-<!--                                              <td style="text-align:center;">{{user.oec}}</td>-->
+                                            <td style="text-align:center;">{{user.medical}}</td>
+                                              <td style="text-align:center;">{{user.mmr_vaccine}}</td>
+                                              <td style="text-align:center;">{{user.owwa}}</td>
+                                              <td style="text-align:center;">{{user.tesda}}</td>
+                                              <td style="text-align:center;">{{user.biometric}} </td>
+                                              <td style="text-align:center;">{{user.stamping}}</td>
+                                              <td style="text-align:center;">{{user.oec}}</td>
+                                            <th style="text-align:center;">{{user.ticket}}</th>
                                               <td style="text-align:center; color:green;">{{user.deployment_date}}</td>
                                               <td style="text-align:center; color:blue;">{{user.status}}</td>
                                         </tr>

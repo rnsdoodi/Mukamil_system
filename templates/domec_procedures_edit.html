@@ -1,0 +1,61 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+<link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
+{%include "header.html"%}
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Edit Worker Status {% endblock %}
+
+{% block content %}
+<br>
+<div class="content">
+
+    <h1 class="heading" style="text-align:center"><b><u> The Procedures For ({{user.worker_name}})</u></b> </h1>
+    <div class="heading">
+<br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('domec_procedures')}}" class="btn btn-lg btn-dark"> Back to Procedures Page </a> </h1>
+</div>
+</div>
+
+<br><br><br><br><br><br>
+<div class="heading">
+
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('medical_update',id=user.id)}}" class="btn btn-lg btn-primary"> MEDICAL PROCESS  </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('vaccine_update',id=user.id)}}" class="btn btn-lg btn-primary"> MMR VACCINE </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('owwa_update',id=user.id)}}" class="btn btn-lg btn-primary"> OWWA </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('tesda_update',id=user.id)}}" class="btn btn-lg btn-primary"> TESDA </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('oec_update',id=user.id)}}" class="btn btn-lg btn-primary"> OEC </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('biometric_update',id=user.id)}}" class="btn btn-lg btn-primary"> BIOMETRIC </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('stamping_update',id=user.id)}}" class="btn btn-lg btn-primary"> VISA STAMPING </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('ticket_update',id=user.id)}}" class="btn btn-lg btn-primary"> FLIGHT DETAILS </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('domec_edit',id=user.id)}}" class="btn btn-lg btn-secondary"> Remarks </a> </h1>
+
+
+
+</div>
+
+    <br>
+
+
+
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
+{%include "domec_footer.html"%}
+    {% endblock %}
+
+
+

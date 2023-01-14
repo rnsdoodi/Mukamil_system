@@ -43,9 +43,13 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                Selected DH List
                             </a>
-                            <a class="nav-link" href="{{url_for('domec_users_list')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                              Edit Selected DH Status
+<!--                            <a class="nav-link" href="{{url_for('domec_users_list')}}">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>-->
+<!--                              Edit Selected DH Status-->
+<!--                            </a>-->
+                             <a class="nav-link" style="color:red;" href="domec_procedures">
+                                <div class="sb-nav-link-icon" style="color:red;"><i class="fas fa-user-edit"></i></div>
+                              Procedures
                             </a>
 
 
@@ -54,9 +58,14 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                Nominated DH List
                             </a>
-                            <a class="nav-link" href="{{url_for('domec_nominated_list')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                              Edit Nominated DH Status
+<!--                            <a class="nav-link" href="{{url_for('domec_nominated_list')}}">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>-->
+<!--                              Edit Nominated DH Status-->
+<!--                            </a>-->
+
+                            <a class="nav-link" style="color:red;" href="{{url_for('domec_nominated_procedures')}}">
+                                <div class="sb-nav-link-icon" style="color:red;"><i class="fas fa-user-edit"></i></div>
+                              Procedures
                             </a>
 
 
@@ -154,9 +163,9 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body"> Edit Nominated DH Status  </div>
+                                    <div class="card-body"> Edit Nominated DH Procedures  </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{url_for('domec_nominated_list')}}">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{url_for('domec_nominated_procedures')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

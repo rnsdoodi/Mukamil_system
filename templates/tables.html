@@ -59,6 +59,11 @@
                                 تعديل طلبات العمالة المنزلية المختارة (Selected)
                             </a>
 
+                              <a class="nav-link" style="color:red"; href="{{url_for('procedures')}}">
+                                <div class="sb-nav-link-icon" style="color:red";><i class="fas fa-user-edit"></i></div>
+                                 (Procedures)ألإجراءات
+                            </a>
+
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">العمالة المنزلية المعينة (Recommended)</div>
@@ -69,6 +74,10 @@
                             <a class="nav-link" href="{{url_for('nominated_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                                 تعديل طلبات العمالة المنزلية المعينة (Recommended)
+                            </a>
+                              <a class="nav-link" style="color:red"; href="{{url_for('nominated_procedures')}}">
+                                <div class="sb-nav-link-icon" style="color:red";><i class="fas fa-user-edit"></i></div>
+                                 (Procedures)ألإجراءات
                             </a>
                     <div class="sb-sidenav-menu">
                         <div class="nav">
@@ -195,25 +204,18 @@
                                     <thead>
 
                                         <tr>
-                                               <th style="text-align:center;">ملاحظات دوميك </th>
+                                              <th style="text-align:center;">ملاحظات دوميك</th>
                                             <th style="text-align:center;">ملاحظات السلالم الدولية</th>
-<!--                                             <th style="text-align:center;">OEC</th>-->
-<!--                                             <th style="text-align:center;">Stamping</th>-->
-<!--                                             <th style="text-align:center;">Biometric</th>-->
-<!--                                             <th style="text-align:center;">TESDA</th>-->
-<!--                                            <th style="text-align:center;">OWWA</th>-->
-<!--                                            <th style="text-align:center;">MMR-Vaccine</th>-->
-<!--                                            <th style="text-align:center;">Medical</th>-->
-                                            <th style="text-align:center;">تاريخ الإرسالية</th>
-                                             <th style="text-align:center;">عقد السفارة</th>
-                                             <th style="text-align:center;">عقد مساند</th>
-                                            <th style="text-align:center;">النوع</th>
-                                            <th style="text-align:center;">المكتب</th>
+                                            <th style="text-align:center;">Flight Details</th>
+                                             <th style="text-align:center;">OEC</th>
+                                             <th style="text-align:center;">Stamping</th>
+                                             <th style="text-align:center;">Biometric</th>
+                                             <th style="text-align:center;">TESDA</th>
+                                            <th style="text-align:center;">OWWA</th>
+                                            <th style="text-align:center;">MMR-Vaccine</th>
+                                            <th style="text-align:center;">Medical</th>
                                             <th style="text-align:center;">المهنة</th>
                                             <th style="text-align:center;">اسم العاملة</th>
-                                            <th style="text-align:center;">تاريخ الطلب </th>
-                                            <th style="text-align:center;">رقم التأشيرة</th>
-                                            <th style="text-align:center;">رقم الجوال</th>
                                             <th style="text-align:center;">رقم الهُوِيَّة/الإقامة</th>
                                              <th style="text-align:center;">اسم العميل</th>
                                             <th style="text-align:center;">الرقم</th>
@@ -222,28 +224,21 @@
                                     <tbody>
                                     {% for user in users %}
                                         <tr>
-                                            <td style="text-align:center; color:blue;">{{user.status}}</td>
-                                              <td style="text-align:center;color:green;">{{user.deployment_date}}</td>
-<!--                                               <td style="text-align:center;">{{user.oec}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.stamping}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.biometric}} </td>-->
-<!--                                            <td style="text-align:center;">{{user.tesda}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.owwa}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.mmr_vaccine}}</td>-->
-<!--                                             <td style="text-align:center;">{{user.medical}}</td>-->
-                                            <td style="text-align:center;">{{user.shipment_date}}</td>
-                                            <td style="text-align:center;">{{user.embassy_contract}}</td>
-                                            <td style="text-align:center;">{{user.musaned}}  </td>
-                                            <td style="text-align:center;">{{user.selected_or_recommended}}</td>
-                                            <td style="text-align:center;">{{user.agency}}</td>
+                                           <td style="text-align:center; color:blue;">{{user.status}}</td>
+                                              <td style="text-align:center; color:green;">{{user.deployment_date}}</td>
+                                              <td style="text-align:center; color:green;">{{user.ticket}}</td>
+                                               <td style="text-align:center;">{{user.oec}}</td>
+                                            <td style="text-align:center;">{{user.stamping}}</td>
+                                            <td style="text-align:center;">{{user.biometric}} </td>
+                                            <td style="text-align:center;">{{user.tesda}}</td>
+                                            <td style="text-align:center;">{{user.owwa}}</td>
+                                            <td style="text-align:center;">{{user.mmr_vaccine}}</td>
+                                             <td style="text-align:center;">{{user.medical}}</td>
                                             <td style="text-align:center;">{{user.type}}</td>
                                              <td style="text-align:center;"><b>{{user.worker_name}}</b></td>
-                                             <td style="text-align:center;">{{user.request_date}}</td>
-                                             <td style="text-align:center;">{{user.visa}}</td>
-                                             <td style="text-align:center;">{{user.contact_No}}</td>
                                             <td style="text-align:center;">{{user.nid_or_iqama}}</td>
                                              <td style="text-align:center;"><b>{{user.name}}</b></td>
-                                            <td style="text-align:center;">{{user.id}}</td>
+                                            <td style="text-align:center;">{{user.id}}</td
                                         </tr>
                                 {%endfor%}
                                     </tbody>

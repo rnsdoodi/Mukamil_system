@@ -18,6 +18,7 @@ all_skills = []
 all_transfers = []
 all_nominates = []
 all_complaints = []
+all_procedures = []
 
 # Creating The SQLALCHEMY DataBase
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "ANY SECRET KEY")
@@ -40,7 +41,7 @@ def load_user(user_id):
 
 # Creating Table in the DB to Add New Customer Request
 class Users(db.Model):
-    __tablename__ = "users1"
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     nid_or_iqama = db.Column(db.BIGINT, nullable=False)
@@ -54,13 +55,14 @@ class Users(db.Model):
     musaned = db.Column(db.String(250), nullable=False)
     embassy_contract = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
-    # medical = db.Column(db.String(500), nullable=True)
-    # mmr_vaccine = db.Column(db.String(500), nullable=True)
-    # owwa = db.Column(db.String(500), nullable=True)
-    # tesda = db.Column(db.String(500), nullable=True)
-    # biometric = db.Column(db.String(500), nullable=True)
-    # stamping = db.Column(db.String(500), nullable=True)
-    # oec = db.Column(db.String(500), nullable=True)
+    medical = db.Column(db.String(500), nullable=True)
+    mmr_vaccine = db.Column(db.String(500), nullable=True)
+    owwa = db.Column(db.String(500), nullable=True)
+    tesda = db.Column(db.String(500), nullable=True)
+    biometric = db.Column(db.String(500), nullable=True)
+    stamping = db.Column(db.String(500), nullable=True)
+    oec = db.Column(db.String(500), nullable=True)
+    ticket = db.Column(db.String(500), nullable=True)
     deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
     status = db.Column(db.String(1000), nullable=True)
 
@@ -101,7 +103,7 @@ class Transfer(db.Model):
 
 # Creating Table in the DB to Add New recommended Customer Request
 class Nominated(db.Model):
-    __tablename__ = "nominates1"
+    __tablename__ = "nominates"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), nullable=False)
     nid_or_iq = db.Column(db.BIGINT, nullable=False)
@@ -117,13 +119,14 @@ class Nominated(db.Model):
     embassy_contract = db.Column(db.String(250), nullable=False)
     shipment_date = db.Column(db.Date, nullable=False)
     ppt_image = db.Column(db.String(1000), nullable=False)
-    # medical = db.Column(db.String(500), nullable=True)
-    # mmr_vaccine = db.Column(db.String(500), nullable=True)
-    # owwa = db.Column(db.String(500), nullable=True)
-    # tesda = db.Column(db.String(500), nullable=True)
-    # biometric = db.Column(db.String(500), nullable=True)
-    # stamping = db.Column(db.String(500), nullable=True)
-    # oec = db.Column(db.String(500), nullable=True)
+    medical = db.Column(db.String(500), nullable=True)
+    mmr_vaccine = db.Column(db.String(500), nullable=True)
+    owwa = db.Column(db.String(500), nullable=True)
+    tesda = db.Column(db.String(500), nullable=True)
+    biometric = db.Column(db.String(500), nullable=True)
+    stamping = db.Column(db.String(500), nullable=True)
+    oec = db.Column(db.String(500), nullable=True)
+    ticket = db.Column(db.String(500), nullable=True)
     deployment_date = db.Column(db.String(500), nullable=True)  # Salalim Remarks
     status = db.Column(db.String(1000), nullable=True)
 
@@ -176,15 +179,7 @@ class AddUser(FlaskForm):
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
     shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    # medical = StringField('Medical', validators=[length(max=1000)])
-    # mmr_vaccine = StringField('MMR-VACCINE', validators=[length(max=1000)])
-    # owwa = StringField('OWWA', validators=[length(max=1000)])
-    # tesda = StringField('TESDA',validators=[length(max=1000)])
-    # biometric = StringField('Biometric', validators=[length(max=1000)])
-    # stamping = StringField('Stamping',validators=[length(max=1000)])
-    # oec = StringField('OEC', validators=[length(max=1000)])
     deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
-    # status = StringField(' ملاحظات دوميك', validators=[length(max=1000)])
     submit = SubmitField('Submit إضافة')
 
 
@@ -456,6 +451,71 @@ class DomecEditComplaint(FlaskForm):
     Status = StringField('Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
+class UpdateMedical(FlaskForm):
+    medical  = StringField("Medical Result", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateVaccine(FlaskForm):
+    mmr_vaccine  = StringField("MMR VACCINE", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateOwwa(FlaskForm):
+    owwa  = StringField("OWWA", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateTesda(FlaskForm):
+    tesda  = StringField("TESDA", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateOec(FlaskForm):
+    oec  = StringField("OEC", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateBiometric(FlaskForm):
+    biometric  = StringField("Biometric", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateStamping(FlaskForm):
+    stamping  = StringField("Visa Stamping", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateTicket(FlaskForm):
+    ticket  = StringField("Flight Details/Ticket", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+
+
+class UpdateNominatedMedical(FlaskForm):
+    medical  = StringField("Medical Result", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedVaccine(FlaskForm):
+    mmr_vaccine  = StringField("MMR VACCINE", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedOwwa(FlaskForm):
+    owwa  = StringField("OWWA", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedTesda(FlaskForm):
+    tesda  = StringField("TESDA", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedOec(FlaskForm):
+    oec  = StringField("OEC", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedBiometric(FlaskForm):
+    biometric  = StringField("Biometric", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedStamping(FlaskForm):
+    stamping  = StringField("Visa Stamping", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedTicket(FlaskForm):
+    ticket  = StringField("Flight Details/Ticket", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
 
 #######################################################################################################################
 # Authentication Part for (السلالم الدولية) :- #
@@ -934,6 +994,15 @@ def privacy():
 def download():
     return send_from_directory('static', filename="files/user's manual.pdf")
 
+@app.route("/procedures")
+def procedures():
+    added_users = Users.query.all()
+    return render_template("procedures.html",users=added_users, name=current_user.name, logged_in=True)
+@ app.route("/nominated-procedures")
+def nominated_procedures():
+    added_nominates = Nominated.query.all()
+    return render_template("nominated_procedures.html",nominates=added_nominates,name=current_user.name, logged_in=True)
+
 
 #######################################################################################################################
 # Authentication Part for (Domec) :- #
@@ -1210,6 +1279,248 @@ def domec_edit_complaint():
         return redirect(url_for('domec_edit_complaint'))
     return render_template("domec_edit_complaint.html", form=form, complaint=updated_complaints)
 
+#The main edit page for the procedures
+@app.route("/domec_edit_procedures",methods=["GET", "POST"])
+def domec_edit_procedures():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    return render_template("domec_procedures_edit.html",user=updated_user)
+
+@app.route("/medical_update", methods=["GET", "POST"])
+def medical_update():
+
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateMedical()
+    if form.validate_on_submit():
+        updated_user.medical = form.medical.data
+        db.session.commit()
+        flash("Medical Status successfully Changed ✔")
+        return redirect(url_for('medical_update'))
+
+    return render_template("medical_edit.html", form=form, user=updated_user)
+
+
+@app.route("/vaccine_update", methods=["GET", "POST"])
+def vaccine_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateVaccine()
+    if form.validate_on_submit():
+        updated_user.mmr_vaccine = form.mmr_vaccine.data
+        db.session.commit()
+        flash("MMR Vaccine Status Changed successfully  ✔")
+        return redirect(url_for('vaccine_update'))
+
+    return render_template("vaccine_edit.html", form=form, user=updated_user)
+
+@app.route("/owwa_update", methods=["GET", "POST"])
+def owwa_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateOwwa()
+    if form.validate_on_submit():
+        updated_user.owwa = form.owwa.data
+        db.session.commit()
+        flash(" OWWA Process Status Changed successfully  ✔")
+        return redirect(url_for('owwa_update'))
+
+    return render_template("owwa_edit.html", form=form, user=updated_user)
+
+@app.route("/tesda_update", methods=["GET", "POST"])
+def tesda_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateTesda()
+    if form.validate_on_submit():
+        updated_user.tesda = form.tesda.data
+        db.session.commit()
+        flash(" TESDA Process Status Changed successfully  ✔")
+        return redirect(url_for('tesda_update'))
+
+    return render_template("tesda_edit.html", form=form, user=updated_user)
+
+
+@app.route("/oec_update", methods=["GET", "POST"])
+def oec_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateOec()
+    if form.validate_on_submit():
+        updated_user.oec = form.oec.data
+        db.session.commit()
+        flash(" OEC Process Status Changed successfully  ✔")
+        return redirect(url_for('oec_update'))
+
+    return render_template("oec_edit.html", form=form, user=updated_user)
+
+
+@app.route("/biometric_update", methods=["GET", "POST"])
+def biometric_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateBiometric()
+    if form.validate_on_submit():
+        updated_user.biometric = form.biometric.data
+        db.session.commit()
+        flash(" Biometric Process Status Changed successfully  ✔")
+        return redirect(url_for('biometric_update'))
+
+    return render_template("biometric_edit.html", form=form, user=updated_user)
+
+
+@app.route("/stamping_update", methods=["GET", "POST"])
+def stamping_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateStamping()
+    if form.validate_on_submit():
+        updated_user.stamping = form.stamping.data
+        db.session.commit()
+        flash(" Visa Stamping Process Status Changed successfully  ✔")
+        return redirect(url_for('stamping_update'))
+
+    return render_template("stamping_edit.html", form=form, user=updated_user)
+
+@app.route("/ticket_update", methods=["GET", "POST"])
+def ticket_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateTicket()
+    if form.validate_on_submit():
+        updated_user.ticket = form.ticket.data
+        db.session.commit()
+        flash(" Flight Details Process Status Changed successfully  ✔")
+        return redirect(url_for('ticket_update'))
+
+    return render_template("ticket_edit.html", form=form, user=updated_user)
+
+
+
+@app.route("/domec_edit_nominated_procedures",methods=["GET", "POST"])
+def domec_edit_nominated_procedures():
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    return render_template("domec_nominated_procedures_edit.html",nominated=updated_nominated)
+
+@app.route("/nominated_medical_update", methods=["GET", "POST"])
+def nominated_medical_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedMedical()
+    if form.validate_on_submit():
+        updated_nominated.medical = form.medical.data
+        db.session.commit()
+        flash("Medical Status successfully Changed ✔")
+        return redirect(url_for('nominated_medical_update'))
+
+    return render_template("nominated_medical_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/nominated_vaccine_update", methods=["GET", "POST"])
+def nominated_vaccine_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedVaccine()
+    if form.validate_on_submit():
+        updated_nominated.mmr_vaccine = form.mmr_vaccine.data
+        db.session.commit()
+        flash("MMR Vaccine Status successfully Changed ✔")
+        return redirect(url_for('nominated_vaccine_update'))
+
+    return render_template("nominated_vaccine_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/nominated_owwa_update", methods=["GET", "POST"])
+def nominated_owwa_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedOwwa()
+    if form.validate_on_submit():
+        updated_nominated.owwa = form.owwa.data
+        db.session.commit()
+        flash("OWWA Status successfully Changed ✔")
+        return redirect(url_for('nominated_owwa_update'))
+
+    return render_template("nominated_owwa_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/nominated_tesda_update", methods=["GET", "POST"])
+def nominated_tesda_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedTesda()
+    if form.validate_on_submit():
+        updated_nominated.tesda = form.tesda.data
+        db.session.commit()
+        flash("TESDA Status successfully Changed ✔")
+        return redirect(url_for('nominated_tesda_update'))
+
+    return render_template("nominated_tesda_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/nominated_oec_update", methods=["GET", "POST"])
+def nominated_oec_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedOec()
+    if form.validate_on_submit():
+        updated_nominated.oec = form.oec.data
+        db.session.commit()
+        flash("OEC Status successfully Changed ✔")
+        return redirect(url_for('nominated_oec_update'))
+
+    return render_template("nominated_oec_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/nominated_biometric_update", methods=["GET", "POST"])
+def nominated_biometric_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedBiometric()
+    if form.validate_on_submit():
+        updated_nominated.biometric = form.biometric.data
+        db.session.commit()
+        flash("BIOMETRIC Status successfully Changed ✔")
+        return redirect(url_for('nominated_biometric_update'))
+
+    return render_template("nominated_biometric_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/nominated_stamping_update", methods=["GET", "POST"])
+def nominated_stamping_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedStamping()
+    if form.validate_on_submit():
+        updated_nominated.stamping = form.stamping.data
+        db.session.commit()
+        flash("Stamping Status successfully Changed ✔")
+        return redirect(url_for('nominated_stamping_update'))
+
+    return render_template("nominated_stamping_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/nominated_ticket_update", methods=["GET", "POST"])
+def nominated_ticket_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedTicket()
+    if form.validate_on_submit():
+        updated_nominated.ticket = form.ticket.data
+        db.session.commit()
+        flash("Ticket Status successfully Changed ✔")
+        return redirect(url_for('nominated_ticket_update'))
+
+    return render_template("nominated_ticket_edit.html", form=form, nominated=updated_nominated)
+
+
+
+
+
+
+
 
 @app.route("/domec_delete")
 def domec_delete():
@@ -1244,6 +1555,19 @@ def domec_nominated_tables():
 def domec_complaints_tables():
     added_complaints = Complaint.query.all()
     return render_template("dom_complaints_tables.html", complaints=added_complaints, name=current_user.name,
+                           logged_in=True)
+
+@app.route("/domec_procedures")
+@login_required
+def domec_procedures():
+    all_users = Users.query.all()
+    return render_template("domec-procedures.html", users=all_users, name=current_user.name, logged_in=True)
+
+@app.route("/domec_nominated_procedures")
+@login_required
+def domec_nominated_procedures():
+    all_nominates = Nominated.query.all()
+    return render_template("domec_nominated_procedures.html", nominates=all_nominates, name=current_user.name,
                            logged_in=True)
 
 
