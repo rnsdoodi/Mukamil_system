@@ -1,8 +1,8 @@
 
 
 window.addEventListener('DOMContentLoaded', event => {
-    // Simple-DataTables
-    // https://github.com/fiduswriter/Simple-DataTables/wiki
+     Simple-DataTables
+     https://github.com/fiduswriter/Simple-DataTables/wiki
 
 
     const datatablesSimple = document.getElementById('datatablesSimple');
@@ -13,8 +13,15 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 
 
-
-
+//let myTable = document.querySelector("#myTable");
+//let dataTable = new DataTable(myTable);
+//
+//
+//let dataTable = new DataTable("#myTable", {
+//    searchable: false,
+//    fixedHeight: true,
+//    ...
+//});
 
 
 

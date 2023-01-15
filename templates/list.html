@@ -17,7 +17,7 @@
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">السلالم الدولية للاستقدام</a>
             <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" ><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
@@ -56,8 +56,8 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
                                 تعديل طلبات العمالة المنزلية المختارة (Selected)
                             </a>
-                            <a class="nav-link" style="color:red"; href="{{url_for('procedures')}}">
-                                <div class="sb-nav-link-icon" style="color:red";><i class="fas fa-user-edit"></i></div>
+                            <a class="nav-link" style="color:red;" href="{{url_for('procedures')}}">
+                                <div class="sb-nav-link-icon" style="color:red;"><i class="fas fa-user-edit"></i></div>
                                  (Procedures)ألإجراءات
                             </a>
 
@@ -73,8 +73,8 @@
                                 تعديل طلبات العمالة المنزلية المعينة (Recommended)
                             </a>
 
-                              <a class="nav-link" style="color:red"; href="{{url_for('nominated_procedures')}}">
-                                <div class="sb-nav-link-icon" style="color:red";><i class="fas fa-user-edit"></i></div>
+                              <a class="nav-link" style="color:red;" href="{{url_for('nominated_procedures')}}">
+                                <div class="sb-nav-link-icon" style="color:red;"><i class="fas fa-user-edit"></i></div>
                                  (Procedures)ألإجراءات
                             </a>
                     <div class="sb-sidenav-menu">
@@ -221,13 +221,6 @@
                                             <th style="text-align:center;">Action</th>
                                             <th style="text-align:center;">ملاحظات دوميك </th>
                                             <th style="text-align:center;">ملاحظات السلالم الدولية</th>
-<!--                                             <th style="text-align:center;">OEC</th>-->
-<!--                                             <th style="text-align:center;">Stamping</th>-->
-<!--                                             <th style="text-align:center;">Biometric</th>-->
-<!--                                             <th style="text-align:center;">TESDA</th>-->
-<!--                                            <th style="text-align:center;">OWWA</th>-->
-<!--                                            <th style="text-align:center;">MMR-Vaccine</th>-->
-<!--                                            <th style="text-align:center;">Medical</th>-->
                                             <th style="text-align:center;">تاريخ الإرسالية</th>
                                              <th style="text-align:center;">عقد السفارة</th>
                                              <th style="text-align:center;">عقد مساند</th>
@@ -246,18 +239,11 @@
                                     <tbody>
                                     {% for user in users %}
                                         <tr>
-                                            <td style="text-align:center;"> <a href="{{url_for('edit',id=user.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
+                                            <td style="text-align:center;"> <a href="{{url_for('edit',id=user.id)}}" class="btn" style="color:blue;"> <i class="far fa-edit fa-sm" ></i></a>
                                                 <br> <p>...</p>
-                                                <a href="{{url_for('delete',id=user.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>
+                                                <a href="{{url_for('delete',id=user.id)}}" class="btn" style="color:red;" > <i class="fas fa-trash-alt fa-sm"></i></a>
                                              <td style="text-align:center;color:blue;">{{user.status}}</td>
                                             <td style="text-align:center;color:green;">{{user.deployment_date}}</td>
-<!--                                               <td style="text-align:center;">{{user.oec}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.stamping}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.biometric}}  </td>-->
-<!--                                            <td style="text-align:center;">{{user.tesda}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.owwa}}</td>-->
-<!--                                            <td style="text-align:center;">{{user.mmr_vaccine}}</td>-->
-<!--                                             <td style="text-align:center;">{{user.medical}}</td>-->
                                             <td style="text-align:center;">{{user.shipment_date}}</td>
                                             <td style="text-align:center;">{{user.embassy_contract}}</td>
                                             <td style="text-align:center;">{{user.musaned}}  </td>
