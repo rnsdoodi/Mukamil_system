@@ -265,27 +265,27 @@
                                     {% for nominated in nominates %}
                                     {% if nominated.agency == "Domec" %}
                                         <tr>
-<!--                                              <td style="text-align:center;">{{nominated.id}}</td>-->
-<!--                                              <td style="text-align:center;"><b>{{nominated.name}}</b></td>-->
-<!--                                              <td style="text-align:center;">{{nominated.nid_or_iq}}</td>-->
-<!--                                              <td style="text-align:center;"><b>{{nominated.worker_name}}</b></td>-->
-<!--                                              <td style="text-align:center;">{{nominated.type}}</td>-->
-<!--                                            <td style="text-align:center;">-->
-<!--                                                <a href="{{nominated.ppt_image}}}" class="btn btn-primary" target="_blank">Passport Copy</a>-->
-<!--                                            </td>-->
-<!--                                            <td style="text-align:center;">{{nominated.medical}}</td>-->
-<!--                                              <td style="text-align:center;">{{nominated.mmr_vaccine}}</td>-->
-<!--                                              <td style="text-align:center;">{{nominated.owwa}}</td>-->
-<!--                                              <td style="text-align:center;">{{nominated.tesda}}</td>-->
-<!--                                              <td style="text-align:center;">{{nominated.biometric}} </td>-->
-<!--                                              <td style="text-align:center;">{{nominated.stamping}}</td>-->
-<!--                                              <td style="text-align:center;">{{nominated.oec}}</td>-->
-<!--                                            <th style="text-align:center;">{{nominated.ticket}}</th>-->
-<!--                                              <td style="text-align:center; color:green;">{{nominated.deployment_date}}</td>-->
-<!--                                              <td style="text-align:center; color:blue;">{{nominated.status}}</td>-->
+                                              <td style="text-align:center;">{{nominated.id}}</td>
+                                              <td style="text-align:center;"><b>{{nominated.name}}</b></td>
+                                              <td style="text-align:center;">{{nominated.nid_or_iq}}</td>
+                                              <td style="text-align:center;"><b>{{nominated.worker_name}}</b></td>
+                                              <td style="text-align:center;">{{nominated.type}}</td>
+                                            <td style="text-align:center;">
+                                                <a href="{{nominated.ppt_image}}}" class="btn btn-primary" target="_blank">Passport Copy</a>
+                                            </td>
+                                            <td style="text-align:center;">{{nominated.medical}}</td>
+                                              <td style="text-align:center;">{{nominated.mmr_vaccine}}</td>
+                                              <td style="text-align:center;">{{nominated.owwa}}</td>
+                                              <td style="text-align:center;">{{nominated.tesda}}</td>
+                                              <td style="text-align:center;">{{nominated.biometric}} </td>
+                                              <td style="text-align:center;">{{nominated.stamping}}</td>
+                                              <td style="text-align:center;">{{nominated.oec}}</td>
+                                            <th style="text-align:center;">{{nominated.ticket}}</th>
+                                              <td style="text-align:center; color:green;">{{nominated.deployment_date}}</td>
+                                              <td style="text-align:center; color:blue;">{{nominated.status}}</td>
 
-<!--                                            <td> <a href="{{url_for('domec_edit_nominated_procedures',id=nominated.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i> Edit</a>-->
-<!--                                        </tr>-->
+                                            <td> <a href="{{url_for('domec_edit_nominated_procedures',id=nominated.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i> Edit</a>
+                                        </tr>
                                     {% endif %}
                                 {%endfor%}
                                     </tbody>
