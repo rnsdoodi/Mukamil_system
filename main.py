@@ -185,19 +185,35 @@ class AddUser(FlaskForm):
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    # name = StringField('اسم العميل ', validators=[length(max=100)])
-    # nid_or_iqama = StringField(' الهوية الوطنية أو الإقامة', validators=[length(max=10)],
-    #                            description="ادخل رقم هوية صالح مكون من 10 ارقام")
-    #
-    # visa = StringField('رقم التأشيرة', validators=[length(max=10)],
-    #                    description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    # worker_name = StringField('إسم العاملة', validators=[length(max=150)],
-    #                           description='كما هو مدون في جواز السفر')
-    # musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
-    # embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
-    # shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
     deployment_date = StringField('ملاحظات السلالم الدولية ', validators=[length(max=1000)]) # Salalim Remarks
     submit = SubmitField('تــعـديــل')
+
+
+class EditMusaned(FlaskForm):
+    musaned = SelectField('هل تم تجهيز عقد مساند؟', choices=["  No", "   Yes"])
+    submit = SubmitField('تــعـديــل')
+
+class EditConsulate(FlaskForm):
+    embassy_contract = SelectField('هل تم تجهيز عقد السفارة', choices=["  No", "  Yes"])
+    submit = SubmitField('تــعـديــل')
+
+class EditShipment(FlaskForm):
+    shipment_date = DateField('متى تم إرسال العقد للفلبين ؟', format='%Y-%m-%d')
+    submit = SubmitField('تــعـديــل')
+
+class EditNominatedMusaned(FlaskForm):
+    musaned = SelectField('هل تم تجهيز عقد مساند؟', choices=["  No", "   Yes"])
+    submit = SubmitField('تــعـديــل')
+
+class EditNominatedConsulate(FlaskForm):
+    embassy_contract = SelectField('هل تم تجهيز عقد السفارة', choices=["  No", "  Yes"])
+    submit = SubmitField('تــعـديــل')
+
+class EditNominatedShipment(FlaskForm):
+    shipment_date = DateField('متى تم إرسال العقد للفلبين ؟', format='%Y-%m-%d')
+    submit = SubmitField('تــعـديــل')
+
+
 
 
 # Add new skills Request Flask Form for (السلالم الدولية)
@@ -226,7 +242,6 @@ class AddSkills(FlaskForm):
                                                          "For POEA Approval", "POEA Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
     shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)])
-    # status = StringField(' ملاحظات دوميك', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
@@ -236,7 +251,6 @@ class EditSkills(FlaskForm):
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
     shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim remarks
-    # status = StringField(' حالة الطلب', validators=[length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -740,13 +754,6 @@ def add_nominated():
             embassy_contract=form.embassy_contract.data,
             shipment_date=form.shipment_date.data,
             ppt_image=form.ppt_image.data,
-            # medical=form.medical.data,
-            # mmr_vaccine=form.mmr_vaccine.data,
-            # owwa=form.owwa.data,
-            # tesda=form.tesda.data,
-            # biometric=form.biometric.data,
-            # stamping=form.stamping.data,
-            # oec=form.oec.data,
             deployment_date=form.deployment_date.data, # Salalim Remarks
             # status=form.status.data
 
@@ -819,19 +826,12 @@ def edit():
     user_id = request.args.get("id")
     updated_user = Users.query.get(user_id)
     if form.validate_on_submit():
-        # updated_user.name = form.name.data
-        # updated_user.nid_or_iqama = form.nid_or_iqama.data
-        # updated_user.visa = form.visa.data
-        # updated_user.worker_name = form.worker_name.data
-        # updated_user.musaned = form.musaned.data
-        # updated_user.embassy_contract = form.embassy_contract.data
-        # updated_user.shipment_date = form.shipment_date.data
         updated_user.deployment_date = form.deployment_date.data  # salalim Remarks
 
         db.session.commit()
         flash("✔ تم تعديل بيانات طلب العمالة المنزلية بنجاح")
         return redirect(url_for('edit'))
-    return render_template("edit.html", form=form, user=updated_user)
+    return render_template("edit.html", form=form, user=updated_user,id=user_id)
 
 
 @app.route("/skills_edit", methods=["GET", "POST"])
@@ -872,15 +872,7 @@ def nominated_edit():
     nominated_id = request.args.get("id")
     updated_nominated = Nominated.query.get(nominated_id)
     if form.validate_on_submit():
-        # updated_nominated.name = form.name.data
-        # updated_nominated.nid_or_iq = form.nid_or_iq.data
-        # updated_nominated.n_visa = form.n_visa.data
-        # updated_nominated.worker_name = form.worker_name.data
-        # updated_nominated.musaned = form.musaned.data
-        # updated_nominated.embassy_contract = form.embassy_contract.data
-        # updated_nominated.shipment_date = form.shipment_date.data
         updated_nominated.deployment_date = form.deployment_date.data  # Salalim Remarks
-
         db.session.commit()
         flash("✔ تم تعديل الطلب بنجاح")
         return redirect(url_for('nominated_edit'))
@@ -898,6 +890,110 @@ def complaint_edit():
         flash("✔ تم تعديل حالة الشكوى بنجاح")
         return redirect(url_for('complaint_edit'))
     return render_template("complaint_edit.html", form=form, complaint=updated_complaint)
+
+
+
+@app.route("/customer_procedures",methods=["GET", "POST"])
+def customer_procedures():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    return render_template("customer_procedures.html",user=updated_user)
+
+@app.route("/musaned_contract",methods=["GET", "POST"])
+def musaned_contract():
+    form = EditMusaned()
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    if form.validate_on_submit():
+        updated_user.musaned = form.musaned.data
+        db.session.commit()
+        flash("✔ تم تعديل حالة العقد بنجاح")
+        return redirect(url_for('musaned_contract'))
+    return render_template("musaned_edit.html", form=form, user=updated_user)
+
+@app.route("/consulate_contract",methods=["GET", "POST"])
+def consulate_contract():
+    form = EditConsulate()
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    if form.validate_on_submit():
+        updated_user.embassy_contract = form.embassy_contract.data
+        db.session.commit()
+        flash("✔ تم تعديل حالة العقد بنجاح")
+        return redirect(url_for('consulate_contract'))
+    return render_template("consulate_edit.html", form=form, user=updated_user)
+
+@app.route("/shipment_date_edit",methods=["GET", "POST"])
+def shipment_date_edit():
+    form = EditShipment()
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    if form.validate_on_submit():
+        updated_user.shipment_date = form.shipment_date.data
+        db.session.commit()
+        flash("✔ تم تعديل تاريخ ألإرسالية بنجاح")
+        return redirect(url_for('shipment_date_edit'))
+    return render_template("consulate_edit.html", form=form, user=updated_user)
+
+
+
+@app.route("/nominated_customer_procedures", methods=["GET", "POST"])
+def nominated_customer_procedures():
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    return render_template("nominated_customer_procedures.html",nominated=updated_nominated)
+
+
+
+@app.route("/musaned_nominated_edit", methods=["GET", "POST"])
+def musaned_nominated_edit():
+    form = EditNominatedMusaned()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.musaned = form.musaned.data
+        db.session.commit()
+        flash("✔ تم تعديل حالة العقد بنجاح")
+        return redirect(url_for('musaned_nominated_edit'))
+    return render_template("musaned_nominated_edit.html", form=form, nominated=updated_nominated)
+
+
+
+@app.route("/consulate_nominated_edit", methods=["GET", "POST"])
+def consulate_nominated_edit():
+    form = EditNominatedConsulate()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.embassy_contract = form.embassy_contract.data
+        db.session.commit()
+        flash("✔ تم تعديل حالة العقد بنجاح")
+        return redirect(url_for('consulate_nominated_edit'))
+    return render_template("consulate_nominated_edit.html", form=form, nominated=updated_nominated)
+
+
+@app.route("/nominated_shipment_date_edit",methods=["GET", "POST"])
+def nominated_shipment_date_edit():
+    form = EditNominatedShipment()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.shipment_date = form.shipment_date.data
+        db.session.commit()
+        flash("✔ تم تعديل تاريخ ألإرسالية بنجاح")
+        return redirect(url_for('nominated_shipment_date_edit'))
+    return render_template("nominated_shipment_date_edit.html", form=form, nominated=updated_nominated)
+
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route("/delete")

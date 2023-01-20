@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
-{% block title %}تعديل بيانات العمالة المنزلية (Recommended)   {% endblock %}
+{% block title %}تعديل بيانات العميل {% endblock %}
 
 {% block content %}
 <br>
 <div class="content">
 
-    <h1 class="heading" style="text-align:center"><b><u>({{nominated.name}})  تعديل بيانات الحالة للعميل</u></b> </h1>
+    <h1 class="heading" style="text-align:center"><b><u> ({{user.name}}) تعديل  حالة العقد للعميل  </u></b> </h1>
     <div class="heading">
 <br>
-    <h1 class="heading" style="text-align:center"><a href="{{url_for('nominated_list')}}" class="btn btn-lg btn-dark"> العودة إلى صفحة التعديل </a> </h1>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('users_list')}}" class="btn btn-lg btn-dark"> العودة إلى صفحة التعديل </a> </h1>
 </div>
 </div>
 
@@ -25,7 +25,6 @@
  {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
-
     <div class="alert alert-success" style="text-align:center;" role="alert">{{ message }}</div>
         {% endfor %}
       {% endif %}
@@ -38,7 +37,7 @@
 </div>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 {%include "footer.html"%}
     {% endblock %}
 

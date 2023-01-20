@@ -1,0 +1,47 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+<link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
+{%include "header.html"%}
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Update Nominated Worker Procedures {% endblock %}
+
+{% block content %}
+<br>
+<div class="content">
+
+    <h1 class="heading" style="text-align:center"><b><u> ({{nominated.name}}) تعديل بيانات الحالة للعميل</u></b> </h1>
+    <div class="heading">
+<br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('nominated_list')}}" class="btn btn-lg btn-dark"> العودة إلى صفحة التعديل </a> </h1>
+</div>
+</div>
+
+<br><br><br><br><br><br>
+<div class="heading">
+
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('musaned_nominated_edit',id=nominated.id)}}" class="btn btn-lg btn-primary"> عقد مساند  </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('consulate_nominated_edit',id=nominated.id)}}" class="btn btn-lg btn-primary"> عقد القنصلية الفلبينية </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('nominated_shipment_date_edit',id=nominated.id)}}" class="btn btn-lg btn-primary"> تاريخ ألإرسالية للفلبين </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('nominated_edit',id=nominated.id)}}" class="btn btn-lg btn-primary"> ملاحظات </a> </h1>
+    <br>
+
+</div>
+
+    <br>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
+{%include "domec_footer.html"%}
+    {% endblock %}
+
+
+
+
