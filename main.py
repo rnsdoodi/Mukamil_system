@@ -171,8 +171,8 @@ class AddUser(FlaskForm):
     worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
     type = SelectField('المهنة',
-                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
-                                "سائق خاص/FAMILY DRIVER"])
+                       choices=["House Maid", "House Boy", " Private Nurse", "Nanny/Babysitter",
+                                " Family Driver"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
                                                                                                             "International"])
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
@@ -306,8 +306,8 @@ class AddNominated(FlaskForm):
     worker_contact_No = StringField('رقم جوال العاملة', validators=[DataRequired(), length(max=150)],
                                     description='لابد من ان يكون الرقم صحيحاً')
     type = SelectField('المهنة',
-                       choices=["عاملة منزلية/DH", "عامل منزلي/HOUSE BOY", "ممرضة منزلية/PRIVATE NURSE", "مربية/NANNY",
-                                "سائق خاص/FAMILY DRIVER"])
+                       choices=["House Maid", "House Boy", " Private Nurse", "Nanny/Babysitter",
+                                " Family Driver"])
     agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
                                                                                                             "International"])
     selected_or_recommended = SelectField('معينة ام مختارة',
