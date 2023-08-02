@@ -306,10 +306,8 @@ class AddNominated(FlaskForm):
     worker_contact_No = StringField('رقم جوال العاملة', validators=[DataRequired(), length(max=150)],
                                     description='لابد من ان يكون الرقم صحيحاً')
     type = SelectField('المهنة',
-                       choices=["House Maid", "House Boy", " Private Nurse", "Nanny/Babysitter",
-                                " Family Driver"])
-    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
-                                                                                                            "International"])
+                       choices=["House Maid", "House Boy","House Cook"," Private Nurse", "Nanny/Babysitter"," Family Driver","Sewer"])
+    agency = SelectField('المكتب', choices=["Domec", "ALZETSI", "Reenkam", "TradeFast"])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
@@ -1602,11 +1600,6 @@ def nominated_ticket_update():
         return redirect(url_for('nominated_ticket_update'))
 
     return render_template("nominated_ticket_edit.html", form=form, nominated=updated_nominated)
-
-
-
-
-
 
 
 
