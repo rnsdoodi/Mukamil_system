@@ -171,10 +171,9 @@ class AddUser(FlaskForm):
     worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
     type = SelectField('المهنة',
-                       choices=["House Maid", "House Boy", " Private Nurse", "Nanny/Babysitter",
+                       choices=["House Maid", "House Boy", " Private Nurse","House Cook","Nanny/Babysitter",
                                 " Family Driver"])
-    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف", "Imran "
-                                                                                                            "International"])
+    agency = SelectField('المكتب', choices=["Domec", "Alzetsi", "Reenkam"])
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
@@ -236,8 +235,7 @@ class AddSkills(FlaskForm):
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=["Selected", " Recommended"])
-    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف",
-                                            "Imran International", "World Vision Int."])
+    agency = SelectField('المكتب', choices=["Domec", "Alzetsi","Reenkam"])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
@@ -268,7 +266,7 @@ class AddTransfer(FlaskForm):
                                      description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     request_date = DateField(' تاريخ الطلب', format='%Y-%m-%d')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
-    agency = SelectField('المكتب', choices=["Domec", "Myriad", "Jinhel", "Reenkam", "الصالح", "الشريف "])
+    agency = SelectField('المكتب', choices=["Domec", "Alzetsi", "Reenkam"])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
                                                         "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الكفالة",
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
@@ -307,7 +305,7 @@ class AddNominated(FlaskForm):
                                     description='لابد من ان يكون الرقم صحيحاً')
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy","House Cook"," Private Nurse", "Nanny/Babysitter"," Family Driver","Sewer"])
-    agency = SelectField('المكتب', choices=["Domec", "ALZETSI", "Reenkam", "TradeFast"])
+    agency = SelectField('المكتب', choices=["Domec", "Alzetsi", "Reenkam"])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
@@ -431,7 +429,7 @@ class DomecAddSkills(FlaskForm):
     quantity = StringField('Quantity', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('Selected or Recommended ',
                                           choices=[" Recommended", " Selected"])
-    agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "Pioneer", "Alshareef"])
+    agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam"])
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
