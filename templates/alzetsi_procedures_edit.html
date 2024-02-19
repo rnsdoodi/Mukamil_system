@@ -1,0 +1,55 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+<link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
+{%include "header.html"%}
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Edit Worker Status {% endblock %}
+
+{% block content %}
+<br>
+<div class="content">
+
+    <h1 class="heading" style="text-align:center"><b><u> ሂደቶች ለግ  ({{user.worker_name}})</u></b> </h1>
+    <div class="heading">
+<br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_procedures')}}" class="btn btn-lg btn-dark"> ወደ ሂደቶች ገጽ ይመለሱ </a> </h1>
+</div>
+</div>
+
+<br><br><br><br><br><br>
+<div class="heading">
+
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_medical_update',id=user.id)}}" class="btn btn-lg btn-primary"> የህክምና ምርመራ  </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_training_edit',id=user.id)}}" class="btn btn-lg btn-primary"> ስልጠና </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_stamping_update',id=user.id)}}" class="btn btn-lg btn-primary"> የሳውዲ ኤምባሲ </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_oec_update',id=user.id)}}" class="btn btn-lg btn-primary">  የሰራተኛ ቢሮ </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_ticket_update',id=user.id)}}" class="btn btn-lg btn-primary"> የበረራ ዝርዝሮች </a> </h1>
+    <br>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_edit',id=user.id)}}" class="btn btn-lg btn-secondary"> FRA አስተያየቶች </a> </h1>
+
+
+
+</div>
+
+    <br>
+
+
+
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{%include "domec_footer.html"%}
+    {% endblock %}
+
+
+
