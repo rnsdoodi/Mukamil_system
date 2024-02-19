@@ -173,7 +173,7 @@ class AddUser(FlaskForm):
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy", " Private Nurse","House Cook","Nanny/Babysitter",
                                 " Family Driver"])
-    agency = SelectField('المكتب', choices=["Domec", "Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["SIM SOH", "Alzetsi", "Reenkam"])
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
@@ -230,12 +230,12 @@ class AddSkills(FlaskForm):
 
     country = SelectField('الدولة', choices=[" Philippines", "Thailand", "India", "Pakistan", "Nepal", "Tunisia",
                                              "Morocco", "Egypt", "Sudan"])
-    mp_request = StringField('المهنة', validators=[DataRequired(), length(max=150)],
+    mp_request = StringField('المهنة',   validators=[DataRequired(), length(max=150)],
                              description='كما هو مدون في التأشيرة ')
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=["Selected", " Recommended"])
-    agency = SelectField('المكتب', choices=["Domec", "Alzetsi","Reenkam"])
+    agency = SelectField('المكتب', choices=["Injaz Alkawader", "Alzetsi","Reenkam"])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
@@ -266,7 +266,7 @@ class AddTransfer(FlaskForm):
                                      description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     request_date = DateField(' تاريخ الطلب', format='%Y-%m-%d')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
-    agency = SelectField('المكتب', choices=["Domec", "Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["SIM-SOH", "Alzetsi", "Reenkam"])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
                                                         "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الكفالة",
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
@@ -305,7 +305,7 @@ class AddNominated(FlaskForm):
                                     description='لابد من ان يكون الرقم صحيحاً')
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy","House Cook"," Private Nurse", "Nanny/Babysitter"," Family Driver","Sewer"])
-    agency = SelectField('المكتب', choices=["Domec", "Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["SIM-SOH", "Alzetsi", "Reenkam"])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
@@ -373,7 +373,7 @@ class AddCustomer(FlaskForm):
     type = SelectField('Position',
                        choices=["DH", "HOUSE BOY", "PRIVATE NURSE", "NANNY",
                                 "FAMILY DRIVER"])
-    agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
+    agency = SelectField('Agency', choices=["SIM-SOH", "Myriad", "Reenkam", "TradeFast", "بايونير", "الشريف"])
     selected_or_recommended = SelectField('Selected or Recommended',
                                           choices=[" Recommended", " Selected"])
     musaned = SelectField('Musaned Contract', choices=["  Yes", "   No"])
@@ -394,7 +394,7 @@ class DomecEditUser(FlaskForm):
     # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
     # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
     # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
-    status = StringField('Domec Remarks', validators=[length(max=1000)])
+    status = StringField('FRA Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit Changes')
 
 
@@ -429,7 +429,7 @@ class DomecAddSkills(FlaskForm):
     quantity = StringField('Quantity', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('Selected or Recommended ',
                                           choices=[" Recommended", " Selected"])
-    agency = SelectField('Agency', choices=["Domec", "Myriad", "Reenkam"])
+    agency = SelectField('Agency', choices=["Injaz Alkawader", "Myriad", "Reenkam"])
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
     shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
@@ -481,6 +481,11 @@ class UpdateOec(FlaskForm):
     oec  = StringField("OEC", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
+class UpdateLaborOffice(FlaskForm):
+    oec  = StringField("Labor Office", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+
 class UpdateBiometric(FlaskForm):
     biometric  = StringField("Biometric", validators=[length(max=1000)])
     submit = SubmitField('Submit')
@@ -491,6 +496,14 @@ class UpdateStamping(FlaskForm):
 
 class UpdateTicket(FlaskForm):
     ticket  = StringField("Flight Details/Ticket", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateTraining(FlaskForm):
+    owwa = StringField("Training", validators=[length(max=1000)])
+    submit = SubmitField('Submit')
+
+class UpdateNominatedTraining(FlaskForm):
+    owwa = StringField("Training", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 
@@ -980,18 +993,6 @@ def nominated_shipment_date_edit():
         return redirect(url_for('nominated_shipment_date_edit'))
     return render_template("nominated_shipment_date_edit.html", form=form, nominated=updated_nominated)
 
-
-
-
-
-
-
-
-
-
-
-
-
 @app.route("/delete")
 def delete():
     user_id = request.args.get("id")
@@ -1097,8 +1098,7 @@ def nominated_procedures():
 
 
 #######################################################################################################################
-# Authentication Part for (Domec) :- #
-
+# Authentication Part for (Domec) :-#
 
 @app.route('/domec')
 def domec_sign():
@@ -1158,6 +1158,68 @@ def domec_login():
 def domec_logout():
     logout_user()
     return redirect(url_for('domec_sign'))
+
+#####################################################################################################################
+
+# Authentication Part for (Alzetsi) :-
+
+@app.route('/alzetsi')
+def alzetsi_sign():
+    return render_template("alzetsi_main.html")
+
+
+@app.route('/alzetsi_register', methods=["GET", "POST"])
+def alzetsi_register():
+    if request.method == "POST":
+
+        if User.query.filter_by(email=request.form.get('email')).first():
+            # User already exists
+            flash("You've already signed up with that email, log in instead!")
+            return redirect(url_for('alzetsi_login'))
+
+        hash_and_salted_password = generate_password_hash(
+            request.form.get('password'),
+            method='pbkdf2:sha256',
+            salt_length=8
+        )
+        new_user = User(
+            email=request.form.get('email'),
+            name=request.form.get('name'),
+            password=hash_and_salted_password,
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        flash("Registered Successfully,Please Log in Again")
+        return redirect(url_for("alzetsi_register"))
+
+    return render_template("alzetsi_register.html", logged_in=current_user.is_authenticated)
+
+@app.route('/alzetsi_login', methods=["GET", "POST"])
+def alzetsi_login():
+    if request.method == "POST":
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email).first()
+        # Email doesn't exist or password incorrect.
+        if not user:
+            flash("That email does not exist, please try again.")
+            return redirect(url_for('alzetsi_login'))
+        elif not check_password_hash(user.password, password):
+            flash('Password incorrect, please try again.')
+            return redirect(url_for('alzetsi_login'))
+        else:
+            login_user(user)
+            return redirect(url_for('alzetsi_home'))
+
+    return render_template("alzetsi_login.html", logged_in=current_user.is_authenticated)
+
+@app.route('/alzetsi_logout')
+def alzetsi_logout():
+    logout_user()
+    return redirect(url_for('alzetsi_sign'))
+
 
 
 #######################################################################################################################
@@ -1650,8 +1712,222 @@ def domec_nominated_procedures():
                            logged_in=True)
 
 
-########################################################################################################################
+# ######################################################################################################################
+# Backend for Alzetsi :-###
 
+@app.route("/alzetsi-index.html")
+@login_required
+def alzetsi_home():
+    all_users = Users.query.all()
+    return render_template("alzetsi_index.html", users=all_users, name=current_user.name, logged_in=True)
+
+@app.route("/alzetsi_procedures")
+@login_required
+def alzetsi_procedures():
+    all_users = Users.query.all()
+    return render_template("alzetsi-procedures.html", users=all_users, name=current_user.name, logged_in=True)
+
+@app.route("/alzetsi-nominated-index.html")
+@login_required
+def alzetsi_nominated_home():
+    all_nominates = Nominated.query.all()
+    return render_template("alzetsi_nominated_index.html", nominates=all_nominates, name=current_user.name,
+                           logged_in=True)
+
+@app.route("/alzetsi_nominated_procedures")
+@login_required
+def alzetsi_nominated_procedures():
+    all_nominates = Nominated.query.all()
+    return render_template("alzetsi_nominated_procedures.html", nominates=all_nominates, name=current_user.name,
+                           logged_in=True)
+
+@app.route("/alzetsi_complaint_index.html")
+@login_required
+def alzetsi_complaint():
+    all_complaints = Complaint.query.all()
+    return render_template("alzetsi_complaint_index.html", complaints=all_complaints, name=current_user.name,
+                           logged_in=True)
+
+@app.route("/alzetsi_complaint_list")
+def alzetsi_complaint_list():
+    added_complaints = Complaint.query.all()
+    return render_template("alzetsi_complaint_list.html", complaints=added_complaints, name=current_user.name)
+
+@app.route("/alzetsi_edit_procedures",methods=["GET", "POST"])
+def alzetsi_edit_procedures():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    return render_template("alzetsi_procedures_edit.html",user=updated_user)
+
+
+@app.route("/alzetsi_medical_update", methods=["GET", "POST"])
+def alzetsi_medical_update():
+
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateMedical()
+    if form.validate_on_submit():
+        updated_user.medical = form.medical.data
+        db.session.commit()
+        flash("Medical Status successfully Changed ✔")
+        return redirect(url_for('alzetsi_medical_update'))
+
+    return render_template("alzetsi_medical_edit.html", form=form, user=updated_user)
+
+@app.route("/alzetsi_stamping_update", methods=["GET", "POST"])
+def alzetsi_stamping_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateStamping()
+    if form.validate_on_submit():
+        updated_user.stamping = form.stamping.data
+        db.session.commit()
+        flash(" Visa Stamping Process Status Changed successfully  ✔")
+        return redirect(url_for('alzetsi_stamping_update'))
+
+    return render_template("alzetsi_stamping_edit.html", form=form, user=updated_user)
+
+@app.route("/alzetsi_oec_update", methods=["GET", "POST"])
+def alzetsi_oec_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateLaborOffice()
+    if form.validate_on_submit():
+        updated_user.oec = form.oec.data
+        db.session.commit()
+        flash(" OEC Process Status Changed successfully  ✔")
+        return redirect(url_for('alzetsi_oec_update'))
+
+    return render_template("alzetsi_oec_edit.html", form=form, user=updated_user)
+
+@app.route("/alzetsi_ticket_update", methods=["GET", "POST"])
+def alzetsi_ticket_update():
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateTicket()
+    if form.validate_on_submit():
+        updated_user.ticket = form.ticket.data
+        db.session.commit()
+        flash(" Flight Details Process Status Changed successfully  ✔")
+        return redirect(url_for('alzetsi_ticket_update'))
+
+    return render_template("alzetsi_ticket_edit.html", form=form, user=updated_user)
+
+@app.route("/alzetsi_edit", methods=["GET", "POST"])
+def alzetsi_edit():
+    form = DomecEditUser()
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    if form.validate_on_submit():
+        updated_user.status = form.status.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_edit'))
+    return render_template("alzetsi_edit.html", form=form, user=updated_user)
+
+
+@app.route("/alzetsi_training_edit", methods=["GET", "POST"])
+def alzetsi_training_edit():
+    form = UpdateTraining()
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    if form.validate_on_submit():
+        updated_user.owwa= form.owwa.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_training_edit'))
+    return render_template("alzetsi_training_edit.html", form=form, user=updated_user)
+
+
+@app.route("/alzetsi_nominated_edit_procedures",methods=["GET", "POST"])
+def alzetsi_nominated_edit_procedures():
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    return render_template("alzetsi_nominated_procedures_edit.html",nominated=updated_nominated)
+
+
+
+#################################
+
+
+
+@app.route("/alzetsi_nominated_medical_update", methods=["GET", "POST"])
+def alzetsi_nominated_medical_update():
+
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form =UpdateNominatedMedical()
+    if form.validate_on_submit():
+        updated_nominated.medical = form.medical.data
+        db.session.commit()
+        flash("Medical Status successfully Changed ✔")
+        return redirect(url_for('alzetsi_nominated_medical_update'))
+
+    return render_template("alzetsi_nominated_medical_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/alzetsi_nominated_stamping_update", methods=["GET", "POST"])
+def alzetsi_nominated_stamping_update():
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateNominatedStamping()
+    if form.validate_on_submit():
+        updated_nominated.stamping = form.stamping.data
+        db.session.commit()
+        flash(" Visa Stamping Process Status Changed successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_stamping_update'))
+
+    return render_template("alzetsi_nominated_stamping_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/alzetsi_nominated_oec_update", methods=["GET", "POST"])
+def alzetsi_nominated_oec_update():
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateLaborOffice()
+    if form.validate_on_submit():
+        updated_nominated.oec = form.oec.data
+        db.session.commit()
+        flash(" OEC Process Status Changed successfully  ✔")
+        return redirect(url_for('alzetsi_oec_update'))
+
+    return render_template("alzetsi_nominated_oec_edit.html", form=form, user=updated_nominated)
+
+@app.route("/alzetsi_nominated_ticket_update", methods=["GET", "POST"])
+def alzetsi_nominated_ticket_update():
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    form = UpdateTicket()
+    if form.validate_on_submit():
+        updated_nominated.ticket = form.ticket.data
+        db.session.commit()
+        flash(" Flight Details Process Status Changed successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_ticket_update'))
+
+    return render_template("alzetsi_nominated_ticket_edit.html", form=form, nominated=updated_nominated)
+
+@app.route("/alzetsi_nominated_edit", methods=["GET", "POST"])
+def alzetsi_nominated_edit():
+    form = DomecEditUser()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.status = form.status.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_edit'))
+    return render_template("alzetsi_nominated_edit.html", form=form, nominated=updated_nominated)
+
+
+@app.route("/alzetsi_nominated_training_edit", methods=["GET", "POST"])
+def alzetsi_nominated_training_edit():
+    form = UpdateNominatedTraining()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.owwa= form.owwa.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_training_edit'))
+    return render_template("alzetsi_nominated_training_edit.html", form=form, nominated=updated_nominated)
 
 if __name__ == "__main__":
     app.run(debug=True)
