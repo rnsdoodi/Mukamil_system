@@ -235,9 +235,9 @@ class AddSkills(FlaskForm):
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=["Selected", " Recommended"])
-    agency = SelectField('المكتب', choices=["Injaz Alkawader", "Alzetsi","Reenkam"])
-    jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
-                                                         "For POEA Approval", "POEA Approved",
+    agency = SelectField('المكتب', choices=["Injaz Alkawader","Imran International ","Alzetsi","Reenkam"])
+    jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
+                                                         "For DMW Approval", "DMW Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
     shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)])
     submit = SubmitField('Add إضافة')
@@ -246,8 +246,8 @@ class AddSkills(FlaskForm):
 # Edit new skills Request Flask Form for (السلالم الدولية)
 
 class EditSkills(FlaskForm):
-    jo_status = SelectField('حالة الجوب اوردر', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
-                                                         "For POEA Approval", "POEA Approved"])
+    jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
+                                                         "For DMW Approval", "DMW Approved"])
     shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim remarks
     submit = SubmitField('تــعـديــل')
 
@@ -442,7 +442,7 @@ class DomecAddSkills(FlaskForm):
 class DomecEditSkills(FlaskForm):
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    status = StringField('Domec Remarks', validators=[length(max=1000)])
+    status = StringField('Injaz Alkawader Remarks', validators=[length(max=1000)])
     submit = SubmitField('Update')
 
 
