@@ -11,7 +11,6 @@ import os
 
 # Flask App
 app = Flask(__name__)
-
 all_users = []
 all_arrived = []
 all_skills = []
@@ -173,7 +172,7 @@ class AddUser(FlaskForm):
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy", " Private Nurse","House Cook","Nanny/Babysitter",
                                 " Family Driver"])
-    agency = SelectField('المكتب', choices=["SIM SOH", "Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["SIM SOH","Myriad" ,"Alzetsi", "Reenkam"])
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
@@ -235,7 +234,7 @@ class AddSkills(FlaskForm):
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=["Selected", " Recommended"])
-    agency = SelectField('المكتب', choices=["Injaz Alkawader","Imran International ","Alzetsi","Reenkam"])
+    agency = SelectField('المكتب', choices=["Injaz Alkawader","Myriad","Imran International ","Alzetsi","Reenkam"])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
                                                          "For DMW Approval", "DMW Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
@@ -266,7 +265,7 @@ class AddTransfer(FlaskForm):
                                      description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     request_date = DateField(' تاريخ الطلب', format='%Y-%m-%d')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
-    agency = SelectField('المكتب', choices=["SIM-SOH", "Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["SIM-SOH", "Myriad","Alzetsi", "Reenkam"])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
                                                         "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الكفالة",
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
@@ -305,7 +304,7 @@ class AddNominated(FlaskForm):
                                     description='لابد من ان يكون الرقم صحيحاً')
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy","House Cook"," Private Nurse", "Nanny/Babysitter"," Family Driver","Sewer"])
-    agency = SelectField('المكتب', choices=["SIM-SOH", "Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["SIM-SOH","Myriad" ,"Alzetsi", "Reenkam"])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
@@ -394,7 +393,7 @@ class DomecEditUser(FlaskForm):
     # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
     # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
     # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
-    status = StringField('FRA Remarks', validators=[length(max=1000)])
+    status = StringField('PRA Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit Changes')
 
 
@@ -482,7 +481,7 @@ class UpdateOec(FlaskForm):
     submit = SubmitField('Submit')
 
 class UpdateLaborOffice(FlaskForm):
-    oec  = StringField("Labor Office", validators=[length(max=1000)])
+    oec  = StringField("OEC", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 
@@ -499,7 +498,7 @@ class UpdateTicket(FlaskForm):
     submit = SubmitField('Submit')
 
 class UpdateTraining(FlaskForm):
-    owwa = StringField("Training", validators=[length(max=1000)])
+    owwa = StringField("OWWA Training", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedTraining(FlaskForm):
@@ -1774,6 +1773,22 @@ def alzetsi_medical_update():
 
     return render_template("alzetsi_medical_edit.html", form=form, user=updated_user)
 
+
+@app.route("/alzetsi_vaccine_update", methods=["GET", "POST"])
+def alzetsi_vaccine_update():
+
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    form = UpdateVaccine()
+    if form.validate_on_submit():
+        updated_user.mmr_vaccine= form.mmr_vaccine.data
+        db.session.commit()
+        flash("Vaccine Status successfully Changed ✔")
+        return redirect(url_for('alzetsi_vaccine_update'))
+
+    return render_template("alzetsi_vaccine_edit.html", form=form, user=updated_user)
+
+
 @app.route("/alzetsi_stamping_update", methods=["GET", "POST"])
 def alzetsi_stamping_update():
     user_id = request.args.get("id")
@@ -1837,6 +1852,40 @@ def alzetsi_training_edit():
         flash("Request Modified successfully  ✔")
         return redirect(url_for('alzetsi_training_edit'))
     return render_template("alzetsi_training_edit.html", form=form, user=updated_user)
+
+
+
+@app.route("/alzetsi_tesda_edit", methods=["GET", "POST"])
+def alzetsi_tesda_edit():
+    form = UpdateTesda()
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    if form.validate_on_submit():
+        updated_user.tesda= form.tesda.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_tesda_edit'))
+    return render_template("alzetsi_tesda_edit.html", form=form, user=updated_user)
+
+
+
+@app.route("/alzetsi_biometric_edit", methods=["GET", "POST"])
+def alzetsi_biometric_edit():
+    form = UpdateBiometric()
+    user_id = request.args.get("id")
+    updated_user = Users.query.get(user_id)
+    if form.validate_on_submit():
+        updated_user.biometric= form.biometric.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_biometric_edit'))
+    return render_template("alzetsi_biometric_edit.html", form=form, user=updated_user)
+
+
+
+
+
+
 
 
 @app.route("/alzetsi_nominated_edit_procedures",methods=["GET", "POST"])
@@ -1928,6 +1977,65 @@ def alzetsi_nominated_training_edit():
         flash("Request Modified successfully  ✔")
         return redirect(url_for('alzetsi_nominated_training_edit'))
     return render_template("alzetsi_nominated_training_edit.html", form=form, nominated=updated_nominated)
+
+
+
+@app.route("/alzetsi_nominated_vaccine_edit", methods=["GET", "POST"])
+def alzetsi_nominated_vaccine_edit():
+    form = UpdateNominatedVaccine()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.mmr_vaccine= form.mmr_vaccine.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_vaccine_edit'))
+    return render_template("alzetsi_nominated_vaccine_edit.html", form=form, nominated=updated_nominated)
+
+
+
+@app.route("/alzetsi_nominated_owwa_edit", methods=["GET", "POST"])
+def alzetsi_nominated_owwa_edit():
+    form = UpdateNominatedOwwa()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.owwa = form.owwa.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_owwa_edit'))
+    return render_template("alzetsi_nominated_owwa_edit.html", form=form, nominated=updated_nominated)
+
+
+
+
+@app.route("/alzetsi_nominated_tesda_edit", methods=["GET", "POST"])
+def alzetsi_nominated_tesda_edit():
+    form = UpdateNominatedTesda()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.tesda = form.tesda.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_tesda_edit'))
+    return render_template("alzetsi_nominated_tesda_edit.html", form=form, nominated=updated_nominated)
+
+
+@app.route("/alzetsi_nominated_biometric_edit", methods=["GET", "POST"])
+def alzetsi_nominated_biometric_edit():
+    form = UpdateNominatedBiometric()
+    nominated_id = request.args.get("id")
+    updated_nominated = Nominated.query.get(nominated_id)
+    if form.validate_on_submit():
+        updated_nominated.biometric = form.biometric.data
+        db.session.commit()
+        flash("Request Modified successfully  ✔")
+        return redirect(url_for('alzetsi_nominated_biometric_edit'))
+    return render_template("alzetsi_nominated_biometric_edit.html", form=form, nominated=updated_nominated)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

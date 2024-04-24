@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 
-{% block title %}Edit Worker Status {% endblock %}
+{% block title %}Worker Procedures {% endblock %}
 
 {% block content %}
 <br>
 <div class="content">
 
-    <h1 class="heading" style="text-align:center"><b><u>Myriad Remarks For ({{user.worker_name}})</u></b> </h1>
+    <h1 class="heading" style="text-align:center"><b><u>Update The TESDA For ({{user.worker_name}})</u></b> </h1>
     <div class="heading">
 <br>
     <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_procedures')}}" class="btn btn-lg btn-dark"> Back To Procedures Page </a> </h1>
@@ -39,9 +39,13 @@
 </div>
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 {%include "alzetsi_footer.html"%}
     {% endblock %}
+
+
+
+
 
 
 

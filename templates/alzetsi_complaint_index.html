@@ -6,7 +6,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="{{url_for('alzetsi_home')}}">AL-ZETSI</a>
+            <a class="navbar-brand ps-3" href="{{url_for('alzetsi_home')}}">MYRIAD</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -33,47 +33,47 @@
         </nav>
 
 
-       <div id="layoutSidenav">
+<div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading" >የተመረጡ ሰራተኞች</div>
+                            <div class="sb-sidenav-menu-heading" >SELECTED WORKERS</div>
                             <a class="nav-link" href="{{url_for('alzetsi_home')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                               የተመረጡ ሰራተኞች
+                               Selected DH List
 <!--                                (Selected Workers List)-->
                             </a>
                             <a class="nav-link" style="color:yellow;" href="{{url_for('alzetsi_procedures')}}">
                                 <div class="sb-nav-link-icon" style="color:yellow;"><i class="fas fa-user-edit"></i></div>
-                                የተመረጡ ሂደቶች
+                                Procedures
 <!--                              Procedures-->
                             </a>
 
 
-                               <div class="sb-sidenav-menu-heading">የሚመከር የቤት ውስጥ ረዳት </div>
+                               <div class="sb-sidenav-menu-heading">NOMINATED WORKERS </div>
                             <a class="nav-link" href="{{url_for('alzetsi_nominated_home')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                    የሚመከሩ የቤት ጠባቂዎች ዝርዝር
+                                    Nominated DH List
 <!--                               Nominated DH List-->
                             </a>
                              <a class="nav-link" style="color:yellow;" href="{{url_for('alzetsi_nominated_procedures')}}">
                                 <div class="sb-nav-link-icon" style="color:yellow;"><i class="fas fa-user-edit"></i></div>
-                              የሚመከሩ ሂደቶች
+                              Procedures
 <!--                                 Procedures-->
                             </a>
 
 
 
-                              <div class="sb-sidenav-menu-heading"> ቅሬታዎች እና ጉዳዮች</div>
+                              <div class="sb-sidenav-menu-heading"> COMPLAINTS & ISSUES</div>
                             <a class="nav-link" href="{{url_for('alzetsi_complaint')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                የቅሬታዎች ዝርዝር
+                                DH's Complaint List
 <!--                               DH Complaint List-->
                             </a>
                             <a class="nav-link" href="{{url_for('alzetsi_complaint_list')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                                የቅሬታ ሁኔታን ያርትዑ
+                                Edit Complaint Status
 <!--                              Edit Complaint Status-->
                             </a>
 
@@ -98,6 +98,7 @@
                             <div class="sb-sidenav-menu-heading"></div>
                         </div>
                     </div>
+
 
 
 
@@ -127,7 +128,7 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body"> Edit Complaint Status  </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{url_for('domec_complaint_list')}}">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{url_for('alzetsi_complaint_list')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

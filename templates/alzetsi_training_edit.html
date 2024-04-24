@@ -1,7 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
 <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
-{%include "header.html"%}
+{%include "alzetsi_header.html"%}
 {% block styles %}
   {{ super() }}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -13,10 +13,10 @@
 <br>
 <div class="content">
 
-    <h1 class="heading" style="text-align:center"><b><u>የስልጠና ሂደቱን ያዘምኑ ({{user.worker_name}})</u></b> </h1>
+    <h1 class="heading" style="text-align:center"><b><u>OWWA TRAINING FOR ({{user.worker_name}})</u></b> </h1>
     <div class="heading">
 <br>
-    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_nominated_procedures')}}" class="btn btn-lg btn-dark"> ወደ ሂደቶች ገጽ ይመለሱ </a> </h1>
+    <h1 class="heading" style="text-align:center"><a href="{{url_for('alzetsi_nominated_procedures')}}" class="btn btn-lg btn-dark"> Back To Procedures Page </a> </h1>
 </div>
 </div>
 
@@ -40,7 +40,7 @@
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br>
-{%include "domec_footer.html"%}
+{%include "alzetsi_footer.html"%}
     {% endblock %}
 
 

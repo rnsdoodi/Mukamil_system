@@ -6,7 +6,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="{{url_for('alzetsi_home')}}">AL-ZETSI</a>
+            <a class="navbar-brand ps-3" href="{{url_for('alzetsi_home')}}">MYRIAD</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -33,49 +33,49 @@
         </nav>
 
 
-       <div id="layoutSidenav">
+     <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading" >የተመረጡ ሰራተኞች</div>
+                            <div class="sb-sidenav-menu-heading" >SELECTED WORKERS</div>
                             <a class="nav-link" href="{{url_for('alzetsi_home')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                               የተመረጡ ሰራተኞች
+                               Selected DH List
 <!--                                (Selected Workers List)-->
                             </a>
                             <a class="nav-link" style="color:yellow;" href="{{url_for('alzetsi_procedures')}}">
                                 <div class="sb-nav-link-icon" style="color:yellow;"><i class="fas fa-user-edit"></i></div>
-                                የተመረጡ ሂደቶች
+                                Procedures
 <!--                              Procedures-->
                             </a>
 
 
-                               <div class="sb-sidenav-menu-heading">የሚመከር የቤት ውስጥ ረዳት </div>
+                               <div class="sb-sidenav-menu-heading">NOMINATED WORKERS </div>
                             <a class="nav-link" href="{{url_for('alzetsi_nominated_home')}}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                    የሚመከሩ የቤት ጠባቂዎች ዝርዝር
+                                    Nominated DH List
 <!--                               Nominated DH List-->
                             </a>
                              <a class="nav-link" style="color:yellow;" href="{{url_for('alzetsi_nominated_procedures')}}">
                                 <div class="sb-nav-link-icon" style="color:yellow;"><i class="fas fa-user-edit"></i></div>
-                              የሚመከሩ ሂደቶች
+                              Procedures
 <!--                                 Procedures-->
                             </a>
 
 
 
-                              <div class="sb-sidenav-menu-heading"> ቅሬታዎች እና ጉዳዮች</div>
-                            <a class="nav-link" href="{{url_for('alzetsi_complaint')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                የቅሬታዎች ዝርዝር
-<!--                               DH Complaint List-->
-                            </a>
-                            <a class="nav-link" href="{{url_for('alzetsi_complaint_list')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>
-                                የቅሬታ ሁኔታን ያርትዑ
-<!--                              Edit Complaint Status-->
-                            </a>
+<!--                              <div class="sb-sidenav-menu-heading"> COMPLAINTS & ISSUES</div>-->
+<!--                            <a class="nav-link" href="{{url_for('alzetsi_complaint')}}">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>-->
+<!--                                DH's Complaint List-->
+<!--&lt;!&ndash;                               DH Complaint List&ndash;&gt;-->
+<!--                            </a>-->
+<!--                            <a class="nav-link" href="{{url_for('alzetsi_complaint_list')}}">-->
+<!--                                <div class="sb-nav-link-icon"><i class="fas fa-user-edit"></i></div>-->
+<!--                                Edit Complaint Status-->
+<!--&lt;!&ndash;                              Edit Complaint Status&ndash;&gt;-->
+<!--                            </a>-->
 
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
@@ -101,6 +101,7 @@
 
 
 
+
                     <div class="sb-sidenav-footer" >
                         <div class="small" > Logged In As : </div>
                         <div class="small" style="color:white" > 🟢 {{name}}  </div>
@@ -111,41 +112,41 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:left"> የሚመከሩ የቤት ጠባቂዎች ዝርዝር</h1>
+                        <h1 class="mt-4" style="text-align:left"> Nominated Domestic workers List</h1>
                         <br>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body"> አዲስ ትዕዛዝ ያክሉ </div>
+                                    <div class="card-body"> Add new DH's Request</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">ዝርዝሮችን ይመልከቱ</a>
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">  ሂደቶችን ያርትዑ  </div>
+                                    <div class="card-body"> Edit DH's Procedures  </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="{{url_for('domec_nominated_procedures')}}">ዝርዝሮችን ይመልከቱ</a>
+                                        <a class="small text-white stretched-link" href="{{url_for('alzetsi_nominated_procedures')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body"> የማሰማራት ዝርዝር </div>
+                                    <div class="card-body"> Deployment List  </div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">ዝርዝሮችን ይመልከቱ</a>
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">ዝርዝር ተሰርዟል።</div>
+                                    <div class="card-body">Backout List</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">ዝርዝሮችን ይመልከቱ</a>
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -160,7 +161,7 @@
 <!--                                        <i class="fas fa-chart-area me-1"></i>-->
 
                                     </div>
-                                    <div class="card-body"style="text-align:center"><img src="static/assets/img/Alzetsi.png" style="width:41.5% "><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body"style="text-align:center"><img src="static/assets/img/Myriad.JPG" style="width:31.1% "><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -191,27 +192,27 @@
 
                                     <thead>
                                         <tr>
-                                            <th style="text-align:center;">መታወቂያ</th>
-                                            <th style="text-align:center;">የአሰሪው ስም</th>
-                                            <th style="text-align:center;">የአሰሪ መታወቂያ ቁጥር</th>
-                                            <th style="text-align:center;">የአሰሪ ሞባይል ቁጥር </th>
-                                            <th style="text-align:center;">ቪዛ ቁ</th>
-                                            <th style="text-align:center;">የታዘዘበት ቀን</th>
-                                            <th style="text-align:center;">የሰራተኛ ስም</th>
-                                            <th style="text-align:center;">የሰራተኛ አድራሻ ቁጥር</th>
-                                            <th style="text-align:center;">አቀማመጥ</th>
-                                            <th style="text-align:center;">ኤጀንሲ</th>
-                                            <th style="text-align:center;">ዓይነቶች</th>
-                                            <th style="text-align:center;">ውል</th>
-                                            <th style="text-align:center;">የፓስፖርት ቅጂ</th>
-                                            <th style="text-align:center;">SRA አስተያየቶች</th>
-                                            <th style="text-align:center;">FRA አስተያየቶች</th>
+                                            <th style="text-align:center;">ID</th>
+                                            <th style="text-align:center;">Employer Name</th>
+                                            <th style="text-align:center;">National ID No.</th>
+                                            <th style="text-align:center;">Employer Contact No.</th>
+                                            <th style="text-align:center;">Visa No.</th>
+                                            <th style="text-align:center;">Request Date</th>
+                                            <th style="text-align:center;">Worker Name</th>
+                                            <th style="text-align:center;">Worker Contact No.</th>
+                                            <th style="text-align:center;">Type</th>
+                                            <th style="text-align:center;">Agency</th>
+                                            <th style="text-align:center;">Selected/Nominated</th>
+                                            <th style="text-align:center;">Musaned Contract</th>
+                                            <th style="text-align:center;">Passport Copy</th>
+                                            <th style="text-align:center;">International Stairs Remarks</th>
+                                            <th style="text-align:center;">Myriad Remarks</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         {% for nominated in nominates %}
-                                        {% if nominated.agency == "Alzetsi" %}
+                                        {% if nominated.agency == "Myriad" %}
                                           <tr>
                                               <td style="text-align:center;">{{nominated.id}}</td>
                                               <td style="text-align:center;"><b>{{nominated.name}}</b></td>
@@ -258,7 +259,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; DOMEC 2023</div>
+                            <div class="text-muted">Copyright &copy; MYRIAD 2024</div>
                             <div class="text-muted">Developed By SkyTech 2022</div>
                             <div>
                                 <a href="#">Privacy Policy </a>
