@@ -441,7 +441,7 @@ class DomecAddSkills(FlaskForm):
 class DomecEditSkills(FlaskForm):
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    status = StringField('Injaz Alkawader Remarks', validators=[length(max=1000)])
+    status = StringField('Princess Joy Notess', validators=[length(max=1000)])
     submit = SubmitField('Update')
 
 
@@ -457,7 +457,7 @@ class DomecAddComplaint(FlaskForm):
 
 
 class DomecEditComplaint(FlaskForm):
-    Status = StringField('Remarks', validators=[length(max=1000)])
+    Status = StringField('Notes', validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateMedical(FlaskForm):
