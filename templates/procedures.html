@@ -237,16 +237,31 @@
                         </div>
 
 
-
-
                         <div class="card mb-4">
-
                             <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
 
-<!--                                    <i class="fas fa-print"></i>-->
-
+                                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+               <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdowng" href="#" style="text-align:right " role="button" data-bs-toggle="dropdown" aria-expanded="false">  المكتب الخارجي <i class="fas fa-flag fa-fw"></i></a>
+                    <ul style="text-align:center" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdowng">
+                        <li><a class="dropdown-item" href="{{url_for('sim_soh_customer_procedures')}}"><img src="static/assets/img/simsoh2.png" style="width:6% "><b>SIM SOH</b></a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="{{url_for('myriad_customer_procedures')}}"><img src="static/assets/img/myriad.JPG" style="width:6% "><b>Myriad</b></a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">INJAZ ALKAWADER</a></li>
+                    </ul>
+                </li>
+            </ul>
                             </div>
+
+<!--                        <div class="card mb-4">-->
+
+<!--                            <div class="card-header">-->
+<!--                                <i class="fas fa-table me-1"></i>-->
+
+<!--&lt;!&ndash;                                    <i class="fas fa-print"></i>&ndash;&gt;-->
+
+<!--                            </div>-->
 
                             <div class="card-body">
 
@@ -264,6 +279,7 @@
                                             <th style="text-align:center;">OWWA</th>
                                             <th style="text-align:center;">MMR-Vaccine</th>
                                             <th style="text-align:center;">Medical</th>
+                                            <th style="text-align:center;">المكتب</th>
                                             <th style="text-align:center;">المهنة</th>
                                             <th style="text-align:center;">اسم العاملة</th>
                                             <th style="text-align:center;">رقم الهُوِيَّة/الإقامة</th>
@@ -287,6 +303,7 @@
                                             <td style="text-align:center;">{{user.owwa}}</td>
                                             <td style="text-align:center;">{{user.mmr_vaccine}}</td>
                                              <td style="text-align:center;">{{user.medical}}</td>
+                                              <td style="text-align:center;">{{user.agency}}</td>
                                             <td style="text-align:center;">{{user.type}}</td>
                                              <td style="text-align:center;"><b>{{user.worker_name}}</b></td>
                                             <td style="text-align:center;">{{user.nid_or_iqama}}</td>

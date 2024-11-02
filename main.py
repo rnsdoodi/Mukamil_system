@@ -172,7 +172,7 @@ class AddUser(FlaskForm):
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy", " Private Nurse","House Cook","Nanny/Babysitter",
                                 " Family Driver"])
-    agency = SelectField('المكتب', choices=["SIM SOH","Myriad" ,"Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["SIM SOH","Myriad" ,"Alzetsi", "INJAZ ALKAWADER"])
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
@@ -2034,6 +2034,45 @@ def alzetsi_nominated_biometric_edit():
         return redirect(url_for('alzetsi_nominated_biometric_edit'))
     return render_template("alzetsi_nominated_biometric_edit.html", form=form, nominated=updated_nominated)
 
+
+##### Drop Menu Code (Selected) #####
+
+@app.route("/SIM_SOH_office")
+@login_required
+def SIM_SOH_office():
+    all_users = Users.query.all()
+    return render_template("SIM_SOH_office.html", users=all_users, name=current_user.name, logged_in=True)
+
+@app.route("/list_SIM_SOH_office")
+def list_SIM_SOH_office():
+    added_users = Users.query.all()
+    return render_template("list_SIM_SOH_office.html", users=added_users, name=current_user.name)
+
+
+@app.route("/sim_soh_customer_procedures")
+def sim_soh_customer_procedures():
+    added_users = Users.query.all()
+    return render_template("sim_soh_customer_procedures.html",users=added_users, name=current_user.name, logged_in=True)
+
+
+
+
+@app.route("/myriad_office")
+@login_required
+def myriad_office():
+    all_users = Users.query.all()
+    return render_template("myriad_office.html", users=all_users, name=current_user.name, logged_in=True)
+
+@app.route("/list_myriad_office")
+def list_myriad_office():
+    added_users = Users.query.all()
+    return render_template("list_myriad_office.html", users=added_users, name=current_user.name)
+
+
+@app.route("/myriad_customer_procedures")
+def myriad_customer_procedures():
+    added_users = Users.query.all()
+    return render_template("myriad_customer_procedures.html",users=added_users, name=current_user.name, logged_in=True)
 
 
 

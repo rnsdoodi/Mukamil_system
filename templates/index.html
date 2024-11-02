@@ -161,6 +161,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div class="sb-sidenav-footer" >
                         <div class="small" > : تسجيل دخول </div>
                         <div class="small" style="color:white" > 🟢 {{name}}  </div>
@@ -243,14 +256,30 @@
 
 
 
+
                         <div class="card mb-4">
-
                             <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
 
-<!--                                    <i class="fas fa-print"></i>-->
+                                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+               <li class="nav-item dropdown">
 
+                    <a class="nav-link dropdown-toggle" id="navbarDropdowng" href="#" style="text-align:right " role="button" data-bs-toggle="dropdown" aria-expanded="false">  المكتب الخارجي <i class="fas fa-flag fa-fw"></i></a>
+                    <ul style="text-align:center" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdowng">
+                        <li><a class="dropdown-item" href="{{url_for('SIM_SOH_office')}}"><img src="static/assets/img/simsoh2.png" style="width:5% "><b>SIM SOH</b></a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="{{url_for('myriad_office')}}"><img src="static/assets/img/myriad.JPG" style="width:6% "><b>Myriad</b></a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">INJAZ ALKAWADER</a></li>
+                    </ul>
+                </li>
+            </ul>
                             </div>
+
+
+
+
+
+
 
                             <div class="card-body">
 

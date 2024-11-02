@@ -176,7 +176,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="text-align:right"> (Selected) تعديل طلبات العمالة المنزلية المختارة </h1>
+                        <h1 class="mt-4" style="text-align:right">   SIM SOH\(Selected) تعديل طلبات العمالة المنزلية المختارة </h1>
                         <br>
 <!--                        <div class="row">-->
 <!--                            <div class="col-xl-3 col-md-6">-->
@@ -241,34 +241,16 @@
                         </div>
 
 
-                                       <div class="card mb-4">
+
+
+                        <div class="card mb-4">
+
                             <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
 
-                                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-               <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdowng" href="#" style="text-align:right " role="button" data-bs-toggle="dropdown" aria-expanded="false">  المكتب الخارجي <i class="fas fa-flag fa-fw"></i></a>
-                    <ul style="text-align:center" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdowng">
-                        <li><a class="dropdown-item" href="{{url_for('list_SIM_SOH_office')}}"><img src="static/assets/img/simsoh2.png" style="width:6% "><b>SIM SOH</b></a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="{{url_for('list_myriad_office')}}"><img src="static/assets/img/myriad.JPG" style="width:6% "><b>Myriad</b></a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">INJAZ ALKAWADER</a></li>
-                    </ul>
-                </li>
-            </ul>
+<!--                                    <i class="fas fa-print"></i>-->
+
                             </div>
-
-
-
-
-
-
-
-<!--                        <div class="card mb-4">-->
-
-<!--                            <div class="card-header">-->
-<!--                                <i class="fas fa-table me-1"></i>-->
-<!--                            </div>-->
 
                                           <div class="content">
                                 {% with messages = get_flashed_messages() %}
@@ -307,6 +289,7 @@
                                     </thead>
                                     <tbody>
                                     {% for user in users %}
+                                    {% if user.agency == "SIM SOH" %}
                                         <tr>
                                             <td style="text-align:center;"> <a href="{{url_for('customer_procedures',id=user.id)}}" class="btn" style="color:blue;"> <i class="far fa-edit fa-sm" ></i></a>
                                                 <br> <p>..</p>
@@ -327,6 +310,7 @@
                                              <td style="text-align:center;"><b>{{user.name}}</b></td>
                                             <td style="text-align:center;">{{user.id}}</td>
                                         </tr>
+                                    {% endif %}
                                 {%endfor%}
                                     </tbody>
 
