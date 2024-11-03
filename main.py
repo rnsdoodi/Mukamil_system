@@ -172,7 +172,7 @@ class AddUser(FlaskForm):
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy", " Private Nurse","House Cook","Nanny/Babysitter",
                                 " Family Driver"])
-    agency = SelectField('المكتب', choices=["SIM SOH","Myriad" ,"Alzetsi", "INJAZ ALKAWADER"])
+    agency = SelectField('المكتب', choices=["Princess Joy"])
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
@@ -234,7 +234,7 @@ class AddSkills(FlaskForm):
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=["Selected", " Recommended"])
-    agency = SelectField('المكتب', choices=["Injaz Alkawader","Myriad","Imran International ","Alzetsi","Reenkam"])
+    agency = SelectField('المكتب', choices=["Princes Joy"])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
                                                          "For DMW Approval", "DMW Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
@@ -265,7 +265,7 @@ class AddTransfer(FlaskForm):
                                      description='ادخل رقم جوال صالح مكون من 10 ارقام ')
     request_date = DateField(' تاريخ الطلب', format='%Y-%m-%d')
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
-    agency = SelectField('المكتب', choices=["SIM-SOH", "Myriad","Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["Princess Joy"])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
                                                         "أكملت العاملة فترة التجربة وجاري إنهاء أجراءات نقل الكفالة",
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
@@ -304,7 +304,7 @@ class AddNominated(FlaskForm):
                                     description='لابد من ان يكون الرقم صحيحاً')
     type = SelectField('المهنة',
                        choices=["House Maid", "House Boy","House Cook"," Private Nurse", "Nanny/Babysitter"," Family Driver","Sewer"])
-    agency = SelectField('المكتب', choices=["SIM-SOH","Myriad" ,"Alzetsi", "Reenkam"])
+    agency = SelectField('المكتب', choices=["Princess Joy"])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=[" Recommended"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
