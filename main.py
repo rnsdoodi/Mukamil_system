@@ -234,7 +234,7 @@ class AddSkills(FlaskForm):
     quantity = StringField('العدد', validators=[DataRequired(), length(max=150)])
     selected_or_recommended = SelectField('معينة ام مختارة',
                                           choices=["Selected", " Recommended"])
-    agency = SelectField('المكتب', choices=["Princess Joy"])
+    agency = SelectField('المكتب', choices=["Princess Joy","Egypt","Nepal"])
     jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
                                                          "For DMW Approval", "DMW Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
