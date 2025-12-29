@@ -167,9 +167,11 @@
                 </ul>
 
 
-
-
-                <p class="text-muted small mb-0">Copyright &copy; International Stairs 2024</p>
+                <div class="small text-center text-muted">
+        Copyright &copy; <span id="current-year"></span> - International Stairs </div>
+   <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
 <!--                <p class="text-muted small mb-0">Designed with ❤️by Ohood Almabadi </p>-->
                 <p class="text-muted small mb-0">Developed by SkyTech 2022</p>
 <!--                <p class="text-muted small mb-0">056-551-6460</p>-->
