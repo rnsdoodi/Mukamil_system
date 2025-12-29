@@ -247,7 +247,6 @@
 
                                      <tbody>
                                         {% for skill in skills %}
-{%%}
                                           <tr>
                                               <td style="text-align:center;">{{skill.id}}</td>
                                               <td style="text-align:center;"><b>{{skill.company_name}}</b></td>
@@ -280,7 +279,11 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Princess Joy 2024</div>
+                                      <div class="small text-center text-muted">
+        Copyright &copy; <span id="current-year"></span> - International Stairs </div>
+   <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
                             <div class="text-muted">Developed By SkyTech 2022</div>
                             <div>
                                 <a href="#">Privacy Policy </a>
