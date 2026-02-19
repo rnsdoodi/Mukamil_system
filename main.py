@@ -155,6 +155,9 @@ class User(UserMixin, db.Model):
 
 db.create_all()
 
+# with app.app_context():
+#     db.create_all()
+
 
 # Add Customer Request Flask Form for (السلالم الدولية)
 class AddUser(FlaskForm):
