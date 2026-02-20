@@ -1,21 +1,133 @@
 {% extends "base.html" %}
 {% block content %}
+
 <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
-<div class="box">
-    <h1>تسجيل الدخول</h1>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-<!--    <p>{{message}}</p>-->
-    <div class="alert alert-danger" role="alert">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    <form method="post">
-        <input type="text" name="email" placeholder="Email" required="required"/>
-        <input type="password" name="password" placeholder="Password" required="required"/>
-        <button type="submit" class="btn btn-primary btn-block btn-large">الدخول</button>
-    </form>
+
+<style>
+
+/* ===== Background ===== */
+.login-wrapper{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+/* ===== Login Card ===== */
+.login-card{
+    background:white;
+    width:100%;
+    max-width:420px;
+    padding:45px 35px;
+    border-radius:20px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.18);
+    animation:fadeUp 0.8s ease;
+}
+
+/* ===== Title ===== */
+.login-card h1{
+    text-align:center;
+    font-size:1.8rem;
+    font-weight:700;
+    margin-bottom:30px;
+    color:#0f172a;
+}
+
+/* ===== Inputs ===== */
+.form-control-custom{
+    width:100%;
+    padding:12px 15px;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    margin-bottom:15px;
+    transition:0.3s;
+    font-size:0.95rem;
+}
+
+.form-control-custom:focus{
+    border-color:#f59e0b;
+    box-shadow:0 0 0 3px rgba(245,158,11,0.2);
+    outline:none;
+}
+
+/* ===== Button ===== */
+.btn-corporate{
+    background:#f59e0b;
+    color:white;
+    padding:12px;
+    border-radius:30px;
+    font-weight:600;
+    border:none;
+    transition:.3s;
+}
+
+.btn-corporate:hover{
+    background:#d97706;
+    transform:translateY(-2px);
+}
+
+/* ===== Alert ===== */
+.alert{
+    border-radius:12px;
+    font-size:0.9rem;
+    padding:10px 15px;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h1>تسجيل الدخول</h1>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-danger text-center">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="post">
+
+            <input type="text"
+                   name="email"
+                   placeholder="البريد الإلكتروني"
+                   class="form-control-custom"
+                   required>
+
+            <input type="password"
+                   name="password"
+                   placeholder="كلمة المرور"
+                   class="form-control-custom"
+                   required>
+
+            <button type="submit"
+                    class="btn btn-corporate w-100 mt-2">
+                الدخول
+            </button>
+
+        </form>
+
+    </div>
+
 </div>
 
 {% endblock %}
