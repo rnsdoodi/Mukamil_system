@@ -1,20 +1,139 @@
 {% extends "simsoh_base.html" %}
 {% block content %}
+
 <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
-<div class="box">
-    <h1>Login</h1>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-    <div class="alert alert-danger" role="alert">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    <form method="post">
-        <input type="text" name="email" placeholder="Email" required="required"/>
-        <input type="password" name="password" placeholder="Password" required="required"/>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
-    </form>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== Wrapper ===== */
+.enterprise-wrapper{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    font-family:'Inter', sans-serif;
+}
+
+/* ===== Card ===== */
+.enterprise-card{
+    background:white;
+    width:100%;
+    max-width:420px;
+    padding:50px 40px;
+    border-radius:18px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.18);
+    animation:fadeUp .8s ease;
+}
+
+/* ===== Title ===== */
+.enterprise-card h1{
+    text-align:center;
+    font-size:1.9rem;
+    font-weight:700;
+    margin-bottom:30px;
+    color:#0f172a;
+    letter-spacing:0.5px;
+}
+
+/* ===== Inputs ===== */
+.form-control-enterprise{
+    width:100%;
+    padding:13px 15px;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    margin-bottom:18px;
+    font-size:0.95rem;
+    transition:.3s;
+}
+
+.form-control-enterprise:focus{
+    border-color:#f59e0b;
+    box-shadow:0 0 0 3px rgba(245,158,11,0.2);
+    outline:none;
+}
+
+/* ===== Button ===== */
+.btn-enterprise{
+    background:#f59e0b;
+    color:white;
+    padding:13px;
+    border-radius:30px;
+    font-weight:600;
+    border:none;
+    width:100%;
+    transition:.3s;
+    letter-spacing:0.4px;
+}
+
+.btn-enterprise:hover{
+    background:#d97706;
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* ===== Alert ===== */
+.alert{
+    border-radius:12px;
+    font-size:0.9rem;
+    padding:10px 15px;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+
+<div class="enterprise-wrapper">
+
+    <div class="enterprise-card">
+
+        <h1>Login to System</h1>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-danger text-center">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="post">
+
+            <input type="text"
+                   name="email"
+                   placeholder="Email"
+                   class="form-control-enterprise"
+                   required>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Password"
+                   class="form-control-enterprise"
+                   required>
+
+            <button type="submit"
+                    class="btn-enterprise">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
 </div>
 
 {% endblock %}
