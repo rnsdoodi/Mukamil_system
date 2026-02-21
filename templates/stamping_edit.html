@@ -11,6 +11,116 @@
 
 {% block content %}
 <br>
+<style>
+
+/* ===== General ===== */
+body{
+    background:#f4f6f9;
+    font-family:'Inter', sans-serif;
+}
+
+/* ===== Top Navbar ===== */
+.sb-topnav{
+    background:linear-gradient(90deg,#0f172a,#1e293b) !important;
+}
+
+.navbar-brand{
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+/* ===== Sidebar ===== */
+.sb-sidenav{
+    background:#0f172a !important;
+}
+
+.sb-sidenav .nav-link{
+    color:#cbd5e1 !important;
+    font-size:.9rem;
+    transition:.2s;
+}
+
+.sb-sidenav .nav-link:hover{
+    background:rgba(255,255,255,.05);
+    color:#f59e0b !important;
+    border-radius:6px;
+}
+
+.sb-sidenav-menu-heading{
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    color:#94a3b8 !important;
+}
+
+/* ===== Page Title ===== */
+h1.mt-4{
+    font-weight:700;
+    color:#0f172a;
+}
+
+/* ===== Stat Cards ===== */
+.card{
+    border:none;
+    border-radius:14px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    transition:.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+.card.bg-primary{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8) !important;
+}
+
+.card.bg-warning{
+    background:linear-gradient(135deg,#f59e0b,#d97706) !important;
+}
+
+.card.bg-success{
+    background:linear-gradient(135deg,#16a34a,#15803d) !important;
+}
+
+.card.bg-danger{
+    background:linear-gradient(135deg,#dc2626,#b91c1c) !important;
+}
+
+.card-body{
+    font-weight:600;
+}
+
+/* ===== Table Styling ===== */
+#datatablesSimple{
+    font-size:.85rem;
+}
+
+#datatablesSimple thead{
+    background:#0f172a;
+    color:white;
+}
+
+#datatablesSimple thead th{
+    text-align:center;
+    font-weight:600;
+}
+
+#datatablesSimple tbody tr{
+    transition:.2s;
+}
+
+#datatablesSimple tbody tr:hover{
+    background:#f1f5f9;
+}
+
+/* ===== Footer ===== */
+footer{
+    font-size:.85rem;
+}
+
+</style>
 <div class="content">
 
     <h1 class="heading" style="text-align:center"><b><u>Update The Visa Stamping Process for ({{user.worker_name}})</u></b> </h1>
