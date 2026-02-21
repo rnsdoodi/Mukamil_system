@@ -179,7 +179,6 @@ class AddUser(FlaskForm):
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
-    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
     deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
     submit = SubmitField('Submit إضافة')
 
