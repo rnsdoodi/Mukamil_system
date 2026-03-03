@@ -8,6 +8,9 @@ from wtforms import TextAreaField
 from wtforms import StringField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
 from wtforms.fields.html5 import DateField
+from datetime import datetime
+from wtforms import StringField, DateField
+from wtforms.validators import Length
 import os
 
 # Flask App
@@ -186,7 +189,8 @@ class AddUser(FlaskForm):
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    deployment_date = TextAreaField('ملاحظات السلالم الدولية ', validators=[length(max=1000)]) # Salalim Remarks
+    deployment_date = TextAreaField('ملاحظات السلالم الدولية ', validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")# Salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -210,9 +214,9 @@ class EditNominatedConsulate(FlaskForm):
     embassy_contract = SelectField('هل تم تجهيز عقد السفارة', choices=["  No", "  Yes"])
     submit = SubmitField('تــعـديــل')
 
-class EditNominatedShipment(FlaskForm):
-    shipment_date = DateField('متى تم إرسال العقد للفلبين ؟', format='%Y-%m-%d')
-    submit = SubmitField('تــعـديــل')
+# class EditNominatedShipment(FlaskForm):
+#     shipment_date = DateField('متى تم إرسال العقد للفلبين ؟', format='%Y-%m-%d')
+#     submit = SubmitField('تــعـديــل')
 
 
 
@@ -250,7 +254,8 @@ class AddSkills(FlaskForm):
 class EditSkills(FlaskForm):
     jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
                                                          "For DMW Approval", "DMW Approved"])
-    shipment_date = TextAreaField(' ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim remarks
+    shipment_date = TextAreaField(' ملاحظات السلالم الدولية', validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")# salalim remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -286,7 +291,8 @@ class EditTransfer(FlaskForm):
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
                                                         "تم نقل الكفالة بنجاح",
                                                         "العاملة رفضت نقل الكفالة وتراجعت"])
-    status = TextAreaField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
+    status = TextAreaField('  ملاحظات ', validators=[DataRequired(), length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('تــعـديــل')
 
 
@@ -337,7 +343,8 @@ class EditNominated(FlaskForm):
     # musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     # embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     # shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    deployment_date = TextAreaField('ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim Remarks
+    deployment_date = TextAreaField('ملاحظات السلالم الدولية', validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")# salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -353,7 +360,8 @@ class AddComplaint(FlaskForm):
 
 
 class EditComplaint(FlaskForm):
-    Status = TextAreaField('ملاحظات', validators=[length(max=1000)])
+    Status = TextAreaField('ملاحظات', validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('تــعـديـل')
 
 
@@ -396,7 +404,8 @@ class DomecEditUser(FlaskForm):
     # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
     # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
     # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
-    status = TextAreaField('PRA Remarks', validators=[length(max=1000)])
+    status = TextAreaField('PRA Remarks', validators=[length(max=1000)],
+    default = lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit Changes')
 
 
@@ -409,7 +418,8 @@ class DomecEditNominated(FlaskForm):
     # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
     # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
     # deployment_date = StringField('Deployment Date', validators=[DataRequired(), length(max=1000)])
-    status = TextAreaField('Domec Remarks', validators=[length(max=1000)])
+    status = TextAreaField('Domec Remarks', validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit Changes')
 
 
@@ -444,8 +454,11 @@ class DomecAddSkills(FlaskForm):
 class DomecEditSkills(FlaskForm):
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    status = TextAreaField('Princess Joy Notess', validators=[length(max=1000)])
+    status = TextAreaField('Princess Joy Notess', validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Update')
+
+
 
 
 class DomecAddComplaint(FlaskForm):
@@ -460,86 +473,106 @@ class DomecAddComplaint(FlaskForm):
 
 
 class DomecEditComplaint(FlaskForm):
-    Status = TextAreaField('Notes', validators=[length(max=1000)])
+    Status = TextAreaField('Notes', validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateMedical(FlaskForm):
-    medical  = TextAreaField("Medical Result", validators=[length(max=1000)])
+    medical  = TextAreaField("Medical Result", validators=[length(max=1000)],
+    default = lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateVaccine(FlaskForm):
-    mmr_vaccine  = TextAreaField("MMR VACCINE", validators=[length(max=1000)])
+    mmr_vaccine  = TextAreaField("MMR VACCINE", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateOwwa(FlaskForm):
-    owwa  = TextAreaField("OWWA", validators=[length(max=1000)])
+    owwa  = TextAreaField("OWWA", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateTesda(FlaskForm):
-    tesda  = TextAreaField("TESDA", validators=[length(max=1000)])
+    tesda  = TextAreaField("TESDA", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateOec(FlaskForm):
-    oec  = TextAreaField("OEC", validators=[length(max=1000)])
+    oec  = TextAreaField("OEC", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateLaborOffice(FlaskForm):
-    oec  = TextAreaField("OEC", validators=[length(max=1000)])
+    oec  = TextAreaField("OEC", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 
 class UpdateBiometric(FlaskForm):
-    biometric  = TextAreaField("Biometric", validators=[length(max=1000)])
+    biometric  = TextAreaField("Biometric", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateStamping(FlaskForm):
-    stamping  = TextAreaField("Visa Stamping", validators=[length(max=1000)])
+    stamping  = TextAreaField("Visa Stamping", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateTicket(FlaskForm):
-    ticket  = TextAreaField("Flight Details/Ticket", validators=[length(max=1000)])
+    ticket  = TextAreaField("Flight Details/Ticket", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateTraining(FlaskForm):
-    owwa = TextAreaField("OWWA Training", validators=[length(max=1000)])
+    owwa = TextAreaField("OWWA Training", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedTraining(FlaskForm):
-    owwa = TextAreaField("Training", validators=[length(max=1000)])
+    owwa = TextAreaField("Training", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 
 
 class UpdateNominatedMedical(FlaskForm):
-    medical  = TextAreaField("Medical Result", validators=[length(max=1000)])
+    medical  = TextAreaField("Medical Result", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedVaccine(FlaskForm):
-    mmr_vaccine  = TextAreaField("MMR VACCINE", validators=[length(max=1000)])
+    mmr_vaccine  = TextAreaField("MMR VACCINE", validators=[length(max=1000)],
+    default = lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedOwwa(FlaskForm):
-    owwa  = TextAreaField("OWWA", validators=[length(max=1000)])
+    owwa  = TextAreaField("OWWA", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedTesda(FlaskForm):
-    tesda  = TextAreaField("TESDA", validators=[length(max=1000)])
+    tesda  = TextAreaField("TESDA", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedOec(FlaskForm):
-    oec  = TextAreaField("OEC", validators=[length(max=1000)])
+    oec  = TextAreaField("OEC", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedBiometric(FlaskForm):
-    biometric  = TextAreaField("Biometric", validators=[length(max=1000)])
+    biometric  = TextAreaField("Biometric", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedStamping(FlaskForm):
-    stamping  = TextAreaField("Visa Stamping", validators=[length(max=1000)])
+    stamping  = TextAreaField("Visa Stamping", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 class UpdateNominatedTicket(FlaskForm):
-    ticket  = TextAreaField("Flight Details/Ticket", validators=[length(max=1000)])
+    ticket  = TextAreaField("Flight Details/Ticket", validators=[length(max=1000)],
+    default=lambda: datetime.today().strftime('Update For %d-%m-%Y -- %H:%M:%S ') + "\n")
     submit = SubmitField('Submit')
 
 #######################################################################################################################
