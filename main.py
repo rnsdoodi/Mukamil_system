@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
+from wtforms import TextAreaField
 from wtforms import StringField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired, length
 from wtforms.fields.html5 import DateField
@@ -179,13 +180,13 @@ class AddUser(FlaskForm):
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
-    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
+    deployment_date = TextAreaField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
     submit = SubmitField('Submit إضافة')
 
 
 # Edit Customer Request Flask Form for (السلالم الدولية)
 class EditUser(FlaskForm):
-    deployment_date = StringField('ملاحظات السلالم الدولية ', validators=[length(max=1000)]) # Salalim Remarks
+    deployment_date = TextAreaField('ملاحظات السلالم الدولية ', validators=[length(max=1000)]) # Salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -240,7 +241,7 @@ class AddSkills(FlaskForm):
     jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
                                                          "For DMW Approval", "DMW Approved",
                                                          "INDIAN IMMIGRATION APPROVED"])
-    shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)])
+    shipment_date = TextAreaField(' ملاحظات السلالم الدولية', validators=[length(max=1000)])
     submit = SubmitField('Add إضافة')
 
 
@@ -249,7 +250,7 @@ class AddSkills(FlaskForm):
 class EditSkills(FlaskForm):
     jo_status = SelectField('حالة الجوب اوردر', choices=["For MWO Verification", "Verified From MWO and sent Via DHL",
                                                          "For DMW Approval", "DMW Approved"])
-    shipment_date = StringField(' ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim remarks
+    shipment_date = TextAreaField(' ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -273,7 +274,7 @@ class AddTransfer(FlaskForm):
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
                                                         "تم نقل الخدمات",
                                                         "العاملة رفضت نقل الكفالة وتراجعت"])
-    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
+    status = TextAreaField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('إضــافـة الطلــب')
 
 
@@ -285,7 +286,7 @@ class EditTransfer(FlaskForm):
                                                         "في انتظار سداد رسوم الإقامة / نقل الكفالة",
                                                         "تم نقل الكفالة بنجاح",
                                                         "العاملة رفضت نقل الكفالة وتراجعت"])
-    status = StringField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
+    status = TextAreaField('  ملاحظات ', validators=[DataRequired(), length(max=1000)])
     submit = SubmitField('تــعـديــل')
 
 
@@ -320,7 +321,7 @@ class AddNominated(FlaskForm):
     # biometric = StringField('Biometric', validators=[length(max=1000)])
     # stamping = StringField('Stamping', validators=[length(max=1000)])
     # oec = StringField('OEC', validators=[length(max=1000)])
-    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
+    deployment_date = TextAreaField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
     # status = StringField(' ملاحظات دوميك', validators=[length(max=1000)])
     submit = SubmitField('Submit إضافة')
 
@@ -336,7 +337,7 @@ class EditNominated(FlaskForm):
     # musaned = SelectField('عقد مساند', choices=["  Yes", "   No"])
     # embassy_contract = SelectField('عقد السفارة', choices=[" Yes", "   No"])
     # shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
-    deployment_date = StringField('ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim Remarks
+    deployment_date = TextAreaField('ملاحظات السلالم الدولية', validators=[length(max=1000)]) # salalim Remarks
     submit = SubmitField('تــعـديــل')
 
 
@@ -347,12 +348,12 @@ class AddComplaint(FlaskForm):
     Employer_contact_No = StringField(' رقم جوال الكفيل', validators=[length(max=200)])
     Deployment_Date = DateField(' تاريخ الوصول', format='%Y-%m-%d')
     Complaint_Description = StringField(' شكوى العاملة', validators=[length(max=1000)])
-    Status = StringField('ملاحظات', validators=[length(max=1000)])
+    Status = TextAreaField('ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('إضـافــة')
 
 
 class EditComplaint(FlaskForm):
-    Status = StringField('ملاحظات', validators=[length(max=1000)])
+    Status = TextAreaField('ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('تــعـديـل')
 
 
@@ -395,7 +396,7 @@ class DomecEditUser(FlaskForm):
     # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
     # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
     # deployment_date = StringField('Deployment Date', validators=[length(max=1000)])
-    status = StringField('PRA Remarks', validators=[length(max=1000)])
+    status = TextAreaField('PRA Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit Changes')
 
 
@@ -408,7 +409,7 @@ class DomecEditNominated(FlaskForm):
     # stamping = StringField('Stamping', validators=[DataRequired(), length(max=1000)])
     # oec = StringField('OEC', validators=[DataRequired(), length(max=1000)])
     # deployment_date = StringField('Deployment Date', validators=[DataRequired(), length(max=1000)])
-    status = StringField('Domec Remarks', validators=[length(max=1000)])
+    status = TextAreaField('Domec Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit Changes')
 
 
@@ -443,7 +444,7 @@ class DomecAddSkills(FlaskForm):
 class DomecEditSkills(FlaskForm):
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    status = StringField('Princess Joy Notess', validators=[length(max=1000)])
+    status = TextAreaField('Princess Joy Notess', validators=[length(max=1000)])
     submit = SubmitField('Update')
 
 
@@ -459,86 +460,86 @@ class DomecAddComplaint(FlaskForm):
 
 
 class DomecEditComplaint(FlaskForm):
-    Status = StringField('Notes', validators=[length(max=1000)])
+    Status = TextAreaField('Notes', validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateMedical(FlaskForm):
-    medical  = StringField("Medical Result", validators=[length(max=1000)])
+    medical  = TextAreaField("Medical Result", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateVaccine(FlaskForm):
-    mmr_vaccine  = StringField("MMR VACCINE", validators=[length(max=1000)])
+    mmr_vaccine  = TextAreaField("MMR VACCINE", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateOwwa(FlaskForm):
-    owwa  = StringField("OWWA", validators=[length(max=1000)])
+    owwa  = TextAreaField("OWWA", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateTesda(FlaskForm):
-    tesda  = StringField("TESDA", validators=[length(max=1000)])
+    tesda  = TextAreaField("TESDA", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateOec(FlaskForm):
-    oec  = StringField("OEC", validators=[length(max=1000)])
+    oec  = TextAreaField("OEC", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateLaborOffice(FlaskForm):
-    oec  = StringField("OEC", validators=[length(max=1000)])
+    oec  = TextAreaField("OEC", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 
 class UpdateBiometric(FlaskForm):
-    biometric  = StringField("Biometric", validators=[length(max=1000)])
+    biometric  = TextAreaField("Biometric", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateStamping(FlaskForm):
-    stamping  = StringField("Visa Stamping", validators=[length(max=1000)])
+    stamping  = TextAreaField("Visa Stamping", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateTicket(FlaskForm):
-    ticket  = StringField("Flight Details/Ticket", validators=[length(max=1000)])
+    ticket  = TextAreaField("Flight Details/Ticket", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateTraining(FlaskForm):
-    owwa = StringField("OWWA Training", validators=[length(max=1000)])
+    owwa = TextAreaField("OWWA Training", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedTraining(FlaskForm):
-    owwa = StringField("Training", validators=[length(max=1000)])
+    owwa = TextAreaField("Training", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 
 
 class UpdateNominatedMedical(FlaskForm):
-    medical  = StringField("Medical Result", validators=[length(max=1000)])
+    medical  = TextAreaField("Medical Result", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedVaccine(FlaskForm):
-    mmr_vaccine  = StringField("MMR VACCINE", validators=[length(max=1000)])
+    mmr_vaccine  = TextAreaField("MMR VACCINE", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedOwwa(FlaskForm):
-    owwa  = StringField("OWWA", validators=[length(max=1000)])
+    owwa  = TextAreaField("OWWA", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedTesda(FlaskForm):
-    tesda  = StringField("TESDA", validators=[length(max=1000)])
+    tesda  = TextAreaField("TESDA", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedOec(FlaskForm):
-    oec  = StringField("OEC", validators=[length(max=1000)])
+    oec  = TextAreaField("OEC", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedBiometric(FlaskForm):
-    biometric  = StringField("Biometric", validators=[length(max=1000)])
+    biometric  = TextAreaField("Biometric", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedStamping(FlaskForm):
-    stamping  = StringField("Visa Stamping", validators=[length(max=1000)])
+    stamping  = TextAreaField("Visa Stamping", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 class UpdateNominatedTicket(FlaskForm):
-    ticket  = StringField("Flight Details/Ticket", validators=[length(max=1000)])
+    ticket  = TextAreaField("Flight Details/Ticket", validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
 #######################################################################################################################
