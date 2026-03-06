@@ -5,13 +5,17 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField
-from wtforms import StringField, SubmitField, SelectField, IntegerField
-from wtforms.validators import DataRequired, length
-from wtforms.fields.html5 import DateField
+from wtforms import SelectField, IntegerField
+from wtforms.validators import length
 from datetime import datetime
-from wtforms import StringField, DateField
-from wtforms.validators import Length
+from wtforms import StringField
+from wtforms import DateField, SubmitField
+from wtforms.validators import DataRequired
+from wtforms.fields import DateField
+from wtforms.widgets import html5 as widgets
 import os
+
+
 
 # Flask App
 app = Flask(__name__)
@@ -57,7 +61,7 @@ class Users(db.Model):
     selected_or_recommended = db.Column(db.String(250), nullable=False)
     musaned = db.Column(db.String(250), nullable=False)
     embassy_contract = db.Column(db.String(250), nullable=False)
-    shipment_date = db.Column(db.Date, nullable=False)
+    shipment_date = db.Column(db.Date, nullable=True)
     medical = db.Column(db.String(500), nullable=True)
     mmr_vaccine = db.Column(db.String(500), nullable=True)
     owwa = db.Column(db.String(500), nullable=True)
@@ -173,7 +177,7 @@ class AddUser(FlaskForm):
                              description='05xxxxxxxx : مثال')
     visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                        description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    request_date = DateField('تاريخ الطلب', validators=[DataRequired()], format='%Y-%m-%d')
+    request_date = DateField('تاريخ الطلب', validators=[DataRequired()], format='%Y-%m-%d',render_kw={"type": "date"})
     worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
     type = SelectField('المهنة',
@@ -183,6 +187,7 @@ class AddUser(FlaskForm):
     selected_or_recommended = SelectField('معينة ام مختارة', choices=[" Selected"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
+    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d',render_kw={"type": "date"})
     deployment_date = TextAreaField('ملاحظات السلالم الدولية', validators=[length(max=1000)])  # Salalim Remarks
     submit = SubmitField('Submit إضافة')
 
@@ -271,7 +276,7 @@ class AddTransfer(FlaskForm):
     second_employer_name = StringField('اسم الكفيل الثاني', validators=[DataRequired(), length(max=100)])
     second_contact_no = IntegerField('رقم جوال الكفيل الثاني', validators=[DataRequired()],
                                      description='ادخل رقم جوال صالح مكون من 10 ارقام ')
-    request_date = DateField(' تاريخ الطلب', format='%Y-%m-%d')
+    request_date = DateField(' تاريخ الطلب', format='%Y-%m-%d',render_kw={"type": "date"})
     iqama = SelectField(' الإقامة', choices=["نعم", "لا"])
     agency = SelectField('المكتب', choices=["Princess Joy"])
     request_status = SelectField('حالة الطلب', choices=["العاملة في فترة التجربة",
@@ -305,7 +310,7 @@ class AddNominated(FlaskForm):
                            description='05xxxxxxxx : مثال')
     n_visa = StringField('رقم التأشيرة', validators=[DataRequired(), length(max=10)],
                          description="ادخل رقم تأشيرة صالح مكون من 10 ارقام")
-    n_request_date = DateField('تاريخ الطلب', validators=[DataRequired()], format='%Y-%m-%d')
+    n_request_date = DateField('تاريخ الطلب',format='%Y-%m-%d',render_kw={"type": "date"})
     worker_name = StringField('إسم العاملة', validators=[DataRequired(), length(max=150)],
                               description='كما هو مدون في جواز السفر')
 
@@ -318,7 +323,7 @@ class AddNominated(FlaskForm):
                                           choices=[" Recommended"])
     musaned = SelectField('عقد مساند', choices=["  No", "   Yes"])
     embassy_contract = SelectField('عقد السفارة', choices=["  No", "  Yes"])
-    shipment_date = DateField(' تاريخ الإرسالية', format='%Y-%m-%d')
+    shipment_date = DateField(' تاريخ الإرسالية',format='%Y-%m-%d',render_kw={"type": "date"})
     ppt_image = StringField('صــورة الـجواز ', validators=[DataRequired(), length(max=2000)])
     # medical = StringField('Medical', validators=[length(max=1000)])
     # mmr_vaccine = StringField('MMR-VACCINE', validators=[length(max=1000)])
@@ -353,7 +358,7 @@ class AddComplaint(FlaskForm):
     Employer_name = StringField('اسم الكفيل', validators=[length(max=200)])
     Worker_contact_No = StringField('رقم جوال العاملة', validators=[length(max=200)])
     Employer_contact_No = StringField(' رقم جوال الكفيل', validators=[length(max=200)])
-    Deployment_Date = DateField(' تاريخ الوصول', format='%Y-%m-%d')
+    Deployment_Date = DateField(' تاريخ الوصول', format='%Y-%m-%d',render_kw={"type": "date"})
     Complaint_Description = StringField(' شكوى العاملة', validators=[length(max=1000)])
     Status = TextAreaField('ملاحظات', validators=[length(max=1000)])
     submit = SubmitField('إضـافــة')
@@ -377,7 +382,7 @@ class AddCustomer(FlaskForm):
                              description='example : 05xxxxxxxx')
     visa = StringField('Visa No.', validators=[DataRequired(), length(max=10)],
                        description="Please insert correct 10 digits visa No.")
-    visa_date = DateField('Request Date', validators=[DataRequired()], format='%Y-%m-%d')
+    visa_date = DateField('Request Date', validators=[DataRequired()], format='%Y-%m-%d',render_kw={"type": "date"})
     worker_name = StringField('Worker Name', validators=[DataRequired(), length(max=150)],
                               description='As per the Passport')
     type = SelectField('Position',
@@ -388,7 +393,7 @@ class AddCustomer(FlaskForm):
                                           choices=[" Recommended", " Selected"])
     musaned = SelectField('Musaned Contract', choices=["  Yes", "   No"])
     embassy_contract = SelectField('Original Contract', choices=["  Yes", "  No"])
-    shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
+    shipment_date = DateField(' Shipment Date', format='%Y-%m-%d',render_kw={"type": "date"})
     status = StringField('Remarks', validators=[length(max=1000)])
     submit = SubmitField('Submit')
 
@@ -444,7 +449,7 @@ class DomecAddSkills(FlaskForm):
     agency = SelectField('Agency', choices=["Injaz Alkawader", "Myriad", "Reenkam"])
     jo_status = SelectField('Job Order Status', choices=["For POLO Verification", "Verified From POLO and sent Via DHL",
                                                          "For POEA Approval", "POEA Approved"])
-    shipment_date = DateField(' Shipment Date', format='%Y-%m-%d')
+    shipment_date = DateField(' Shipment Date', format='%Y-%m-%d',render_kw={"type": "date"})
     status = StringField(' Remarks', validators=[length(max=500)])
     submit = SubmitField('Submit')
 
@@ -466,7 +471,7 @@ class DomecAddComplaint(FlaskForm):
     Employer_name = StringField('Employer Name', validators=[length(max=200)])
     Worker_contact_No = StringField('Worker Contact No.', validators=[length(max=200)])
     Employer_contact_No = StringField('Employer Contact No.', validators=[length(max=200)])
-    Deployment_Date = DateField(' Deployment Date', format='%Y-%m-%d')
+    Deployment_Date = DateField(' Deployment Date', format='%Y-%m-%d',render_kw={"type": "date"})
     Complaint_Description = StringField('Complaint Details', validators=[length(max=1000)])
     Status = StringField('Complaint Status', validators=[length(max=1000)])
     submit = SubmitField('Submit')
