@@ -658,12 +658,38 @@ def index():
     return render_template("index.html", users=all_users)
 
 
+# @app.route("/index.html")
+# @login_required
+# def home():
+#     all_users = Users.query.all()
+#     return render_template("index.html", users=all_users, name=current_user.name, logged_in=True)
+
+
 @app.route("/index.html")
 @login_required
 def home():
-    all_users = Users.query.all()
-    return render_template("index.html", users=all_users, name=current_user.name, logged_in=True)
+    # جلب جميع البيانات
+    all_users = Users.query.all()          # طلبات مختارة Selected
+    all_nominates = Nominated.query.all()  # طلبات معينة Recommended
+    all_transfers = Transfer.query.all()   # طلبات نقل الكفالة
+    all_complaints = Complaint.query.all() # شكاوى
 
+    # حساب الإحصائيات
+    selected_count = len(all_users)        # كل الطلبات في Users تعتبر Selected
+    recommended_count = len(all_nominates) # كل الطلبات في Nominated تعتبر Recommended
+    complaints_count = len(all_complaints) # كل الشكاوى
+    transfer_count = len(all_transfers)    # كل طلبات نقل الكفالة
+
+    return render_template(
+        "index.html",
+        users=all_users,
+        name=current_user.name,
+        logged_in=True,
+        selected_count=selected_count,
+        recommended_count=recommended_count,
+        complaints_count=complaints_count,
+        transfer_count=transfer_count
+    )
 
 @app.route("/skills_index")
 @login_required
@@ -679,11 +705,40 @@ def transfer():
     return render_template("transfer_index.html", transfers=all_transfers, name=current_user.name, logged_in=True)
 
 
+# @app.route("/nominated_index")
+# @login_required
+# def nominated():
+#     all_nominates = Nominated.query.all()
+#     return render_template("nominated_index.html", nominates=all_nominates, name=current_user.name, logged_in=True)
+
+
 @app.route("/nominated_index")
 @login_required
 def nominated():
-    all_nominates = Nominated.query.all()
-    return render_template("nominated_index.html", nominates=all_nominates, name=current_user.name, logged_in=True)
+    # جلب جميع البيانات
+    all_users = Users.query.all()          # طلبات مختارة Selected
+    all_nominates = Nominated.query.all()  # طلبات معينة Recommended
+    all_transfers = Transfer.query.all()   # طلبات نقل الكفالة
+    all_complaints = Complaint.query.all() # شكاوى
+
+    # حساب الإحصائيات
+    selected_count = len(all_users)        # كل الطلبات في Users تعتبر Selected
+    recommended_count = len(all_nominates) # كل الطلبات في Nominated تعتبر Recommended
+    complaints_count = len(all_complaints) # كل الشكاوى
+    transfer_count = len(all_transfers)    # كل طلبات نقل الكفالة
+
+    return render_template(
+        "nominated_index.html",
+        nominates=all_nominates,
+        name=current_user.name,
+        logged_in=True,
+        selected_count=selected_count,
+        recommended_count=recommended_count,
+        complaints_count=complaints_count,
+        transfer_count=transfer_count
+    )
+
+
 
 
 @app.route("/complaint_index")

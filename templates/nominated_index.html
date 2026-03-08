@@ -338,28 +338,62 @@ body{
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-
-<!--                                        <i class="fas fa-chart-area me-1"></i>-->
-
-                                    </div>
-                                    <div class="card-body" style="text-align:center;width:90%;"><img src="static/assets/img/PJ.png" style="width:37.4% "><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-<!--                                        <i class="fas fa-chart-bar me-1"></i>-->
+       <div class="row g-4">
 
 
-                                    </div>
-                                    <div class="card-body" style="text-align:right"><img src="static/assets/img/salalim.jpg" style="width:75%"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
+
+ <div class="col-xl-3 col-md-6">
+        <div class="card p-3 shadow-sm h-100">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-muted">طلبات نقل الكفالة</h6>
+                    <h2 class="fw-bold">{{ transfer_count }}</h2>
+                </div>
+                <i class="fas fa-exchange-alt fa-2x text-info"></i>
+            </div>
+            <a href="{{url_for('transfer_list')}}" class="stretched-link text-decoration-none"></a>
+        </div>
+    </div>
+
+<div class="col-xl-3 col-md-6">
+        <div class="card p-3 shadow-sm h-100">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-muted">الشكاوى</h6>
+                    <h2 class="fw-bold">{{ complaints_count }}</h2>
+                </div>
+                <i class="fas fa-exclamation-circle fa-2x text-warning"></i>
+            </div>
+            <a href="{{url_for('complaint_list')}}" class="stretched-link text-decoration-none"></a>
+        </div>
+    </div>
+
+<div class="col-xl-3 col-md-6">
+        <div class="card p-3 shadow-sm h-100">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-muted">طلبات معينة</h6>
+                    <h2 class="fw-bold">{{ recommended_count }}</h2>
+                </div>
+                <i class="fas fa-user-check fa-2x text-success"></i>
+            </div>
+            <a href="{{url_for('nominated_list')}}" class="stretched-link text-decoration-none"></a>
+        </div>
+    </div>
+
+<div class="col-xl-3 col-md-6">
+        <div class="card p-3 shadow-sm h-100">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="text-muted">طلبات مختارة</h6>
+                    <h2 class="fw-bold">{{ selected_count }}</h2>
+                </div>
+                <i class="fas fa-users fa-2x text-primary"></i>
+            </div>
+            <a href="{{url_for('users_list')}}" class="stretched-link text-decoration-none"></a>
+        </div>
+    </div>
+</div>
 
 
 
