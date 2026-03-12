@@ -638,7 +638,7 @@ def login():
             return redirect(url_for('login'))
         else:
             login_user(user)
-            return redirect(url_for('home'))
+            return redirect(url_for('dashboard'))
 
     return render_template("login.html", logged_in=current_user.is_authenticated)
 
@@ -651,6 +651,22 @@ def logout():
 
 #######################################################################################################################
 # Backend For (السلالم الدولية ) including the CRUD Operations form the DB #
+
+@app.route("/dashboard")
+def dashboard():
+    selected_count = Users.query.count()
+    recommended_count = Nominated.query.count()
+    skills_count = Skilled.query.count()
+    complaint_count = Complaint.query.count()
+    transfer_count = Transfer.query.count()
+
+    return render_template(
+        "dashboard.html",
+        selected_count=selected_count,
+        recommended_count=recommended_count,
+        skills_count=skills_count,
+        complaint_count=complaint_count,transfer_count=transfer_count)
+
 
 @app.route("/")
 def index():
