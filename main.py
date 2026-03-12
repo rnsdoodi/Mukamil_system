@@ -755,8 +755,6 @@ def nominated():
     )
 
 
-
-
 @app.route("/complaint_index")
 @login_required
 def complaint():
