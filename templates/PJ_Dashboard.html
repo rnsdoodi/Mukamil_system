@@ -175,6 +175,8 @@
         .bg-skills { background: linear-gradient(135deg, #ffb703, #fb8500); }
         .bg-transfer { background: linear-gradient(135deg, #9c89b8, #7b5ea7); }
         .bg-complaint { background: linear-gradient(135deg, #ef476f, #b7094c); }
+        /* Logout button color */
+        .bg-logout { background: linear-gradient(135deg, #dc3545, #b02a37); }
 
         /* Text and title colors */
         .type-selected { color: #4361ee; }
@@ -296,6 +298,38 @@
             font-weight: 600 !important;
         }
 
+        /* Logout button styling */
+        .logout-btn {
+            background: linear-gradient(135deg, #dc3545, #b02a37) !important;
+            color: white !important;
+            padding: 10px 25px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 15px;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+            color: white;
+        }
+
+        .logout-btn i {
+            font-size: 16px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         /* Mobile optimization */
         @media (max-width: 768px) {
             .counter {
@@ -308,6 +342,28 @@
 
             .report-section .btn {
                 padding: 12px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .logout-btn {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .update-badge {
+                width: 100%;
+                text-align: center;
             }
         }
 
@@ -335,16 +391,22 @@
 
 <div class="container-fluid py-4 px-4">
 
-    <!-- Enhanced page header -->
+    <!-- Enhanced page header with logout button -->
     <div class="page-header d-flex justify-content-between align-items-center">
         <h2 class="fw-bold mb-0">
             <i class="fas fa-chart-pie me-2" style="color: #667eea;"></i>
             Dashboard
         </h2>
-        <span class="update-badge">
-            <i class="fas fa-sync fa-spin me-2"></i>
-            Last Update: {{ now.strftime('%Y-%m-%d %H:%M') if now else 'Live' }}
-        </span>
+        <div class="header-actions">
+            <span class="update-badge">
+                <i class="fas fa-sync fa-spin me-2"></i>
+                Last Update: {{ now.strftime('%Y-%m-%d %H:%M') if now else 'Live' }}
+            </span>
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
     </div>
 
     <div class="row g-4">
@@ -412,28 +474,7 @@
             </div>
         </div>
 
-<!--        &lt;!&ndash; Services Transfer Card &ndash;&gt;-->
-<!--        <div class="col-xl-3 col-md-6">-->
-<!--            <div class="dashboard-card card-transfer">-->
-<!--                <div class="card-body-content">-->
-<!--                    <div class="card-title type-transfer">-->
-<!--                        <i class="fas fa-exchange-alt fa-fw"></i>-->
-<!--                        Services Transfer-->
-<!--                    </div>-->
-<!--                    <canvas id="transChart"></canvas>-->
-<!--                    <div class="counter type-transfer">{{ transfer_count|default(18) }}</div>-->
-<!--                    <p class="text-muted small">-->
-<!--                        <i class="fas fa-truck me-1"></i>-->
-<!--                        Total Transfer Requests-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--                <a href="{{ url_for('transfer') }}" class="card-footer-btn bg-transfer">-->
-<!--                    View Details <i class="fas fa-arrow-right ms-2"></i>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
-
-        <!-- OFW Complaints Card (takes full width in new row) -->
+        <!-- OFW Complaints Card -->
         <div class="col-xl-3 col-md-6">
             <div class="dashboard-card card-complaint">
                 <div class="card-body-content">
@@ -486,13 +527,6 @@
                             <small class="d-block mt-1 opacity-75">View full details</small>
                         </a>
                     </div>
-<!--                    <div class="col-md-3">-->
-<!--                        <a href="{{ url_for('transfer') }}" class="btn btn-outline-dark w-100 py-3">-->
-<!--                            <i class="fas fa-truck mb-2 d-block fs-4"></i>-->
-<!--                            <span>Transfer Services Report</span>-->
-<!--                            <small class="d-block mt-1 opacity-75">View full details</small>-->
-<!--                        </a>-->
-<!--                    </div>-->
                     <div class="col-md-3">
                         <a href="{{url_for('domec_complaints_tables')}}" class="btn btn-outline-danger w-100 py-3">
                             <i class="fas fa-headset mb-2 d-block fs-4"></i>
@@ -587,6 +621,13 @@ function updateTime() {
 
 // Update every minute
 setInterval(updateTime, 60000);
+
+// Confirm logout
+document.querySelector('.logout-btn')?.addEventListener('click', function(e) {
+    if (!confirm('Are you sure you want to logout?')) {
+        e.preventDefault();
+    }
+});
 </script>
 
 </body>
