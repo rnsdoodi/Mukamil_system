@@ -1358,7 +1358,7 @@ def PJ_dashboard():
     transfer_count = Transfer.query.count()
 
     return render_template(
-        "PJ_dashboard.html",
+        "PJ_Dashboard.html",
         selected_count=selected_count,
         recommended_count=recommended_count,
         skills_count=skills_count,
