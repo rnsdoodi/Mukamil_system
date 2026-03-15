@@ -1258,7 +1258,7 @@ def domec_login():
             return redirect(url_for('domec_login'))
         else:
             login_user(user)
-            return redirect(url_for('domec_home'))
+            return redirect(url_for('PJ_dashboard()'))
 
     return render_template("domec_login.html", logged_in=current_user.is_authenticated)
 
@@ -1346,6 +1346,23 @@ def domec_index():
 def domec_home():
     all_users = Users.query.all()
     return render_template("domec_index.html", users=all_users, name=current_user.name, logged_in=True)
+
+
+
+@app.route("/pj_dashboard")
+def PJ_dashboard():
+    selected_count = Users.query.count()
+    recommended_count = Nominated.query.count()
+    skills_count = Skilled.query.count()
+    complaint_count = Complaint.query.count()
+    transfer_count = Transfer.query.count()
+
+    return render_template(
+        "PJ_dashboard.html",
+        selected_count=selected_count,
+        recommended_count=recommended_count,
+        skills_count=skills_count,
+        complaint_count=complaint_count,transfer_count=transfer_count)
 
 
 @app.route("/domec-nominated-index.html")

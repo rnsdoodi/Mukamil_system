@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princess Joy Placement & General Services Inc.</title>
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon2.ico" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Custom colors for each card */
+        :root {
+            --selected-primary: #4361ee;
+            --selected-gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --recommended-primary: #06d6a0;
+            --recommended-gradient: linear-gradient(135deg, #06d6a0, #118ab2);
+            --skills-primary: #ffb703;
+            --skills-gradient: linear-gradient(135deg, #ffb703, #fb8500);
+            --transfer-primary: #9c89b8;
+            --transfer-gradient: linear-gradient(135deg, #9c89b8, #7b5ea7);
+            --complaint-primary: #ef476f;
+            --complaint-gradient: linear-gradient(135deg, #ef476f, #b7094c);
+        }
+
+        /* Enhanced card design */
+        .dashboard-card {
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: none;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+        }
+
+        /* Colored top bar for each card */
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--card-gradient, linear-gradient(90deg, #4361ee, #3a0ca3));
+        }
+
+        /* Custom top bars per card type */
+        .card-selected::before { background: linear-gradient(90deg, #4361ee, #3a0ca3); }
+        .card-recommended::before { background: linear-gradient(90deg, #06d6a0, #118ab2); }
+        .card-skills::before { background: linear-gradient(90deg, #ffb703, #fb8500); }
+        .card-transfer::before { background: linear-gradient(90deg, #9c89b8, #7b5ea7); }
+        .card-complaint::before { background: linear-gradient(90deg, #ef476f, #b7094c); }
+
+        .card-body-content {
+            padding: 25px;
+            flex-grow: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Title icon with circular background */
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            background: rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover .card-title {
+            transform: scale(1.05);
+        }
+
+        .card-title i {
+            font-size: 20px;
+        }
+
+        /* Counter styling */
+        .counter {
+            font-size: 48px;
+            font-weight: 800;
+            margin: 15px 0;
+            line-height: 1;
+            background: linear-gradient(135deg, currentColor 0%, #333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Small text */
+        .text-muted {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+
+        /* Professional footer buttons */
+        .card-footer-btn {
+            border: none;
+            border-radius: 0;
+            padding: 15px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card-footer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card-footer-btn:hover::before {
+            left: 100%;
+        }
+
+        .card-footer-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .card-footer-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Button background colors */
+        .bg-selected { background: linear-gradient(135deg, #4361ee, #3a0ca3); }
+        .bg-recommended { background: linear-gradient(135deg, #06d6a0, #118ab2); }
+        .bg-skills { background: linear-gradient(135deg, #ffb703, #fb8500); }
+        .bg-transfer { background: linear-gradient(135deg, #9c89b8, #7b5ea7); }
+        .bg-complaint { background: linear-gradient(135deg, #ef476f, #b7094c); }
+
+        /* Text and title colors */
+        .type-selected { color: #4361ee; }
+        .type-recommended { color: #06d6a0; }
+        .type-skills { color: #ffb703; }
+        .type-transfer { color: #9c89b8; }
+        .type-complaint { color: #ef476f; }
+
+        /* Reports section styling */
+        .report-section {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-top: 30px;
+        }
+
+        .report-section h4 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #2d3748;
+            position: relative;
+            display: inline-block;
+        }
+
+        .report-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Report buttons styling */
+        .report-section .btn {
+            border-radius: 15px;
+            padding: 18px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            color: #2d3748;
+        }
+
+        .report-section .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: currentColor;
+        }
+
+        .report-section .btn-outline-primary:hover {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            color: white;
+        }
+        .report-section .btn-outline-success:hover {
+            background: linear-gradient(135deg, #06d6a0, #118ab2);
+            color: white;
+        }
+        .report-section .btn-outline-warning:hover {
+            background: linear-gradient(135deg, #ffb703, #fb8500);
+            color: white;
+        }
+        .report-section .btn-outline-dark:hover {
+            background: linear-gradient(135deg, #9c89b8, #7b5ea7);
+            color: white;
+        }
+        .report-section .btn-outline-danger:hover {
+            background: linear-gradient(135deg, #ef476f, #b7094c);
+            color: white;
+        }
+
+        .report-section .btn i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* Chart styling */
+        canvas {
+            max-height: 140px;
+            margin: 15px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-card:hover canvas {
+            transform: scale(1.05);
+        }
+
+        /* Header enhancement */
+        .page-header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .page-header h2 {
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .update-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2) !important;
+            color: white !important;
+            padding: 10px 20px !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .counter {
+                font-size: 36px;
+            }
+
+            .card-title {
+                font-size: 16px;
+            }
+
+            .report-section .btn {
+                padding: 12px;
+            }
+        }
+
+        /* Shine effect for cards */
+        .dashboard-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .dashboard-card:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid py-4 px-4">
+
+    <!-- Enhanced page header -->
+    <div class="page-header d-flex justify-content-between align-items-center">
+        <h2 class="fw-bold mb-0">
+            <i class="fas fa-chart-pie me-2" style="color: #667eea;"></i>
+            Dashboard
+        </h2>
+        <span class="update-badge">
+            <i class="fas fa-sync fa-spin me-2"></i>
+            Last Update: {{ now.strftime('%Y-%m-%d %H:%M') if now else 'Live' }}
+        </span>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Selected OFW Card -->
+        <div class="col-xl-3 col-md-6">
+            <div class="dashboard-card card-selected">
+                <div class="card-body-content">
+                    <div class="card-title type-selected">
+                        <i class="fas fa-user-check fa-fw"></i>
+                        Selected OFW
+                    </div>
+                    <canvas id="selectedChart"></canvas>
+                    <div class="counter type-selected">{{ selected_count|default(12) }}</div>
+                    <p class="text-muted small">
+                        <i class="fas fa-file-contract me-1"></i>
+                        Total Active Contracts
+                    </p>
+                </div>
+                <a href="{{ url_for('domec_home') }}" class="card-footer-btn bg-selected">
+                    View Details <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recommended OFW Card -->
+        <div class="col-xl-3 col-md-6">
+            <div class="dashboard-card card-recommended">
+                <div class="card-body-content">
+                    <div class="card-title type-recommended">
+                        <i class="fas fa-user-tie fa-fw"></i>
+                        Recommended OFW
+                    </div>
+                    <canvas id="recommendedChart"></canvas>
+                    <div class="counter type-recommended">{{ recommended_count|default(8) }}</div>
+                    <p class="text-muted small">
+                        <i class="fas fa-briefcase me-1"></i>
+                        Total Active Contracts
+                    </p>
+                </div>
+                <a href="{{ url_for('domec_nominated_home') }}" class="card-footer-btn bg-recommended">
+                    View Details <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Skills Workers Card -->
+        <div class="col-xl-3 col-md-6">
+            <div class="dashboard-card card-skills">
+                <div class="card-body-content">
+                    <div class="card-title type-skills">
+                        <i class="fas fa-tools fa-fw"></i>
+                        Skills Workers
+                    </div>
+                    <canvas id="skillsChart"></canvas>
+                    <div class="counter type-skills">{{ skills_count|default(25) }}</div>
+                    <p class="text-muted small">
+                        <i class="fas fa-clipboard-list me-1"></i>
+                        Total Skills Requests
+                    </p>
+                </div>
+                <a href="{{ url_for('dom_skills') }}" class="card-footer-btn bg-skills">
+                    View Details <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+
+<!--        &lt;!&ndash; Services Transfer Card &ndash;&gt;-->
+<!--        <div class="col-xl-3 col-md-6">-->
+<!--            <div class="dashboard-card card-transfer">-->
+<!--                <div class="card-body-content">-->
+<!--                    <div class="card-title type-transfer">-->
+<!--                        <i class="fas fa-exchange-alt fa-fw"></i>-->
+<!--                        Services Transfer-->
+<!--                    </div>-->
+<!--                    <canvas id="transChart"></canvas>-->
+<!--                    <div class="counter type-transfer">{{ transfer_count|default(18) }}</div>-->
+<!--                    <p class="text-muted small">-->
+<!--                        <i class="fas fa-truck me-1"></i>-->
+<!--                        Total Transfer Requests-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--                <a href="{{ url_for('transfer') }}" class="card-footer-btn bg-transfer">-->
+<!--                    View Details <i class="fas fa-arrow-right ms-2"></i>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <!-- OFW Complaints Card (takes full width in new row) -->
+        <div class="col-xl-3 col-md-6">
+            <div class="dashboard-card card-complaint">
+                <div class="card-body-content">
+                    <div class="card-title type-complaint">
+                        <i class="fas fa-exclamation-triangle fa-fw"></i>
+                        OFW Complaints
+                    </div>
+                    <canvas id="complaintChart"></canvas>
+                    <div class="counter type-complaint">{{ complaint_count|default(3) }}</div>
+                    <p class="text-muted small">
+                        <i class="fas fa-clock me-1"></i>
+                        Total Complaints
+                    </p>
+                </div>
+                <a href="{{ url_for('dom_complaint') }}" class="card-footer-btn bg-complaint">
+                    View Details <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Enhanced Reports Section -->
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <div class="report-section">
+                <h4 class="mb-4 fw-bold">
+                    <i class="fas fa-file-export me-2" style="color: #667eea;"></i>
+                    Quick Reports Center
+                </h4>
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <a href="{{ url_for('domec_tables') }}" class="btn btn-outline-primary w-100 py-3">
+                            <i class="fas fa-table mb-2 d-block fs-4"></i>
+                            <span>Selected OFW Report</span>
+                            <small class="d-block mt-1 opacity-75">View full details</small>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('domec_nominated_tables') }}" class="btn btn-outline-success w-100 py-3">
+                            <i class="fas fa-file-invoice mb-2 d-block fs-4"></i>
+                            <span>Recommended OFW Report</span>
+                            <small class="d-block mt-1 opacity-75">View full details</small>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('domec_skills_tables') }}" class="btn btn-outline-warning w-100 py-3">
+                            <i class="fas fa-chart-bar mb-2 d-block fs-4"></i>
+                            <span>Skills Workers Report</span>
+                            <small class="d-block mt-1 opacity-75">View full details</small>
+                        </a>
+                    </div>
+<!--                    <div class="col-md-3">-->
+<!--                        <a href="{{ url_for('transfer') }}" class="btn btn-outline-dark w-100 py-3">-->
+<!--                            <i class="fas fa-truck mb-2 d-block fs-4"></i>-->
+<!--                            <span>Transfer Services Report</span>-->
+<!--                            <small class="d-block mt-1 opacity-75">View full details</small>-->
+<!--                        </a>-->
+<!--                    </div>-->
+                    <div class="col-md-3">
+                        <a href="{{url_for('domec_complaints_tables')}}" class="btn btn-outline-danger w-100 py-3">
+                            <i class="fas fa-headset mb-2 d-block fs-4"></i>
+                            <span>Complaints Report</span>
+                            <small class="d-block mt-1 opacity-75">View full details</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Enhanced dynamic chart function
+function makeDynamicChart(id, countValue, color) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+
+    // Use dynamic max value
+    const maxValue = Math.max(100, countValue * 2);
+    const remaining = Math.max(0, maxValue - countValue);
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Completed', 'Remaining'],
+            datasets: [{
+                data: [countValue, remaining],
+                backgroundColor: [color, '#f1f5f9'],
+                borderWidth: 0,
+                hoverOffset: 8,
+                borderRadius: 10,
+                spacing: 2
+            }]
+        },
+        options: {
+            cutout: '75%',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#2d3748',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    padding: 12,
+                    cornerRadius: 8,
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.raw} requests`;
+                        }
+                    }
+                }
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true,
+                duration: 2000,
+                easing: 'easeInOutQuart'
+            }
+        }
+    });
+}
+
+// Call the function with values
+document.addEventListener('DOMContentLoaded', function() {
+    makeDynamicChart("selectedChart", {{ selected_count|default(0) }}, "#4361ee");
+    makeDynamicChart("recommendedChart", {{ recommended_count|default(0) }}, "#06d6a0");
+    makeDynamicChart("skillsChart", {{ skills_count|default(0) }}, "#ffb703");
+    makeDynamicChart("complaintChart", {{ complaint_count|default(0) }}, "#ef476f");
+    makeDynamicChart("transChart", {{ transfer_count|default(0) }}, "#9c89b8");
+});
+</script>
+
+<!-- Digital clock for updates -->
+<script>
+// Dynamic time update
+function updateTime() {
+    const now = new Date();
+    const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    };
+    document.querySelector('.update-badge').innerHTML = `<i class="fas fa-sync fa-spin me-2"></i>Last Update: ${now.toLocaleString('en-US', options)}`;
+}
+
+// Update every minute
+setInterval(updateTime, 60000);
+</script>
+
+</body>
+</html>
