@@ -1258,7 +1258,7 @@ def domec_login():
             return redirect(url_for('domec_login'))
         else:
             login_user(user)
-            return redirect(url_for('PJ_dashboard()'))
+            return redirect(url_for('PJ_dashboard'))
 
     return render_template("domec_login.html", logged_in=current_user.is_authenticated)
 
