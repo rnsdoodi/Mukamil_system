@@ -18,10 +18,17 @@
 ========================= */
 :root{
     --primary:#2563eb;
+    --primary-dark:#1d4ed8;
     --dark:#0f172a;
     --sidebar:#111827;
+    --sidebar-hover:#1e293b;
     --light-bg:#f8fafc;
     --border:#e5e7eb;
+    --table-header: #1e293b;
+    --table-header-text: #ffffff;
+    --table-row-hover: #f1f5f9;
+    --table-border: #e2e8f0;
+    --table-stripe: #f8fafc;
 }
 
 /* خلفية عامة */
@@ -77,25 +84,314 @@ body{
 .card.bg-primary{ background:#3b82f6 !important; }
 
 /* =========================
-   TABLE
+   MODERN TABLE STYLING
 ========================= */
-#datatablesSimple{
-    background:white;
-    border-radius:14px;
-    overflow:hidden;
+#datatablesSimple {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100% !important;
+    margin-top: 20px;
 }
 
-#datatablesSimple thead{
-    background:#1e293b;
-    color:white;
+#datatablesSimple thead {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: white;
 }
 
-#datatablesSimple thead th{
-    border-bottom:3px solid #3b82f6;
+#datatablesSimple thead th {
+    padding: 16px 12px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 3px solid var(--primary);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-#datatablesSimple tbody tr:hover{
-    background:#f1f5f9;
+#datatablesSimple thead th:first-child {
+    border-top-right-radius: 16px;
+}
+
+#datatablesSimple thead th:last-child {
+    border-top-left-radius: 16px;
+}
+
+#datatablesSimple tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--border);
+}
+
+#datatablesSimple tbody tr:hover {
+    background-color: var(--table-row-hover) !important;
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#datatablesSimple tbody tr:nth-child(even) {
+    background-color: var(--table-stripe);
+}
+
+#datatablesSimple tbody td {
+    padding: 14px 10px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border);
+}
+
+/* تنسيق خاص لأزرار الإجراءات */
+#datatablesSimple tbody td:first-child {
+    background-color: #f8fafc;
+    font-weight: 600;
+    min-width: 90px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    width: 80px;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.action-btn.edit {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.action-btn.edit:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+    border-color: var(--primary);
+}
+
+.action-btn.delete {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.action-btn.delete:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+    border-color: #ef4444;
+}
+
+.action-btn i {
+    font-size: 14px;
+}
+
+/* تنسيق badge الحالة */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* ألوان مختلفة للحالات */
+.status-badge.pending {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.status-badge.resolved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.processing {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.status-badge.cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* تنسيق خاص للأعمدة المهمة */
+#datatablesSimple tbody td:nth-child(2) {
+    /* عمود الحالة */
+    font-weight: 600;
+}
+
+#datatablesSimple tbody td:nth-child(3) {
+    /* وصف الشكوى */
+    text-align: right;
+    max-width: 300px;
+    white-space: normal;
+    line-height: 1.5;
+}
+
+#datatablesSimple tbody td:nth-child(7),
+#datatablesSimple tbody td:nth-child(8) {
+    /* أسماء الكفيل والعاملة */
+    font-weight: 700;
+    color: #0f172a;
+    background-color: rgba(37, 99, 235, 0.05);
+    border-radius: 8px;
+}
+
+#datatablesSimple tbody td:last-child {
+    /* الرقم */
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* تنسيق خاص لأرقام الجوال */
+#datatablesSimple tbody td:nth-child(5),
+#datatablesSimple tbody td:nth-child(6) {
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+    direction: ltr;
+}
+
+/* تنسيق wrapper الجدول */
+.dataTables_wrapper {
+    padding: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.dataTables_length select,
+.dataTables_filter input {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.dataTables_length select:focus,
+.dataTables_filter input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.dataTables_info {
+    padding: 10px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.dataTables_paginate {
+    padding: 10px;
+}
+
+.dataTables_paginate .paginate_button {
+    border-radius: 10px !important;
+    margin: 0 3px;
+    padding: 8px 12px !important;
+    transition: all 0.2s ease;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background: linear-gradient(135deg, var(--primary), #1d4ed8) !important;
+    border: none !important;
+    color: white !important;
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background: var(--border) !important;
+    border: none !important;
+}
+
+/* تنسيق أزرار الطباعة */
+.dt-buttons {
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.dt-button {
+    background: linear-gradient(135deg, var(--primary), #1d4ed8) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 8px 20px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-family: 'Cairo', sans-serif !important;
+    transition: all 0.2s ease !important;
+}
+
+.dt-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+}
+
+/* تحسين التمرير للجدول */
+.table-responsive {
+    border-radius: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+/* تحسين للأجهزة المحمولة */
+@media (max-width: 768px) {
+    #datatablesSimple thead th {
+        font-size: 12px;
+        padding: 12px 8px;
+    }
+
+    #datatablesSimple tbody td {
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+
+    .dataTables_wrapper {
+        padding: 10px;
+    }
+
+    #datatablesSimple tbody td:nth-child(3) {
+        max-width: 200px;
+    }
+
+    .action-btn {
+        width: 70px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    .action-btn i {
+        font-size: 12px;
+    }
 }
 
 /* =========================
@@ -107,27 +403,6 @@ body{
     font-size:12px;
     font-weight:600;
     display:inline-block;
-}
-
-/* حالات */
-.badge-arrived{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.badge-pending{
-    background:#fef9c3;
-    color:#854d0e;
-}
-
-.badge-cancel{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.badge-processing{
-    background:#dbeafe;
-    color:#1e40af;
 }
 
 </style>
@@ -244,16 +519,7 @@ body{
                                             <a class="nav-link" href="password.html">Forgot Password</a>
                                         </nav>
                                     </div>
-<!--                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">-->
-<!--                                        صفحات الأخطاء-->
-<!--                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>-->
-<!--                                    </a>-->
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-<!--                                        <nav class="sb-sidenav-menu-nested nav">-->
-<!--                                            <a class="nav-link" href="401.html">401 Page</a>-->
-<!--                                            <a class="nav-link" href="404.html">404 Page</a>-->
-<!--                                            <a class="nav-link" href="500.html">500 Page</a>-->
-<!--                                        </nav>-->
                                     </div>
                                 </nav>
                             </div>
@@ -286,17 +552,10 @@ body{
                         </div>
                     </div>
 
-
-
                     <div class="sb-sidenav-footer" >
                         <div class="small" > : تسجيل دخول </div>
                         <div class="small" style="color:white" > 🟢 {{name}}  </div>
-
                     </div>
-                          </div>
-                            </div>
-                            </div>
-                        </div>
                 </nav>
             </div>
 
@@ -305,121 +564,85 @@ body{
                     <div class="container-fluid px-4">
                         <h1 class="mt-4" style="text-align:right"> تعديل حالة الشكاوى </h1>
                         <br>
-<!--                        <div class="row">-->
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card bg-danger text-white mb-4">-->
-<!--                                    <div class="card-body"> قائمة المشاكل تحت المعالجة</div>-->
-<!--                                    <div class="card-footer d-flex align-items-center justify-content-between">-->
-<!--                                        <a class="small text-white stretched-link" href="#">عرض التفاصيل</a>-->
-<!--                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card bg-success text-white mb-4">-->
-<!--                                    <div class="card-body">قائمة المشاكل المحلولة</div>-->
-<!--                                    <div class="card-footer d-flex align-items-center justify-content-between">-->
-<!--                                        <a class="small text-white stretched-link" href="#">عرض التفاصيل</a>-->
-<!--                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card bg-warning text-white mb-4">-->
-<!--                                    <div class="card-body">تعديل الشكاوي الحالية </div>-->
-<!--                                    <div class="card-footer d-flex align-items-center justify-content-between">-->
-<!--                                        <a class="small text-white stretched-link" href="{{url_for('complaint_list')}}">عرض التفاصيل</a>-->
-<!--                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-xl-3 col-md-6">-->
-<!--                                <div class="card bg-primary text-white mb-4">-->
-<!--                                    <div class="card-body">إضافة شكوى أو تقرير مشكلة جديدة</div>-->
-<!--                                    <div class="card-footer d-flex align-items-center justify-content-between">-->
-<!--                                        <a class="small text-white stretched-link" href="{{url_for('add_complaint')}}">عرض التفاصيل</a>-->
-<!--                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
 
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header">
-
-<!--                                        <i class="fas fa-chart-area me-1"></i>-->
-
-                                    </div>
+                                    <div class="card-header"></div>
                                     <div class="card-body" style="text-align:center;width:90%;"><img src="static/assets/img/PJ.png" style="width:37.44% "><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header">
-<!--                                        <i class="fas fa-chart-bar me-1"></i>-->
-
-
-                                    </div>
+                                    <div class="card-header"></div>
                                     <div class="card-body" style="text-align:right"><img src="static/assets/img/salalim.jpg" style="width:75%"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                         </div>
 
-
-
-
                         <div class="card mb-4">
 
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-
-<!--                                    <i class="fas fa-print"></i>-->
-
                             </div>
 
                             <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="datatablesSimple" class="display" style="width:100%">
 
-                                <table id="datatablesSimple" class="display" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align:center;">الإجراءات</th>
+                                                <th style="text-align:center;">الحالة</th>
+                                                <th style="text-align:center;">وصف الشكوى أو المشكلة</th>
+                                                <th style="text-align:center;">تاريخ الوصول</th>
+                                                <th style="text-align:center;">رقم جوال الكفيل</th>
+                                                <th style="text-align:center;">رقم جوال العاملة</th>
+                                                <th style="text-align:center;">إسم الكفيل</th>
+                                                <th style="text-align:center;">اسم العاملة</th>
+                                                <th style="text-align:center;">الرقم</th>
+                                            </tr>
+                                        </thead>
 
-                                                   <thead>
-                                        <tr>
-                                            <th style="text-align:center;">Action</th>
-                                            <th style="text-align:center;">الحالة</th>
-                                            <th style="text-align:center;">وصف الشكوى أو المشكلة</th>
-                                            <th style="text-align:center;">تاريخ الوصول</th>
-                                            <th style="text-align:center;">رقم جوال الكفيل</th>
-                                            <th style="text-align:center;">رقم جوال العاملة </th>
-                                            <th style="text-align:center;">إسم الكفيل</th>
-                                             <th style="text-align:center;">اسم العاملة</th>
-                                            <th style="text-align:center;">الرقم</th>
-                                        </tr>
-                                    </thead>
+                                        <tbody>
+                                            {% for complaint in complaints %}
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <div class="action-buttons">
+                                                        <a href="{{url_for('complaint_edit',id=complaint.id)}}" class="action-btn edit" title="تعديل">
+                                                            <i class="far fa-edit"></i> تعديل
+                                                        </a>
+                                                        <a href="{{url_for('complaint_delete',id=complaint.id)}}" class="action-btn delete" title="حذف" onclick="return confirm('هل أنت متأكد من الحذف؟')">
+                                                            <i class="fas fa-trash-alt"></i> حذف
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    {% if complaint.Status == 'pending' or complaint.Status == 'قيد الانتظار' %}
+                                                        <span class="status-badge pending">{{complaint.Status}}</span>
+                                                    {% elif complaint.Status == 'resolved' or complaint.Status == 'تم الحل' %}
+                                                        <span class="status-badge resolved">{{complaint.Status}}</span>
+                                                    {% elif complaint.Status == 'processing' or complaint.Status == 'قيد المعالجة' %}
+                                                        <span class="status-badge processing">{{complaint.Status}}</span>
+                                                    {% elif complaint.Status == 'cancelled' or complaint.Status == 'ملغي' %}
+                                                        <span class="status-badge cancelled">{{complaint.Status}}</span>
+                                                    {% else %}
+                                                        <span class="status-badge">{{complaint.Status}}</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td style="text-align:right;">{{complaint.Complaint_Description}}</td>
+                                                <td style="text-align:center;">{{complaint.Deployment_Date}}</td>
+                                                <td style="text-align:center;">{{complaint.Employer_contact_No}}</td>
+                                                <td style="text-align:center;">{{complaint.Worker_contact_No}}</td>
+                                                <td style="text-align:center;"><b>{{complaint.Employer_name}}</b></td>
+                                                <td style="text-align:center;"><b>{{complaint.worker_name}}</b></td>
+                                                <td style="text-align:center;">{{complaint.id}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
 
-
-
-                                    <tbody>
-                                        {% for complaint in complaints %}
-                                          <tr>
-                                              <td style="text-align:center;"> <a href="{{url_for('complaint_edit',id=complaint.id)}}" class="btn" style="color:blue"> <i class="far fa-edit fa-sm" ></i></a>
-                                                <br> <p>...</p>
-                                                <a href="{{url_for('complaint_delete',id=complaint.id)}}" class="btn" style="color:red" > <i class="fas fa-trash-alt fa-sm"></i></a>
-
-                                            <td style="text-align:center;">{{complaint.Status}}</td>
-                                             <td style="text-align:center;">{{complaint.Complaint_Description}}</td>
-                                             <td style="text-align:center;">{{complaint.Deployment_Date}}</td>
-                                             <td style="text-align:center;">{{complaint.Employer_contact_No}}</td>
-                                             <td style="text-align:center;">{{complaint.Worker_contact_No}}</td>
-                                            <td style="text-align:center;"><b>{{complaint.Employer_name}}</b></td>
-                                             <td style="text-align:center;"><b>{{complaint.worker_name}}</b></td>
-                                            <td style="text-align:center;">{{complaint.id}}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-
-                                </table>
-
+                                    </table>
+                                </div>
                             </div>
 
                         </div>
@@ -431,11 +654,12 @@ body{
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                                      <div class="small text-center text-muted">
-        Copyright &copy; <span id="current-year"></span> - International Stairs </div>
-   <script>
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-</script>
+                            <div class="small text-center text-muted">
+                                Copyright &copy; <span id="current-year"></span> - International Stairs
+                            </div>
+                            <script>
+                                document.getElementById("current-year").textContent = new Date().getFullYear();
+                            </script>
                             <div class="text-muted">Developed By SkyTech 2022</div>
                             <div>
                                 <a href="{{url_for('privacy')}}">سياسة الخصوصية</a>
@@ -448,55 +672,33 @@ body{
             </div>
         </div>
 
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="static/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 
-<!--       DataTables Scripts for printing  -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
 
         <script type="text/javascript">
-
-          $('#datatablesSimple').DataTable({
-             dom: 'Bfrtip',
-             buttons: [
-            'print'
-             ]
-          });
-
+            $('#datatablesSimple').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['print'],
+                language: {
+                    "search": "بحث:",
+                    "lengthMenu": "عرض _MENU_ سجلات",
+                    "info": "عرض _START_ إلى _END_ من _TOTAL_ سجل",
+                    "paginate": {
+                        "first": "الأول",
+                        "last": "الأخير",
+                        "next": "التالي",
+                        "previous": "السابق"
+                    }
+                }
+            });
         </script>
-
 
         <script src="static/js/datatables-simple-demo.js"></script>
     </body>
 </html>
-
-
-<!--        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
-<!--        <script src="static/js/scripts.js"></script>-->
-<!--        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>-->
-
-
-
-<!--        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
-<!--        <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>-->
-<!--        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>-->
-<!--        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>-->
-
-<!--        <script type="text/javascript">-->
-
-<!--          $('#datatablesSimple').DataTable({-->
-<!--             dom: 'Bfrtip',-->
-<!--             buttons: [-->
-<!--            'print'-->
-<!--             ]-->
-<!--          });-->
-
-<!--        </script>-->
-
-
-
